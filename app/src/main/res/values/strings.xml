@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">FlashCard</string>
+    <string name="tv_folders">Folders</string>
+    <string name="tv_lists">Lists</string>
+    <string name="btn_addFolder">add folder</string>
+    <string name="btn_importList">Import List</string>
+    <string name="btn_startAll">Start All</string>
+    <string name="btn_startSelection">Start Selection</string>
+    <string name="title_activity_list">ListActivity</string>
+</resources>
