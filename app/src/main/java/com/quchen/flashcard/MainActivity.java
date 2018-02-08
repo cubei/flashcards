@@ -34,12 +34,11 @@ public class MainActivity extends AppCompatActivity {
     private AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            String folder = folderAdapter.getItem(position);
 
-        String folder = folderAdapter.getItem(position);
-
-        Intent intent = new Intent("com.quchen.flashcard.ListActivity");
-        intent.putExtra(ListActivity.KEY_FOLDER, folder);
-        startActivity(intent);
+            Intent intent = new Intent("com.quchen.flashcard.ListActivity");
+            intent.putExtra(ListActivity.KEY_FOLDER, folder);
+            startActivity(intent);
         }
     };
 

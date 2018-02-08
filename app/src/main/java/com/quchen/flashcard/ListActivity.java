@@ -2,10 +2,7 @@ package com.quchen.flashcard;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -17,9 +14,9 @@ import java.util.List;
 public class ListActivity extends AppCompatActivity {
 
     public static final String KEY_FOLDER = "folder";
+    public static final String KEY_FILE = "file";
 
     private String folderName;
-    private ListAdapter listAdapter;
 
     private List<ListItem> getLists() {
         List<ListItem> lists = new ArrayList<>();
@@ -38,32 +35,21 @@ public class ListActivity extends AppCompatActivity {
         return lists;
     }
 
-    private AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-
-        ListItem listItem = listAdapter.getItem(position);
-
-        Intent intent = new Intent("com.quchen.flashcard.ListActivity");
-        intent.putExtra(ListActivity.KEY_FOLDER, listItem.getlabel());
-        startActivity(intent);
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_folder);
-
-        listAdapter = new ListAdapter(this);
-        listAdapter.addAll(getLists());
+        setContentView(R.layout.activity_lists);
 
         ListView listView = findViewById(R.id.listList);
+
+        ListAdapter listAdapter = new ListAdapter(this, listView);
+        listAdapter.addAll(getLists());
+
         listView.setAdapter(listAdapter);
 
         folderName = getIntent().getExtras().getString(KEY_FOLDER);
 
-        TextView title = findViewById(R.id.title);
+        TextView title = findViewById(R.id.listsTitle);
         title.setText(folderName);
     }
 

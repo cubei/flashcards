@@ -5,7 +5,7 @@
     android:padding="5dp">
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/folderListTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -25,7 +25,7 @@
         android:layout_marginStart="10dp"
         android:orientation="horizontal"
         android:padding="10dp"
-        android:layout_below="@+id/title"
+        android:layout_below="@+id/folderListTitle"
         android:layout_centerHorizontal="true">
 
         <ListView
