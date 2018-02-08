@@ -36,16 +36,16 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/startBtn"
+        android:id="@+id/importListBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btn_startAll"
+        android:text="@string/btn_importList"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
 
     <Button
-        android:id="@+id/importListBtn"
+        android:id="@+id/startBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_startAll"

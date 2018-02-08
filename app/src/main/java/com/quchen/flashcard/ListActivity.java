@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -51,6 +52,17 @@ public class ListActivity extends AppCompatActivity {
 
         TextView title = findViewById(R.id.listsTitle);
         title.setText(folderName);
+
+        Button startButton = findViewById(R.id.startBtn);
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent("com.quchen.flashcard.ListCfgActivity");
+                startActivity(intent);
+            }
+        });
+
+//        Button importButton = findViewById(R.id.importListBtn);
     }
 
 }
