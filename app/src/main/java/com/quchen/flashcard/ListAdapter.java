@@ -1,7 +1,6 @@
 package com.quchen.flashcard;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,24 +13,27 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Lars on 05.02.2018.
  */
 
-public class ListAdapter extends ArrayAdapter<ListItem> {
+public class ListAdapter extends ArrayAdapter<ListFileItem> {
 
     private final ListActivity listActivity;
     private final ListView listView;
+    private Button startBtn;
+    private List<ListFileItem> listOfSelectedItems = new ArrayList<>();
 
     private AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-            ListItem listItem = getItem(position);
-
-            Log.d("Flashcard", "Clicked item: " + position);
+            ListFileItem listItem = getItem(position);
+            listActivity.startListFile(listItem.getFilePath());
         }
     };
 
@@ -50,10 +52,21 @@ public class ListAdapter extends ArrayAdapter<ListItem> {
         public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
             final View parentRow = (View) compoundButton.getParent().getParent();
             final int position = listView.getPositionForView(parentRow);
+            ListFileItem listItem = getItem(position);
 
-            Log.d("Flashcard", "" + position + " is " + (checked ? "checked" : "not checked"));
+            if(checked) {
+                listOfSelectedItems.add(listItem);
+            } else {
+                listOfSelectedItems.remove(listItem);
+            }
+
+            listActivity.changeStartBtnText(listOfSelectedItems.size() > 0);
         }
     };
+
+    public List<ListFileItem> getListOfSelectedItems() {
+        return listOfSelectedItems;
+    }
 
 
     public ListAdapter(ListActivity listActivity, ListView listView) {
@@ -68,7 +81,7 @@ public class ListAdapter extends ArrayAdapter<ListItem> {
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ListItem item = this.getItem(position);
+        ListFileItem item = this.getItem(position);
 
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if(convertView == null) {

@@ -1,17 +1,20 @@
 package com.quchen.flashcard;
 
+import java.util.List;
+
 /**
- * Created by Lars on 06.02.2018.
+ * Created by Lars on 09.02.2018.
  */
 
 public class ListItem {
-    private String fileName;
 
-    public ListItem(String fileName) {
-        this.fileName = fileName;
+    String filePath;
+
+    public ListItem(String filePath) {
+        this.filePath = filePath;
     }
 
-    public String getlabel() {
-        return fileName;
+    public int getNumberOfItems() {
+        return 123;
     }
 }

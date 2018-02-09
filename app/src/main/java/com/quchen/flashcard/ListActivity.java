@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -15,25 +14,69 @@ import java.util.List;
 public class ListActivity extends AppCompatActivity {
 
     public static final String KEY_FOLDER = "folder";
-    public static final String KEY_FILE = "file";
+    public static final String KEY_FILE_LIST = "file";
 
     private String folderName;
+    private ListAdapter listAdapter;
+    private Button startButton;
 
-    private List<ListItem> getLists() {
-        List<ListItem> lists = new ArrayList<>();
+    private List<ListFileItem> getLists() {
+        List<ListFileItem> lists = new ArrayList<>();
 
-        lists.add(new ListItem("List0"));
-        lists.add(new ListItem("List1"));
-        lists.add(new ListItem("List2"));
-        lists.add(new ListItem("List3"));
-        lists.add(new ListItem("List4"));
-        lists.add(new ListItem("List5"));
-        lists.add(new ListItem("List6"));
-        lists.add(new ListItem("List7"));
-        lists.add(new ListItem("List8"));
-        lists.add(new ListItem("List9"));
+        lists.add(new ListFileItem(folderName,"List0"));
+        lists.add(new ListFileItem(folderName,"List1"));
+        lists.add(new ListFileItem(folderName,"List2"));
+        lists.add(new ListFileItem(folderName,"List3"));
+        lists.add(new ListFileItem(folderName,"List4"));
+        lists.add(new ListFileItem(folderName,"List5"));
+        lists.add(new ListFileItem(folderName,"List6"));
+        lists.add(new ListFileItem(folderName,"List7"));
+        lists.add(new ListFileItem(folderName,"List8"));
+        lists.add(new ListFileItem(folderName,"List9"));
 
         return lists;
+    }
+
+    public void startListFile(String file) {
+        String files[] = {file};
+        startListFiles(files);
+    }
+
+    public void startListFiles(String files[]) {
+        Intent intent = new Intent("com.quchen.flashcard.ListCfgActivity");
+        intent.putExtra(KEY_FILE_LIST, files);
+        startActivity(intent);
+    }
+
+    private View.OnClickListener startBtnOnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            List<String> fileList = new ArrayList<>();
+
+            List<ListFileItem> listItems = listAdapter.getListOfSelectedItems();
+
+            if(listItems.size() > 0) {
+                // Add checked lists
+                for(ListFileItem li: listItems) {
+                    fileList.add(li.getFilePath());
+                }
+            } else {
+                // Add all lists
+                for(int i = 0; i < listAdapter.getCount(); i++) {
+                    fileList.add(listAdapter.getItem(i).getFilePath());
+                }
+            }
+
+            startListFiles(fileList.toArray(new String[fileList.size()]));
+        }
+    };
+
+    public void changeStartBtnText(boolean isSelection) {
+        if(isSelection) {
+            startButton.setText(R.string.btn_startSelection);
+        } else {
+            startButton.setText(R.string.btn_startAll);
+        }
     }
 
     @Override
@@ -43,24 +86,18 @@ public class ListActivity extends AppCompatActivity {
 
         ListView listView = findViewById(R.id.listList);
 
-        ListAdapter listAdapter = new ListAdapter(this, listView);
+        folderName = getIntent().getExtras().getString(KEY_FOLDER);
+
+        listAdapter = new ListAdapter(this, listView);
         listAdapter.addAll(getLists());
 
         listView.setAdapter(listAdapter);
 
-        folderName = getIntent().getExtras().getString(KEY_FOLDER);
-
         TextView title = findViewById(R.id.listsTitle);
         title.setText(folderName);
 
-        Button startButton = findViewById(R.id.startBtn);
-        startButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent("com.quchen.flashcard.ListCfgActivity");
-                startActivity(intent);
-            }
-        });
+        startButton = findViewById(R.id.startBtn);
+        startButton.setOnClickListener(startBtnOnClick);
 
 //        Button importButton = findViewById(R.id.importListBtn);
     }

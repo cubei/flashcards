@@ -10,7 +10,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:layout_marginTop="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,6 +27,7 @@
                 android:layout_weight="2" />
 
             <RadioGroup
+                android:id="@+id/sideRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -71,8 +73,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_margin="10dp"
-                android:weightSum="10">
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:weightSum="8">
 
                 <SeekBar
                     android:id="@+id/numberOfListItemsSlider"
@@ -88,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:text="100"
                     android:textAlignment="center"
-                    android:layout_weight="9"/>
+                    android:layout_weight="7"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -110,14 +113,14 @@
                 android:weightSum="2">
 
                 <CheckBox
-                    android:id="@+id/checkBox"
+                    android:id="@+id/timeTrialActive"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/listCfg_tv_TimeTrial" />
 
                 <CheckBox
-                    android:id="@+id/checkBox2"
+                    android:id="@+id/timeTrialReset"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -129,8 +132,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_margin="10dp"
-                android:weightSum="10">
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:weightSum="8">
 
                 <SeekBar
                     style="@style/Widget.AppCompat.SeekBar.Discrete"
@@ -147,7 +151,7 @@
                     android:layout_height="wrap_content"
                     android:text="5"
                     android:textAlignment="center"
-                    android:layout_weight="9"/>
+                    android:layout_weight="7"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
