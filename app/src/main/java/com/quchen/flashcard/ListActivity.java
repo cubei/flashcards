@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,16 +24,12 @@ public class ListActivity extends AppCompatActivity {
     private List<ListFileItem> getLists() {
         List<ListFileItem> lists = new ArrayList<>();
 
-        lists.add(new ListFileItem(folderName,"List0"));
-        lists.add(new ListFileItem(folderName,"List1"));
-        lists.add(new ListFileItem(folderName,"List2"));
-        lists.add(new ListFileItem(folderName,"List3"));
-        lists.add(new ListFileItem(folderName,"List4"));
-        lists.add(new ListFileItem(folderName,"List5"));
-        lists.add(new ListFileItem(folderName,"List6"));
-        lists.add(new ListFileItem(folderName,"List7"));
-        lists.add(new ListFileItem(folderName,"List8"));
-        lists.add(new ListFileItem(folderName,"List9"));
+        File listRoodDir = App.getListRootDir();
+        File listFolder = new File(listRoodDir, folderName);
+
+        for(File listFile: listFolder.listFiles()) {
+            lists.add(new ListFileItem(folderName,listFile.getName()));
+        }
 
         return lists;
     }

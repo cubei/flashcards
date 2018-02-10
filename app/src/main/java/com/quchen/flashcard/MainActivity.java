@@ -1,12 +1,19 @@
 package com.quchen.flashcard;
 
 import android.content.Intent;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,16 +24,11 @@ public class MainActivity extends AppCompatActivity {
     private List<String> getFolders() {
         List<String> folders = new ArrayList<>();
 
-        folders.add("Test0");
-        folders.add("Test1");
-        folders.add("Test2");
-        folders.add("Test3");
-        folders.add("Test4");
-        folders.add("Test5");
-        folders.add("Test6");
-        folders.add("Test7");
-        folders.add("Test8");
-        folders.add("Test9");
+        File listRoodDir = App.getListRootDir();
+
+        for(File listFolder: listRoodDir.listFiles()) {
+            folders.add(listFolder.getName());
+        }
 
         return folders;
     }
@@ -42,10 +44,51 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    private void copyFileFromResource(int id, String folderName, String fileName) {
+        InputStream in = getResources().openRawResource(id);
+        File folder = new File(App.getListRootDir(), folderName);
+        folder.mkdirs();
+        File file = new File(folder, fileName);
+
+        try {
+            OutputStream out = new FileOutputStream(file);
+            byte[] buffer = new byte[1024];
+            int len;
+            while((len = in.read(buffer, 0, buffer.length)) != -1){
+                out.write(buffer, 0, len);
+            }
+            in.close();
+            out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void updateListFiles() {
+        copyFileFromResource(R.raw.artist_title, "Music", "artist_title.csv");
+        copyFileFromResource(R.raw.lyrics, "Music", "lyrics.csv");
+        copyFileFromResource(R.raw.quotes, "TV","quotes.csv");
+        copyFileFromResource(R.raw.basic_chinese, "Chinese","basic.csv");
+        copyFileFromResource(R.raw.numbers_chinese, "Chinese","numbers.csv");
+        copyFileFromResource(R.raw.basic_german, "German","basic.csv");
+        copyFileFromResource(R.raw.numbers_german, "German","numbers.csv");
+        copyFileFromResource(R.raw.basic_japanese, "Japanese","basic.csv");
+        copyFileFromResource(R.raw.numbers_japanese, "Japanese","numbers.csv");
+        copyFileFromResource(R.raw.basic_spanish, "Spanish","basic.csv");
+        copyFileFromResource(R.raw.numbers_spanish, "Spanish","numbers.csv");
+        copyFileFromResource(R.raw.hiragana, "Japanese","hiragana.csv");
+        copyFileFromResource(R.raw.katakana, "Japanese","katakana.csv");
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        updateListFiles();
 
         folderAdapter = new FolderAdapter(this);
         folderAdapter.addAll(getFolders());

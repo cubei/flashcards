@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -15,6 +16,8 @@ public class ListCfgActivity extends AppCompatActivity {
     private MultiListItem multiListItem;
 
     private RadioGroup sideRadioGroup;
+    private RadioButton leftRadioBtn;
+    private RadioButton rightRadioBtn;
 
     private SeekBar itemNumberSeekBar;
     private TextView itemNumberTextView;
@@ -27,6 +30,8 @@ public class ListCfgActivity extends AppCompatActivity {
 
     private void assignViews() {
         sideRadioGroup = findViewById(R.id.sideRadioGroup);
+        leftRadioBtn = findViewById(R.id.radioButtonLeft);
+        rightRadioBtn = findViewById(R.id.radioButtonRight);
 
         itemNumberSeekBar = findViewById(R.id.numberOfListItemsSlider);
         itemNumberTextView = findViewById(R.id.numberOfListItemsSliderLabel);
@@ -52,7 +57,6 @@ public class ListCfgActivity extends AppCompatActivity {
             }
         });
 
-        itemNumberSeekBar.setMax(multiListItem.getNumberOfItems());
         itemNumberSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -65,6 +69,9 @@ public class ListCfgActivity extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) { }
         });
+        int numberOfItems = multiListItem.getNumberOfItems();
+        itemNumberSeekBar.setMax(numberOfItems);
+        itemNumberSeekBar.setProgress(numberOfItems);
 
         timeTrialTimeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -78,6 +85,9 @@ public class ListCfgActivity extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) { }
         });
+
+        leftRadioBtn.setText(multiListItem.getLeftHeader());
+        rightRadioBtn.setText(multiListItem.getRightHeader());
     }
 
     private void restoreViewCfg() {
