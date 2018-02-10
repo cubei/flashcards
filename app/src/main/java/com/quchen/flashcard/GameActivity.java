@@ -32,8 +32,16 @@ public class GameActivity extends AppCompatActivity {
     private int timePerItem;
 
     private QuestionFragment questionFragment;
+    private ResultFragment resultFragment;
 
+    public void questionsCompleted(List<QuestionResult> questionResults) {
+        resultFragment = ResultFragment.newInstance(questionResults);
 
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.replace(R.id.frameLayout, resultFragment);
+        transaction.commit();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">FlashCard</string>
+    <string name="tv_results">Results</string>
     <string name="tv_folders">Folders</string>
     <string name="tv_lists">Lists</string>
     <string name="btn_addFolder">add folder</string>
+    <string name="btn_playAgainAll">Retry</string>
+    <string name="btn_playAgainWrong">Retry Wrong</string>
     <string name="btn_importList">Import List</string>
     <string name="btn_startAll">Start All</string>
     <string name="btn_startSelection">Start Selection</string>
@@ -14,4 +17,5 @@
     <string name="listCfg_checkbox_TimeReset">Reset</string>
     <string name="listCfg_radioBtn_Left">Left</string>
     <string name="listCfg_radioBtn_Right">Right</string>
+    <string name="tv_yourAnswer">Your Answer</string>
 </resources>

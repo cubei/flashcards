@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="7dp"
+    android:layout_margin="7dp"
+    android:background="@drawable/backround_round_corners"
+    android:descendantFocusability="blocksDescendants">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_questionLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Foobar"
+            android:textAlignment="viewStart"
+            android:layout_weight="1"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/tv_questionVal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewEnd"
+            android:text="val"
+            android:layout_weight="1"
+            android:textColor="#ffffff" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_correctAnswerLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Foobar"
+            android:textAlignment="viewStart"
+            android:layout_weight="1"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/tv_correctAnswerVal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewEnd"
+            android:text="val"
+            android:layout_weight="1"
+            android:textColor="#ffffff" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/selectedAnswerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_selectedAnswerLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_yourAnswer"
+            android:textAlignment="viewStart"
+            android:layout_weight="1"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/tv_selectedAnswerVal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewEnd"
+            android:text="val"
+            android:layout_weight="1"
+            android:textColor="#ff4040" />
+
+    </LinearLayout>
+</LinearLayout>

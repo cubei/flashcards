@@ -68,7 +68,7 @@ public class QuestionFragment extends Fragment {
         public void onClick(View view) {
             TextView answerTextView = (TextView) view;
             QuestionItem questionItem = questionItems.get(questionCount);
-            QuestionResult questionResult = new QuestionResult(questionItem.question, questionItem.rightAnswer, answerTextView.getText().toString());
+            QuestionResult questionResult = new QuestionResult(questionItem.questionHeader, questionItem.answerHeader, questionItem.question, questionItem.rightAnswer, answerTextView.getText().toString());
             questionResults.add(questionResult);
 
             if(questionResult.isAnswerCorrect()) {
@@ -109,7 +109,7 @@ public class QuestionFragment extends Fragment {
         questionCount++;
 
         if(questionCount == numberOfDesiredQuestions) {
-            this.getActivity().finish();
+            ((GameActivity)this.getActivity()).questionsCompleted(questionResults);
         } else {
             setQuestionItem(questionItems.get(questionCount));
             updateViews();
@@ -124,6 +124,7 @@ public class QuestionFragment extends Fragment {
         QuestionFragment fragment = new QuestionFragment();
         fragment.numberOfDesiredQuestions = numberOfDesiredQuestions;
         fragment.questionItems = questionItems;
+        Collections.shuffle(fragment.questionItems);
         return fragment;
     }
 
