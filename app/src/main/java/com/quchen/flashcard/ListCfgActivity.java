@@ -1,8 +1,10 @@
 package com.quchen.flashcard;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -10,6 +12,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
 
 public class ListCfgActivity extends AppCompatActivity {
 
@@ -28,6 +31,9 @@ public class ListCfgActivity extends AppCompatActivity {
     private SeekBar timeTrialTimeSeekBar;
     private TextView timeTrialTimeTextView;
 
+    private Button startButton;
+    private Intent gameIntent = new Intent("com.quchen.flashcard.GameActivity");;
+
     private void assignViews() {
         sideRadioGroup = findViewById(R.id.sideRadioGroup);
         leftRadioBtn = findViewById(R.id.radioButtonLeft);
@@ -41,6 +47,8 @@ public class ListCfgActivity extends AppCompatActivity {
         timeTrialResetCheckBox = findViewById(R.id.timeTrialReset);
         timeTrialTimeSeekBar = findViewById(R.id.timeSlider);
         timeTrialTimeTextView = findViewById(R.id.timeSliderLabel);
+
+        startButton = findViewById(R.id.startBtn);
     }
 
     private void setUpViews() {
@@ -50,9 +58,22 @@ public class ListCfgActivity extends AppCompatActivity {
                 if(isChecked) {
                     timeTrialResetCheckBox.setVisibility(View.VISIBLE);
                     timeTrialSeekBarLayout.setVisibility(View.VISIBLE);
+                    gameIntent.putExtra(GameActivity.KEY_TIME_TRIAL, true);
                 } else {
                     timeTrialResetCheckBox.setVisibility(View.INVISIBLE);
                     timeTrialSeekBarLayout.setVisibility(View.INVISIBLE);
+                    gameIntent.putExtra(GameActivity.KEY_TIME_TRIAL, false);
+                }
+            }
+        });
+
+        timeTrialResetCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked) {
+                    gameIntent.putExtra(GameActivity.KEY_TIME_TRIAL_RESET, true);
+                } else {
+                    gameIntent.putExtra(GameActivity.KEY_TIME_TRIAL_RESET, false);
                 }
             }
         });
@@ -61,6 +82,7 @@ public class ListCfgActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 itemNumberTextView.setText("" + progress);
+                gameIntent.putExtra(GameActivity.KEY_NUMBER_OF_ITEMS, progress);
             }
 
             @Override
@@ -76,7 +98,8 @@ public class ListCfgActivity extends AppCompatActivity {
         timeTrialTimeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                timeTrialTimeTextView.setText("" + progress + " sec");
+                timeTrialTimeTextView.setText(String.format("%d sec", progress));
+                gameIntent.putExtra(GameActivity.KEY_TIME_PER_ITEMS, progress);
             }
 
             @Override
@@ -85,9 +108,31 @@ public class ListCfgActivity extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) { }
         });
+        timeTrialTimeSeekBar.setProgress(10);
 
         leftRadioBtn.setText(multiListItem.getLeftHeader());
         rightRadioBtn.setText(multiListItem.getRightHeader());
+
+        sideRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                switch(i) {
+                    case R.id.radioButtonLeft:
+                        gameIntent.putExtra(GameActivity.KEY_SIDE, GameActivity.VAL_SIDE_LEFT);
+                        break;
+                    case R.id.radioButtonRight:
+                        gameIntent.putExtra(GameActivity.KEY_SIDE, GameActivity.VAL_SIDE_RIGHT);
+                        break;
+                }
+            }
+        });
+
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(gameIntent);
+            }
+        });
     }
 
     private void restoreViewCfg() {
@@ -106,6 +151,7 @@ public class ListCfgActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_cfg);
 
         String files[] = this.getIntent().getStringArrayExtra(ListActivity.KEY_FILE_LIST);
+        gameIntent.putExtra(GameActivity.KEY_FILE_LIST, files);
         multiListItem = new MultiListItem(files);
 
         assignViews();

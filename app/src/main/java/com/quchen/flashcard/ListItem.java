@@ -3,7 +3,6 @@ package com.quchen.flashcard;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -22,12 +21,31 @@ public class ListItem {
     static final int RIGHT_IDX = 1;
 
     private String filePath;
-    private List<String> header;
-    private List<List<String>> items = null;
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public static class ItemPair {
+        public String left;
+        public String right;
+
+        public ItemPair(String left, String right) {
+            this.left = left;
+            this.right = right;
+        }
+    }
+
+    private ItemPair header;
+    private List<ItemPair> itemPairs = new ArrayList<>();
 
     public ListItem(String filePath) {
         this.filePath = filePath;
         readFile();
+    }
+
+    public List<ItemPair> getItemPairs() {
+        return itemPairs;
     }
 
     private static List<List<String>> getFileContent(File file) throws IOException {
@@ -43,7 +61,7 @@ public class ListItem {
             String line;
 
             while ((line = br.readLine()) != null) {
-                if(!line.equals("")) {
+                if(line.contains(";")) {
                     ArrayList<String> values = new ArrayList<>(Arrays.asList(line.split(";")));
                     fileContentList.add(values);
                 }
@@ -71,21 +89,24 @@ public class ListItem {
         if(lines != null && lines.size() > 0)
         {
             // Store header separate
-            header = lines.get(0);
+            List<String> headerLine = lines.get(0);
+            header = new ItemPair(headerLine.get(LEFT_IDX), headerLine.get(RIGHT_IDX));
             lines.remove(0);
-            items = lines;
+            for(List<String> line: lines) {
+                itemPairs.add(new ItemPair(line.get(LEFT_IDX), line.get(RIGHT_IDX)));
+            }
         }
     }
 
     public int getNumberOfItems() {
-        return items.size();
+        return itemPairs.size();
     }
 
     public String getLeftHeader() {
-        return header.get(LEFT_IDX);
+        return header.left;
     }
 
     public String getRightHeader() {
-        return header.get(RIGHT_IDX);
+        return header.right;
     }
 }
