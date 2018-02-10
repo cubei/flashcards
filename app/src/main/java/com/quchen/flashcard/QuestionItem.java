@@ -25,18 +25,22 @@ public class QuestionItem {
                 }
             }
 
-            questionItemList.add(new QuestionItem(listFilePath, question, rightAnswer, potentialWrongAnswers));
+            questionItemList.add(new QuestionItem(listItem.getLeftHeader(), listItem.getRightHeader(), listFilePath, question, rightAnswer, potentialWrongAnswers));
         }
 
         return questionItemList;
     }
 
-    private String listFilePath;
-    private String question;
-    private String rightAnswer;
-    private List<String> wrongAnswers;
+    public String questionHeader;
+    public String answerHeader;
+    public String listFilePath;
+    public String question;
+    public String rightAnswer;
+    public List<String> wrongAnswers;
 
-    public QuestionItem(String listFilePath, String question, String rightAnswer, List<String> wrongAnswers) {
+    public QuestionItem(String questionHeader, String answerHeader, String listFilePath, String question, String rightAnswer, List<String> wrongAnswers) {
+        this.questionHeader = questionHeader;
+        this.answerHeader = answerHeader;
         this.listFilePath = listFilePath;
         this.question = question;
         this.rightAnswer = rightAnswer;

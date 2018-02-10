@@ -1,10 +1,11 @@
 package com.quchen.flashcard;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GameActivity extends AppCompatActivity {
@@ -25,6 +26,60 @@ public class GameActivity extends AppCompatActivity {
     private boolean isTimeTrialReset;
     private int timePerItem;
 
+    private List<TextView> answerTextViews = new ArrayList<>();
+    private TextView timeTextView;
+    private TextView progressTextView;
+    private TextView listNameTextView;
+    private TextView questionTextView;
+    private TextView questionSideLabel;
+    private TextView answerSideLabel;
+    private TextView correctCountTextView;
+    private TextView wrongCountTextView;
+
+    private void assignViews() {
+        answerTextViews.add((TextView) findViewById(R.id.tv_answer1));
+        answerTextViews.add((TextView) findViewById(R.id.tv_answer2));
+        answerTextViews.add((TextView) findViewById(R.id.tv_answer3));
+        answerTextViews.add((TextView) findViewById(R.id.tv_answer4));
+
+        timeTextView = findViewById(R.id.tv_time);
+        progressTextView = findViewById(R.id.tv_progress);
+        listNameTextView = findViewById(R.id.tv_listName);
+        questionTextView = findViewById(R.id.tv_question);
+        questionSideLabel = findViewById(R.id.tv_questionSide);
+        answerSideLabel = findViewById(R.id.tv_guessSide);
+        correctCountTextView = findViewById(R.id.tv_correctAnswerCount);
+        wrongCountTextView = findViewById(R.id.tv_wrongAnswerCount);
+    }
+
+    private void setUpViews() {
+        correctCountTextView.setText(String.format("%d", 0));
+        wrongCountTextView.setText(String.format("%d", 0));
+    }
+
+    private void setQuestionItem(QuestionItem questionItem) {
+        listNameTextView.setText(questionItem.listFilePath);
+        questionTextView.setText(questionItem.question);
+        questionSideLabel.setText(questionItem.questionHeader);
+        answerSideLabel.setText(questionItem.answerHeader);
+
+        List<String> answers = new ArrayList<>();
+        answers.add(questionItem.rightAnswer);
+
+        List<String> wrongAnswers = new ArrayList<>(questionItem.wrongAnswers);
+        for(int i=0; i<3; i++) {
+            String wrongAnswer = wrongAnswers.get((int) (Math.random() * wrongAnswers.size()));
+            wrongAnswers.remove(wrongAnswer);
+            answers.add(wrongAnswer);
+        }
+
+        Collections.shuffle(answers);
+
+        for(int i=0; i<4; i++) {
+            answerTextViews.get(i).setText(answers.get(i));
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,5 +97,12 @@ public class GameActivity extends AppCompatActivity {
             ListItem listItem = new ListItem(listFile);
             questionItems.addAll(QuestionItem.getQuestionItemList(listItem));
         }
+
+        numberOfitems = Math.min(numberOfitems, questionItems.size());
+
+        assignViews();
+        setUpViews();
+
+        setQuestionItem(questionItems.get(0));
     }
 }
