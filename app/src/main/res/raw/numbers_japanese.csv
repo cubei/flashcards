@@ -1,7 +1,33 @@
-Japanese;English
-1;a
-2;b
-3;c
-5;e
-4;d
-6;f
+Rōmaji;English
+zero;0
+ichi;1
+ni;2
+san;3
+shi;4
+yon;4
+go;5
+roku;6
+shichi;7
+nana;7
+hachi;8
+kyū;9
+jū;10
+jū ichi;11
+jū ni;12
+jū san;13
+jū yon;14
+jū go;15
+jū roku;16
+jū nana;17
+jū hachi;18
+jū kyū;19
+ni-jū;20
+san-jū;30
+yon-jū;40
+go-jū;50
+roku-jū;90
+nana-jū;70
+hachi-jū;80
+kyū-jū;90
+hyaku;100
+

@@ -20,10 +20,10 @@
             android:weightSum="3">
 
             <TextView
-                android:id="@+id/tv_guess"
+                android:id="@+id/tv_showSide"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/listCfg_tv_Guess"
+                android:text="@string/listCfg_tv_showSide"
                 android:layout_weight="2" />
 
             <RadioGroup
