@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -60,5 +61,8 @@ public class ResultFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Button retryAll = view.findViewById(R.id.btn_playAgainAll);
+        Button retryWrong = view.findViewById(R.id.btn_playAgainWrong);
     }
 }

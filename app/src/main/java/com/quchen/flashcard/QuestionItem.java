@@ -10,18 +10,25 @@ import java.util.List;
 
 public class QuestionItem {
 
-    public static List<QuestionItem> getQuestionItemList(ListItem listItem) {
+    public static String getQuestion(ListItem.ItemPair itemPair, int side) {
+        return side == GameActivity.VAL_SIDE_LEFT ? itemPair.left : itemPair.right;
+    }
+    public static String getAnswer(ListItem.ItemPair itemPair, int side) {
+        return side == GameActivity.VAL_SIDE_LEFT ? itemPair.right : itemPair.left;
+    }
+
+    public static List<QuestionItem> getQuestionItemList(ListItem listItem, int side) {
         List<QuestionItem> questionItemList = new ArrayList<>();
 
         for(ListItem.ItemPair itemPair: listItem.getItemPairs()) {
             String listFilePath = listItem.getFilePath();
-            String question = itemPair.left;
-            String rightAnswer = itemPair.right;
+            String question = getQuestion(itemPair, side);
+            String rightAnswer = getAnswer(itemPair, side);
 
             List<String> potentialWrongAnswers = new ArrayList<>();
             for(ListItem.ItemPair ip: listItem.getItemPairs()) {
-                if(!ip.left.equals(question) && !ip.right.equals(rightAnswer) && !potentialWrongAnswers.contains(ip.right)) {
-                    potentialWrongAnswers.add(ip.right);
+                if(!getQuestion(ip, side).equals(question) && !getAnswer(ip, side).equals(rightAnswer) && !potentialWrongAnswers.contains(getAnswer(ip, side))) {
+                    potentialWrongAnswers.add(getAnswer(ip, side));
                 }
             }
 

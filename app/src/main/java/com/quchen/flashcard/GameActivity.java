@@ -59,7 +59,7 @@ public class GameActivity extends AppCompatActivity {
         List<QuestionItem> questionItems = new ArrayList<>();
         for(String listFile: listFiles) {
             ListItem listItem = new ListItem(listFile);
-            questionItems.addAll(QuestionItem.getQuestionItemList(listItem));
+            questionItems.addAll(QuestionItem.getQuestionItemList(listItem, side));
         }
 
         numberOfDesireditems = Math.min(numberOfDesireditems, questionItems.size());
