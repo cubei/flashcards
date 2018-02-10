@@ -84,38 +84,39 @@
         android:layout_height="wrap_content"
         android:text="@string/listCfg_radioBtn_Right"/>
 
-    <LinearLayout
+    <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_height="0dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:weightSum="2"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:measureWithLargestChild="true">
 
-        <LinearLayout
+        <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:orientation="horizontal"
             android:layout_weight="1"
             android:weightSum="2">
             <TextView
                 android:id="@+id/tv_answer1"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:background="@drawable/backround_round_corners"
                 android:layout_weight="1"
                 android:padding="5dp"
-                android:text="testtesttesttesttesttesttest"
+                android:text="dasfdsafdfdfadfdfadfdsfafdfadfadf"
                 android:textAlignment="center"
                 android:gravity="center"
                 android:textColor="#FFF"
                 android:textSize="16sp" />
             <TextView
                 android:id="@+id/tv_answer2"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textAlignment="center"
@@ -125,40 +126,40 @@
                 android:textColor="#FFF"
                 android:textSize="16sp"
                 android:background="@drawable/backround_round_corners" />
-        </LinearLayout>
+        </TableRow>
 
-        <LinearLayout
+        <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:orientation="horizontal"
             android:layout_weight="1"
             android:weightSum="2">
             <TextView
                 android:id="@+id/tv_answer3"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:textAlignment="center"
-                android:gravity="center"
+                android:background="@drawable/backround_round_corners"
                 android:layout_weight="1"
                 android:padding="5dp"
                 android:text="test"
+                android:textAlignment="center"
+                android:gravity="center"
                 android:textColor="#FFF"
-                android:textSize="16sp"
-                android:background="@drawable/backround_round_corners" />
+                android:textSize="16sp" />
             <TextView
                 android:id="@+id/tv_answer4"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:textAlignment="center"
                 android:gravity="center"
-                android:layout_weight="1"
                 android:padding="5dp"
-                android:text="test"
+                android:text="teadfadfasdfdst"
                 android:textColor="#FFF"
                 android:textSize="16sp"
                 android:background="@drawable/backround_round_corners" />
-        </LinearLayout>
-    </LinearLayout>
+        </TableRow>
+    </TableLayout>
 
     <View
         android:layout_width="match_parent"

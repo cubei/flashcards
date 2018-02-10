@@ -20,8 +20,8 @@ public class QuestionItem {
 
             List<String> potentialWrongAnswers = new ArrayList<>();
             for(ListItem.ItemPair ip: listItem.getItemPairs()) {
-                if(!ip.left.equals(question) && !ip.right.equals(rightAnswer) && !potentialWrongAnswers.contains(ip.left)) {
-                    potentialWrongAnswers.add(ip.left);
+                if(!ip.left.equals(question) && !ip.right.equals(rightAnswer) && !potentialWrongAnswers.contains(ip.right)) {
+                    potentialWrongAnswers.add(ip.right);
                 }
             }
 

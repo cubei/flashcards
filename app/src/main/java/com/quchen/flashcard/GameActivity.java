@@ -2,6 +2,7 @@ package com.quchen.flashcard;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,8 +21,9 @@ public class GameActivity extends AppCompatActivity {
     public static final String KEY_TIME_PER_ITEMS = "timePerItem";
 
     private List<QuestionItem> questionItems = new ArrayList<>();
+    private List<QuestionResult> questionResults = new ArrayList<>();
     private int side;
-    private int numberOfitems;
+    private int numberOfDesireditems;
     private boolean isTimeTrial;
     private boolean isTimeTrialReset;
     private int timePerItem;
@@ -35,6 +37,28 @@ public class GameActivity extends AppCompatActivity {
     private TextView answerSideLabel;
     private TextView correctCountTextView;
     private TextView wrongCountTextView;
+
+    private int questionCount = 0;
+    private int wrongAnswerCount = 0;
+    private int correctAnswerCount = 0;
+
+    private View.OnClickListener answerOnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            TextView answerTextView = (TextView) view;
+            QuestionItem questionItem = questionItems.get(questionCount);
+            QuestionResult questionResult = new QuestionResult(questionItem.question, questionItem.rightAnswer, answerTextView.getText().toString());
+            questionResults.add(questionResult);
+
+            if(questionResult.isAnswerCorrect()) {
+                correctAnswerCount++;
+            } else {
+                wrongAnswerCount++;
+            }
+
+            setUpNextQuestion();
+        }
+    };
 
     private void assignViews() {
         answerTextViews.add((TextView) findViewById(R.id.tv_answer1));
@@ -55,6 +79,14 @@ public class GameActivity extends AppCompatActivity {
     private void setUpViews() {
         correctCountTextView.setText(String.format("%d", 0));
         wrongCountTextView.setText(String.format("%d", 0));
+
+        updateViews();
+    }
+
+    private void updateViews() {
+        progressTextView.setText(String.format("%d / %d", questionCount, numberOfDesireditems));
+        correctCountTextView.setText(String.format("%d", correctAnswerCount));
+        wrongCountTextView.setText(String.format("%d", wrongAnswerCount));
     }
 
     private void setQuestionItem(QuestionItem questionItem) {
@@ -76,7 +108,20 @@ public class GameActivity extends AppCompatActivity {
         Collections.shuffle(answers);
 
         for(int i=0; i<4; i++) {
-            answerTextViews.get(i).setText(answers.get(i));
+            TextView tv = answerTextViews.get(i);
+            tv.setText(answers.get(i));
+            tv.setOnClickListener(answerOnClick);
+        }
+    }
+
+    private void setUpNextQuestion() {
+        questionCount++;
+
+        if(questionCount == numberOfDesireditems) {
+            finish();
+        } else {
+            setQuestionItem(questionItems.get(questionCount));
+            updateViews();
         }
     }
 
@@ -86,7 +131,7 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         side = getIntent().getIntExtra(KEY_SIDE, VAL_SIDE_LEFT);
-        numberOfitems = getIntent().getIntExtra(KEY_NUMBER_OF_ITEMS, 0);
+        numberOfDesireditems = getIntent().getIntExtra(KEY_NUMBER_OF_ITEMS, 0);
         isTimeTrial = getIntent().getBooleanExtra(KEY_TIME_TRIAL, false);
         isTimeTrialReset = getIntent().getBooleanExtra(KEY_TIME_TRIAL_RESET, false);
         timePerItem = getIntent().getIntExtra(KEY_TIME_PER_ITEMS, 10);
@@ -98,11 +143,11 @@ public class GameActivity extends AppCompatActivity {
             questionItems.addAll(QuestionItem.getQuestionItemList(listItem));
         }
 
-        numberOfitems = Math.min(numberOfitems, questionItems.size());
+        numberOfDesireditems = Math.min(numberOfDesireditems, questionItems.size());
 
         assignViews();
         setUpViews();
 
-        setQuestionItem(questionItems.get(0));
+        setQuestionItem(questionItems.get(questionCount));
     }
 }
