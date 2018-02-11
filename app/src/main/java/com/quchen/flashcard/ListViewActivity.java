@@ -15,7 +15,7 @@ public class ListViewActivity extends AppCompatActivity {
 
     public static final String KEY_FILE = "file";
 
-    private static class ListViewAdapter extends ArrayAdapter<ListItem.ItemPair> {
+    private class ListViewAdapter extends ArrayAdapter<ListItem.ItemPair> {
 
         public ListViewAdapter(Context context) {
             super(context, 0);

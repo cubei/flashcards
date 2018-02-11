@@ -1,12 +1,18 @@
 package com.quchen.flashcard;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,6 +24,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    private class FolderAdapter extends ArrayAdapter<String> {
+
+        public FolderAdapter(Context context) {
+            super(context, 0);
+        }
+
+        @NonNull
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            String item = this.getItem(position);
+
+            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            if(convertView == null) {
+                convertView = inflater.inflate(R.layout.folder_item_view, parent, false);
+            }
+
+            TextView label = convertView.findViewById(R.id.label);
+            label.setText(item);
+
+            return convertView;
+        }
+    }
 
     private FolderAdapter folderAdapter;
 

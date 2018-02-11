@@ -9,7 +9,6 @@
     <string name="btn_importList">Import List</string>
     <string name="btn_startAll">Start All</string>
     <string name="btn_startSelection">Start Selection</string>
-    <string name="title_activity_list">ListActivity</string>
     <string name="btn_startList">Start</string>
     <string name="listCfg_tv_showSide">Ask of</string>
     <string name="listCfg_tv_ListLength">How many items do you want to guess?</string>
