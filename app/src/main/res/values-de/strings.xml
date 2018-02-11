@@ -10,7 +10,7 @@
     <string name="btn_startAll">Alle starten</string>
     <string name="btn_startSelection">Auswahl starten</string>
     <string name="btn_startList">Start</string>
-    <string name="listCfg_tv_showSide">Frage nach</string>
+    <string name="listCfg_tv_showSide">Frage von</string>
     <string name="listCfg_tv_ListLength">Wie viele Wörter willst du raten?</string>
     <string name="listCfg_tv_TimeTrial">Mit Zeitlimit</string>
     <string name="listCfg_checkbox_TimeReset">Zurücksetzen</string>
