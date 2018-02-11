@@ -1,2 +1,2 @@
 # flashcards
-Simple flash card game with csv files as input.
+Simple flash card android app with csv files as input.
