@@ -40,10 +40,11 @@ public class ResultAdapter extends ArrayAdapter<QuestionResult> {
         TextView correctAnswerVal = convertView.findViewById(R.id.tv_correctAnswerVal);
         correctAnswerVal.setText(item.correctAnswer);
 
+        LinearLayout selectedAnswerlayout = convertView.findViewById(R.id.selectedAnswerLayout);
         if(item.isAnswerCorrect()) {
-            LinearLayout selectedAnswerlayout = convertView.findViewById(R.id.selectedAnswerLayout);
             selectedAnswerlayout.setVisibility(View.GONE);
         } else {
+            selectedAnswerlayout.setVisibility(View.VISIBLE);
             TextView selectedAnswerLabel = convertView.findViewById(R.id.tv_selectedAnswerLabel);
             TextView selectedAnswerVal = convertView.findViewById(R.id.tv_selectedAnswerVal);
             selectedAnswerVal.setText(item.givenAnswer);

@@ -34,6 +34,12 @@ public class ListActivity extends AppCompatActivity {
         return lists;
     }
 
+    public void startListView(ListFileItem listFileItem) {
+        Intent intent = new Intent("com.quchen.flashcard.ListViewActivity");
+        intent.putExtra(ListViewActivity.KEY_FILE, listFileItem.getFilePath());
+        startActivity(intent);
+    }
+
     public void startListFile(String file) {
         String files[] = {file};
         startListFiles(files);

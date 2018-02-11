@@ -1,6 +1,7 @@
 package com.quchen.flashcard;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,8 +43,8 @@ public class ListAdapter extends ArrayAdapter<ListFileItem> {
         public void onClick(View view) {
             final View parentRow = (View) view.getParent().getParent();
             final int position = listView.getPositionForView(parentRow);
-
-            Log.d("Flashcard", "Clicked button: " + position);
+            final ListFileItem listFileItem = getItem(position);
+            listActivity.startListView(listFileItem);
         }
     };
 

@@ -67,8 +67,9 @@ public class QuestionFragment extends Fragment {
         @Override
         public void onClick(View view) {
             TextView answerTextView = (TextView) view;
+            String givenAnswer = answerTextView.getText().toString();
             QuestionItem questionItem = questionItems.get(questionCount);
-            QuestionResult questionResult = new QuestionResult(questionItem.questionHeader, questionItem.answerHeader, questionItem.question, questionItem.rightAnswer, answerTextView.getText().toString());
+            QuestionResult questionResult = new QuestionResult(questionItem.questionHeader, questionItem.answerHeader, questionItem.question, questionItem.rightAnswer, givenAnswer);
             questionResults.add(questionResult);
 
             if(questionResult.isAnswerCorrect()) {

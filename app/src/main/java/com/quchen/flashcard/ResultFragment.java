@@ -19,14 +19,16 @@ import java.util.List;
 public class ResultFragment extends Fragment {
     private ResultAdapter resultAdapter;
     private List<QuestionResult> questionResults;
+    private long questionTimeS;
 
     public ResultFragment() {
         // Required empty public constructor
     }
 
-    public static ResultFragment newInstance(List<QuestionResult> questionResults) {
+    public static ResultFragment newInstance(List<QuestionResult> questionResults, long questionTimeMs) {
         ResultFragment fragment = new ResultFragment();
         fragment.questionResults = questionResults;
+        fragment.questionTimeS = questionTimeMs / 1000;
         return fragment;
     }
 
@@ -47,7 +49,8 @@ public class ResultFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_result, container, false);
 
         TextView resultScore = view.findViewById(R.id.tv_resultScore);
-        resultScore.setText(String.format("%d / %d", getNumberOfCorrectAnswers(), questionResults.size()));
+        resultScore.setText(String.format("%d / %d in %d sec (Ø %d sec)",
+                            getNumberOfCorrectAnswers(), questionResults.size(), questionTimeS, questionTimeS/questionResults.size()));
 
         resultAdapter = new ResultAdapter(this);
         resultAdapter.addAll(questionResults);

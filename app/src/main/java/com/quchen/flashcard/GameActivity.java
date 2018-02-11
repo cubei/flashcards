@@ -4,12 +4,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class GameActivity extends AppCompatActivity {
@@ -31,11 +28,14 @@ public class GameActivity extends AppCompatActivity {
     private boolean isTimeTrialReset;
     private int timePerItem;
 
+    private long startTimestampMs;
+
     private QuestionFragment questionFragment;
     private ResultFragment resultFragment;
 
     public void questionsCompleted(List<QuestionResult> questionResults) {
-        resultFragment = ResultFragment.newInstance(questionResults);
+        long questionTimeMs = System.currentTimeMillis() - startTimestampMs;
+        resultFragment = ResultFragment.newInstance(questionResults, questionTimeMs);
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
@@ -70,5 +70,7 @@ public class GameActivity extends AppCompatActivity {
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.replace(R.id.frameLayout, questionFragment);
         transaction.commit();
+
+        startTimestampMs = System.currentTimeMillis();
     }
 }
