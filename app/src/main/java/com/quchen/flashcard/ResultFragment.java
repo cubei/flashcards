@@ -49,8 +49,8 @@ public class ResultFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_result, container, false);
 
         TextView resultScore = view.findViewById(R.id.tv_resultScore);
-        resultScore.setText(String.format("%d / %d in %d sec (Ø %d sec)",
-                            getNumberOfCorrectAnswers(), questionResults.size(), questionTimeS, questionTimeS/questionResults.size()));
+        resultScore.setText(String.format("%d / %d in %d sec (Ø %.1f sec)",
+                            getNumberOfCorrectAnswers(), questionResults.size(), questionTimeS, (float)questionTimeS/questionResults.size()));
 
         resultAdapter = new ResultAdapter(this);
         resultAdapter.addAll(questionResults);

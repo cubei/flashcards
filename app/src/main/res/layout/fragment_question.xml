@@ -113,6 +113,8 @@
                 android:textAlignment="center"
                 android:gravity="center"
                 android:textColor="#FFF"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="30sp"
                 android:textSize="16sp" />
             <TextView
                 android:id="@+id/tv_answer2"
@@ -124,6 +126,8 @@
                 android:padding="5dp"
                 android:text="test"
                 android:textColor="#FFF"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="30sp"
                 android:textSize="16sp"
                 android:background="@drawable/backround_round_corners" />
         </TableRow>
@@ -145,6 +149,8 @@
                 android:textAlignment="center"
                 android:gravity="center"
                 android:textColor="#FFF"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="30sp"
                 android:textSize="16sp" />
             <TextView
                 android:id="@+id/tv_answer4"
@@ -156,6 +162,8 @@
                 android:padding="5dp"
                 android:text="teadfadfasdfdst"
                 android:textColor="#FFF"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="30sp"
                 android:textSize="16sp"
                 android:background="@drawable/backround_round_corners" />
         </TableRow>

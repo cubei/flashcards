@@ -82,6 +82,12 @@ public class MainActivity extends AppCompatActivity {
         copyFileFromResource(R.raw.hiragana, "Japanese","hiragana.csv");
         copyFileFromResource(R.raw.katakana, "Japanese","katakana.csv");
         copyFileFromResource(R.raw.japanese_kanji_grade1, "Japanese","Kanji1.csv");
+        copyFileFromResource(R.raw.japanese_kanji_grade2, "Japanese","Kanji2.csv");
+        copyFileFromResource(R.raw.japanese_kanji_grade3, "Japanese","Kanji3.csv");
+        copyFileFromResource(R.raw.japanese_kanji_grade4, "Japanese","Kanji4.csv");
+        copyFileFromResource(R.raw.japanese_kanji_grade5, "Japanese","Kanji5.csv");
+        copyFileFromResource(R.raw.japanese_kanji_grade6, "Japanese","Kanji6.csv");
+        copyFileFromResource(R.raw.japanese_lektion0, "Minna no Nihongo","Lektion0.csv");
         copyFileFromResource(R.raw.japanese_lektion1, "Minna no Nihongo","Lektion1.csv");
         copyFileFromResource(R.raw.japanese_lektion2, "Minna no Nihongo","Lektion2.csv");
         copyFileFromResource(R.raw.japanese_lektion3, "Minna no Nihongo","Lektion3.csv");

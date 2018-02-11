@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">FlashCard</string>
+    <string name="tv_results">Ergebnis</string>
+    <string name="tv_folders">Ordner</string>
+    <string name="tv_lists">Listen</string>
+    <string name="btn_addFolder">Ordner hinzufügen</string>
+    <string name="btn_playAgainAll">Nochmal</string>
+    <string name="btn_playAgainWrong">Nochmal die falschen</string>
+    <string name="btn_importList">Liste importieren</string>
+    <string name="btn_startAll">Alle starten</string>
+    <string name="btn_startSelection">Auswahl starten</string>
+    <string name="btn_startList">Start</string>
+    <string name="listCfg_tv_showSide">Frage nach</string>
+    <string name="listCfg_tv_ListLength">Wie viele Wörter willst du raten?</string>
+    <string name="listCfg_tv_TimeTrial">Mit Zeitlimit</string>
+    <string name="listCfg_checkbox_TimeReset">Zurücksetzen</string>
+    <string name="listCfg_radioBtn_Left">Links</string>
+    <string name="listCfg_radioBtn_Right">Rechts</string>
+    <string name="tv_yourAnswer">Deine Antwort</string>
+</resources>

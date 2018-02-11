@@ -17,6 +17,13 @@ public class QuestionItem {
         return side == GameActivity.VAL_SIDE_LEFT ? itemPair.right : itemPair.left;
     }
 
+    public static String getQuestionHeader(ListItem listItem, int side) {
+        return side == GameActivity.VAL_SIDE_LEFT ? listItem.getLeftHeader() : listItem.getRightHeader();
+    }
+    public static String getAnswerHeader(ListItem listItem, int side) {
+        return side == GameActivity.VAL_SIDE_LEFT ? listItem.getRightHeader() : listItem.getLeftHeader();
+    }
+
     public static List<QuestionItem> getQuestionItemList(ListItem listItem, int side) {
         List<QuestionItem> questionItemList = new ArrayList<>();
 
@@ -32,7 +39,7 @@ public class QuestionItem {
                 }
             }
 
-            questionItemList.add(new QuestionItem(listItem.getLeftHeader(), listItem.getRightHeader(), listFilePath, question, rightAnswer, potentialWrongAnswers));
+            questionItemList.add(new QuestionItem(getQuestionHeader(listItem, side), getAnswerHeader(listItem, side), listFilePath, question, rightAnswer, potentialWrongAnswers));
         }
 
         return questionItemList;

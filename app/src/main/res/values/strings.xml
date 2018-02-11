@@ -11,7 +11,7 @@
     <string name="btn_startSelection">Start Selection</string>
     <string name="title_activity_list">ListActivity</string>
     <string name="btn_startList">Start</string>
-    <string name="listCfg_tv_showSide">Show</string>
+    <string name="listCfg_tv_showSide">Ask for</string>
     <string name="listCfg_tv_ListLength">How many items do you want to guess?</string>
     <string name="listCfg_tv_TimeTrial">Time Trial</string>
     <string name="listCfg_checkbox_TimeReset">Reset</string>
