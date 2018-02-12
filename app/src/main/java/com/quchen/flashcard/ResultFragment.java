@@ -48,9 +48,27 @@ public class ResultFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_result, container, false);
 
+        final int numberOfCorrectAnswers = getNumberOfCorrectAnswers();
+        final boolean noMistakes = numberOfCorrectAnswers == questionResults.size();
+        final float relativeNumberOfRightAnswers = (float) numberOfCorrectAnswers / questionResults.size();
+
         TextView resultScore = view.findViewById(R.id.tv_resultScore);
-        resultScore.setText(String.format("%d / %d in %d sec (Ø %.1f sec)",
-                            getNumberOfCorrectAnswers(), questionResults.size(), questionTimeS, (float)questionTimeS/questionResults.size()));
+        resultScore.setText(String.format("%d / %d (%d%%) in %d sec (Ø %.1f sec)",
+                numberOfCorrectAnswers, questionResults.size(), (int) (relativeNumberOfRightAnswers*100), questionTimeS, (float)questionTimeS/questionResults.size()));
+
+        TextView resultComment = view.findViewById(R.id.tv_resultComment);
+        if(noMistakes) {
+            resultComment.setText(R.string.resultComment100);
+        } else if(relativeNumberOfRightAnswers < 0.5f) {
+            resultComment.setText(R.string.resultCommentLess50);
+        } else {
+            resultComment.setVisibility(View.GONE);
+        }
+
+        Button retryWrong = view.findViewById(R.id.btn_playAgainWrong);
+        if(noMistakes) {
+            retryWrong.setVisibility(View.GONE);
+        }
 
         resultAdapter = new ResultAdapter(this);
         resultAdapter.addAll(questionResults);
