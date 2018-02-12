@@ -24,7 +24,6 @@ import java.util.List;
 public class ListActivity extends AppCompatActivity {
 
     public static final String KEY_FOLDER = "folder";
-    public static final String KEY_FILE_LIST = "file";
 
     private class ListAdapter extends ArrayAdapter<ListFileItem> {
 
@@ -132,8 +131,8 @@ public class ListActivity extends AppCompatActivity {
     }
 
     public void startListFiles(String files[]) {
-        Intent intent = new Intent("com.quchen.flashcard.ListCfgActivity");
-        intent.putExtra(KEY_FILE_LIST, files);
+        Intent intent = new Intent("com.quchen.flashcard.GameActivity");
+        intent.putExtra(GameActivity.KEY_FILE_LIST, files);
         startActivity(intent);
     }
 

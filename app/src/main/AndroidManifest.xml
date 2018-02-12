@@ -31,16 +31,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ListCfgActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="com.quchen.flashcard.ListCfgActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".GameActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
