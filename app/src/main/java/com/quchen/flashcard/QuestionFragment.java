@@ -1,5 +1,10 @@
 package com.quchen.flashcard;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -63,6 +68,36 @@ public class QuestionFragment extends Fragment {
         wrongCountTextView.setText(String.format("%d", wrongAnswerCount));
     }
 
+    private void animateAnswer(final TextView tv, boolean correctAnswer) {
+        int colorFrom = getResources().getColor(R.color.colorPrimary);
+        int colorTo = getResources().getColor(correctAnswer ? R.color.colorCorrectAnswer : R.color.colorWrongAnswer);
+
+        final GradientDrawable dw = (GradientDrawable) tv.getBackground();
+
+        ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+        colorAnimation.setDuration(correctAnswer ? 1000 : 900); // color wrong answers faster and avoid race condition of setUpNextQuestion and a wrong answer still changing it's color
+        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                dw.setColor((int)valueAnimator.getAnimatedValue());
+            }
+        });
+
+        // upon finish of the correct answer animation, setup the next question
+        if (correctAnswer) {
+           colorAnimation.addListener(new AnimatorListenerAdapter() {
+               @Override
+               public void onAnimationEnd(Animator animation) {
+                   super.onAnimationEnd(animation);
+
+                   setUpNextQuestion();
+               }
+           });
+        }
+
+        colorAnimation.start();
+    }
+
     private View.OnClickListener answerOnClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -78,7 +113,11 @@ public class QuestionFragment extends Fragment {
                 wrongAnswerCount++;
             }
 
-            setUpNextQuestion();
+            for (TextView tv : answerTextViews) {
+                tv.setClickable(false);
+                boolean isTvCorrectAnswer = questionResult.isAnswerCorrect(tv.getText().toString());
+                animateAnswer(tv, isTvCorrectAnswer);
+            }
         }
     };
 
@@ -103,6 +142,11 @@ public class QuestionFragment extends Fragment {
         for(int i=0; i<4; i++) {
             TextView tv = answerTextViews.get(i);
             tv.setText(answers.get(i));
+
+            // Todo: Find method to reset view / restore view from XML after animation
+            final GradientDrawable dw = (GradientDrawable) tv.getBackground();
+            dw.setColor(getResources().getColor(R.color.colorPrimary));
+            tv.setClickable(true);
         }
     }
 

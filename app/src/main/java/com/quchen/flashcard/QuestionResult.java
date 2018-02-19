@@ -22,4 +22,8 @@ public class QuestionResult {
     public boolean isAnswerCorrect() {
         return correctAnswer.equals(givenAnswer);
     }
+
+    public boolean isAnswerCorrect(final String givenAnswer) {
+        return correctAnswer.equals(givenAnswer);
+    }
 }
