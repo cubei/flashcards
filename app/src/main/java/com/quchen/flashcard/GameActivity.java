@@ -16,19 +16,13 @@ public class GameActivity extends AppCompatActivity {
     public static final int VAL_SIDE_LEFT = 0;
     public static final int VAL_SIDE_RIGHT = 1;
 
-    private FrameLayout frameLayout;
-
     private String[] listFiles;
 
     private long startTimestampMs;
 
-    private ListCfgFragment listCfgFragment;
-    private QuestionFragment questionFragment;
-    private ResultFragment resultFragment;
-
     public void questionsCompleted(List<QuestionResult> questionResults) {
         long questionTimeMs = System.currentTimeMillis() - startTimestampMs;
-        resultFragment = ResultFragment.newInstance(questionResults, questionTimeMs);
+        ResultFragment resultFragment = ResultFragment.newInstance(questionResults, questionTimeMs);
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
@@ -45,8 +39,7 @@ public class GameActivity extends AppCompatActivity {
 
         cfgContainer.numberOfDesireditems = Math.min(cfgContainer.numberOfDesireditems, questionItems.size());
 
-        questionFragment = QuestionFragment.newInstance(cfgContainer.numberOfDesireditems, questionItems);
-        frameLayout = findViewById(R.id.frameLayout);
+        QuestionFragment questionFragment = QuestionFragment.newInstance(cfgContainer.numberOfDesireditems, questionItems);
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.replace(R.id.frameLayout, questionFragment);
@@ -62,9 +55,8 @@ public class GameActivity extends AppCompatActivity {
 
         listFiles = getIntent().getStringArrayExtra(KEY_FILE_LIST);
 
-        listCfgFragment = ListCfgFragment.newInstance(listFiles);
+        ListCfgFragment listCfgFragment = ListCfgFragment.newInstance(listFiles);
 
-        frameLayout = findViewById(R.id.frameLayout);
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.replace(R.id.frameLayout, listCfgFragment);
