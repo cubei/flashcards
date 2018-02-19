@@ -11,6 +11,7 @@ Japanisch;Deutsch
 ふね;Schiff
 でんしゃ;Bahn, Zug
 しんかんせん;Shinkansen
+ちかてつ;U-Bahn
 バス;Bus
 タクシー;Taxi
 じてんしゃ;Fahrrad
@@ -25,7 +26,7 @@ Japanisch;Deutsch
 
 せんしゅう;letzte Woche
 こんしゅう;diese Woche
-らいしゅう;nächste WOche
+らいしゅう;nächste Woche
 せんげつ;letzten Monat
 こんげつ;diesen Monat
 らいげつ;nächsten Monat
@@ -39,4 +40,13 @@ Japanisch;Deutsch
 なんがつ;welcher Monat
 
 いつ;wann
+たんじょうび;Geburtstag
 そうですね。;Ja, das stimmt.
+
+[どうも]　ありがとうございました;Vielen Dank
+どういたしまして;Keine Ursache
+-ばんせん;Bahnsteig-, Gleis-
+つぎの;nächste/-r/-s
+ふつう;S-Bahn
+きゅうこう;Schnellzug
+とっきゅう;Expresszug
