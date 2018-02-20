@@ -59,5 +59,11 @@ public class QuestionItem {
         this.question = question;
         this.rightAnswer = rightAnswer;
         this.wrongAnswers = wrongAnswers;
+
+        // Fill wrong answer lists to make sure the list contains enough items to fill all flash cards
+        int numberOfMissingAnswers = GameActivity.NUMBER_OF_ANSWERS - wrongAnswers.size() - 1; // minus the correct answer
+        for(int i = 0; i < numberOfMissingAnswers; i++) {
+            wrongAnswers.add("");
+        }
     }
 }

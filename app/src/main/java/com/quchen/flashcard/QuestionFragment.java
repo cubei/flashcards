@@ -132,7 +132,7 @@ public class QuestionFragment extends Fragment {
         answers.add(questionItem.rightAnswer);
 
         List<String> wrongAnswers = new ArrayList<>(questionItem.wrongAnswers);
-        for(int i=0; i<3; i++) {
+        for(int i=0; i < (GameActivity.NUMBER_OF_ANSWERS - 1); i++) {
             String wrongAnswer = wrongAnswers.get((int) (Math.random() * wrongAnswers.size()));
             wrongAnswers.remove(wrongAnswer);
             answers.add(wrongAnswer);
@@ -140,7 +140,7 @@ public class QuestionFragment extends Fragment {
 
         Collections.shuffle(answers);
 
-        for(int i=0; i<4; i++) {
+        for(int i=0; i < GameActivity.NUMBER_OF_ANSWERS; i++) {
             TextView tv = answerTextViews.get(i);
             tv.setText(answers.get(i));
             tv.setClickable(true);

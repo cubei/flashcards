@@ -13,6 +13,8 @@ public class GameActivity extends AppCompatActivity {
 
     public static final String KEY_FILE_LIST = "file";
 
+    public static final int NUMBER_OF_ANSWERS = 4;
+
     public static final int VAL_SIDE_LEFT = 0;
     public static final int VAL_SIDE_RIGHT = 1;
 
