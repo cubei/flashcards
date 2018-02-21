@@ -166,7 +166,6 @@ public class QuestionFragment extends Fragment {
         QuestionFragment fragment = new QuestionFragment();
         fragment.numberOfDesiredQuestions = numberOfDesiredQuestions;
         fragment.questionItems = questionItems;
-        Collections.shuffle(fragment.questionItems);
         return fragment;
     }
 

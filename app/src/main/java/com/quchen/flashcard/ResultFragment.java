@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -80,11 +81,35 @@ public class ResultFragment extends Fragment {
         return view;
     }
 
+    private View.OnClickListener retryAllOnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            ((GameActivity)getActivity()).restartLastGame();
+        }
+    };
+
+    private View.OnClickListener retryWrongOnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            List<QuestionResult> wrongQuestionResults = new ArrayList<>();
+
+            for(QuestionResult questionResult: questionResults) {
+                if(!questionResult.isAnswerCorrect()) {
+                    wrongQuestionResults.add(questionResult);
+                }
+            }
+
+            ((GameActivity)getActivity()).restartLastGame(wrongQuestionResults);
+        }
+    };
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         Button retryAll = view.findViewById(R.id.btn_playAgainAll);
+        retryAll.setOnClickListener(retryAllOnClick);
         Button retryWrong = view.findViewById(R.id.btn_playAgainWrong);
+        retryWrong.setOnClickListener(retryWrongOnClick);
     }
 }
