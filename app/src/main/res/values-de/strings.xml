@@ -17,4 +17,10 @@
     <string name="listCfg_radioBtn_Left">Links</string>
     <string name="listCfg_radioBtn_Right">Rechts</string>
     <string name="tv_yourAnswer">Deine Antwort</string>
+    <string name="createFolderYesOption">Ordner erstellen</string>
+    <string name="createFolderNoOption">Abbrechen</string>
+    <string name="createFolderDialogTitle">Erstelle einen neuen Ordner</string>
+    <string name="createFolderDialogMessage">Setze den Ordnernamen</string>
+    <string name="listImportFilePicker">Wähle die CSV Datei</string>
+    <string name="listImportWrongFileType">Falscher Dateityp. Nur CSV Dateien sind erlaubt.</string>
 </resources>

@@ -19,4 +19,10 @@
     <string name="tv_yourAnswer">Your Answer</string>
     <string name="resultComment100">EZ game EZ life!</string>
     <string name="resultCommentLess50">Fail of the week!</string>
+    <string name="createFolderYesOption">Create folder</string>
+    <string name="createFolderNoOption">Cancel</string>
+    <string name="createFolderDialogTitle">Create a new folder</string>
+    <string name="createFolderDialogMessage">Set folder name</string>
+    <string name="listImportFilePicker">Select the csv file</string>
+    <string name="listImportWrongFileType">Wrong filetype. Only CSV files are supported.</string>
 </resources>

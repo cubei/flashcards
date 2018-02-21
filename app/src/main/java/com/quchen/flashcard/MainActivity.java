@@ -1,8 +1,9 @@
 package com.quchen.flashcard;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -62,6 +65,36 @@ public class MainActivity extends AppCompatActivity {
         return folders;
     }
 
+    private void showFolderCreateDialog() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+        final EditText edittext = new EditText(this);
+        alert.setTitle(R.string.createFolderDialogTitle);
+        alert.setMessage(R.string.createFolderDialogMessage);
+
+        alert.setView(edittext);
+
+        alert.setPositiveButton(R.string.createFolderYesOption, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                String folderName = edittext.getText().toString();
+                File folder = new File(App.getListRootDir(), folderName);
+                folder.mkdir();
+                folderAdapter.add(folderName);
+            }
+        });
+
+        alert.setNegativeButton(R.string.createFolderNoOption, null);
+
+        alert.show();
+    }
+
+    private View.OnClickListener createFolderClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            showFolderCreateDialog();
+        }
+    };
+
     private AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
@@ -93,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     private void updateListFiles() {
@@ -140,5 +172,8 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(folderAdapter);
 
         listView.setOnItemClickListener(clickListener);
+
+        Button importButton = findViewById(R.id.addFolderBtn);
+        importButton.setOnClickListener(createFolderClickListener);
     }
 }
