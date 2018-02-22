@@ -14,7 +14,8 @@ public class ListFileItem {
     }
 
     public String getlabel() {
-        return fileName;
+        int startOfExtention = fileName.toLowerCase().lastIndexOf(".csv");
+        return fileName.substring(0, startOfExtention == -1 ? fileName.length() : startOfExtention);
     }
 
     public String getFilePath() {
