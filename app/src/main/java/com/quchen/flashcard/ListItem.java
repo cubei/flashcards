@@ -17,8 +17,8 @@ import java.util.List;
 
 public class ListItem {
 
-    static final int LEFT_IDX = 0;
-    static final int RIGHT_IDX = 1;
+    private static final int LEFT_IDX = 0;
+    private static final int RIGHT_IDX = 1;
 
     private String filePath;
 

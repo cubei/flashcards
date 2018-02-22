@@ -10,17 +10,17 @@ import java.util.List;
 
 public class QuestionItem {
 
-    public static String getQuestion(ListItem.ItemPair itemPair, int side) {
+    private static String getQuestion(ListItem.ItemPair itemPair, int side) {
         return side == GameActivity.VAL_SIDE_LEFT ? itemPair.left : itemPair.right;
     }
-    public static String getAnswer(ListItem.ItemPair itemPair, int side) {
+    private static String getAnswer(ListItem.ItemPair itemPair, int side) {
         return side == GameActivity.VAL_SIDE_LEFT ? itemPair.right : itemPair.left;
     }
 
-    public static String getQuestionHeader(ListItem listItem, int side) {
+    private static String getQuestionHeader(ListItem listItem, int side) {
         return side == GameActivity.VAL_SIDE_LEFT ? listItem.getLeftHeader() : listItem.getRightHeader();
     }
-    public static String getAnswerHeader(ListItem listItem, int side) {
+    private static String getAnswerHeader(ListItem listItem, int side) {
         return side == GameActivity.VAL_SIDE_LEFT ? listItem.getRightHeader() : listItem.getLeftHeader();
     }
 
@@ -52,7 +52,7 @@ public class QuestionItem {
     public String rightAnswer;
     public List<String> wrongAnswers;
 
-    public QuestionItem(String questionHeader, String answerHeader, String listFilePath, String question, String rightAnswer, List<String> wrongAnswers) {
+    private QuestionItem(String questionHeader, String answerHeader, String listFilePath, String question, String rightAnswer, List<String> wrongAnswers) {
         this.questionHeader = questionHeader;
         this.answerHeader = answerHeader;
         this.listFilePath = listFilePath;

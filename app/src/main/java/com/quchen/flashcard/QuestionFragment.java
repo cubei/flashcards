@@ -16,6 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 
 public class QuestionFragment extends Fragment {
@@ -63,9 +64,9 @@ public class QuestionFragment extends Fragment {
     }
 
     private void updateViews() {
-        progressTextView.setText(String.format("%d / %d", questionCount, numberOfDesiredQuestions));
-        correctCountTextView.setText(String.format("%d", correctAnswerCount));
-        wrongCountTextView.setText(String.format("%d", wrongAnswerCount));
+        progressTextView.setText(String.format(Locale.US, "%d / %d", (questionCount + 1), numberOfDesiredQuestions));
+        correctCountTextView.setText(String.format(Locale.US, "%d", correctAnswerCount));
+        wrongCountTextView.setText(String.format(Locale.US, "%d", wrongAnswerCount));
     }
 
     private void animateAnswer(final TextView tv, boolean correctAnswer) {

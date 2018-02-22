@@ -12,13 +12,13 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Lars on 10.02.2018.
  */
 
 public class ResultFragment extends Fragment {
-    private ResultAdapter resultAdapter;
     private List<QuestionResult> questionResults;
     private long questionTimeS;
 
@@ -54,8 +54,8 @@ public class ResultFragment extends Fragment {
         final float relativeNumberOfRightAnswers = (float) numberOfCorrectAnswers / questionResults.size();
 
         TextView resultScore = view.findViewById(R.id.tv_resultScore);
-        String timeFormat = String.format("%2d:%2d", questionTimeS/60, questionTimeS%60);
-        resultScore.setText(String.format("%d / %d (%d%%) in %s (Ø %.1f sec)",
+        String timeFormat = String.format(Locale.US, "%2d:%2d", questionTimeS/60, questionTimeS%60);
+        resultScore.setText(String.format(Locale.US, "%d / %d (%d%%) in %s (Ø %.1f sec)",
                 numberOfCorrectAnswers, questionResults.size(), (int) (relativeNumberOfRightAnswers*100), timeFormat, (float)questionTimeS/questionResults.size()));
 
         TextView resultComment = view.findViewById(R.id.tv_resultComment);
@@ -72,7 +72,7 @@ public class ResultFragment extends Fragment {
             retryWrong.setVisibility(View.GONE);
         }
 
-        resultAdapter = new ResultAdapter(this);
+        ResultAdapter resultAdapter = new ResultAdapter(this);
         resultAdapter.addAll(questionResults);
 
         ListView listView = view.findViewById(R.id.resultList);

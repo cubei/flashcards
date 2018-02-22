@@ -16,6 +16,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Locale;
 
 
 public class ListCfgFragment extends Fragment {
@@ -118,7 +119,7 @@ public class ListCfgFragment extends Fragment {
         timeTrialTimeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                timeTrialTimeTextView.setText(String.format("%d sec", progress));
+                timeTrialTimeTextView.setText(String.format(Locale.US, "%d sec", progress));
                 cfgContainer.timePerItem = progress;
             }
 

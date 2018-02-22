@@ -121,8 +121,6 @@ public class MainActivity extends AppCompatActivity {
             }
             in.close();
             out.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

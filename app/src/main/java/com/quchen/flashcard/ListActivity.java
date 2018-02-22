@@ -83,12 +83,12 @@ public class ListActivity extends AppCompatActivity {
             }
         };
 
-        public List<ListFileItem> getListOfSelectedItems() {
+        private List<ListFileItem> getListOfSelectedItems() {
             return listOfSelectedItems;
         }
 
 
-        public ListAdapter(Context context, ListView listView) {
+        private ListAdapter(Context context, ListView listView) {
             super(context, 0);
 
             this.listView = listView;
@@ -213,8 +213,6 @@ public class ListActivity extends AppCompatActivity {
             }
             in.close();
             out.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
