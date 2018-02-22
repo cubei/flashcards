@@ -225,7 +225,7 @@ public class ListActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == GET_FILE_REQUEST_ID && resultCode == RESULT_OK) {
             Uri selectedFile = data.getData();
-            if(selectedFile.getPath().endsWith(".csv")) {
+            if(selectedFile.getPath().toLowerCase().endsWith(".csv")) {
 
                 String fileName = selectedFile.getLastPathSegment();
                 // If the file is in root, the URI may contain a ':' in the last segment
