@@ -101,8 +101,8 @@ public class ListActivity extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
             ListFileItem item = this.getItem(position);
 
-            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             if(convertView == null) {
+                LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 convertView = inflater.inflate(R.layout.list_item_view, parent, false);
             }
 
@@ -113,6 +113,8 @@ public class ListActivity extends AppCompatActivity {
             watchBtn.setOnClickListener(watchBtnClickListener);
 
             CheckBox checkBox = convertView.findViewById(R.id.selectList);
+            checkBox.setOnCheckedChangeListener(null); // Shortly remove listener to set the state without callback
+            checkBox.setChecked(listOfSelectedItems.contains(item));
             checkBox.setOnCheckedChangeListener(selectionChanged);
 
             return convertView;
