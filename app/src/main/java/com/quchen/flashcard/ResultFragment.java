@@ -54,7 +54,7 @@ public class ResultFragment extends Fragment {
         final float relativeNumberOfRightAnswers = (float) numberOfCorrectAnswers / questionResults.size();
 
         TextView resultScore = view.findViewById(R.id.tv_resultScore);
-        String timeFormat = String.format(Locale.US, "%2d:%2d", questionTimeS/60, questionTimeS%60);
+        String timeFormat = String.format(Locale.US, "%02d:%02d", questionTimeS/60, questionTimeS%60);
         resultScore.setText(String.format(Locale.US, "%d / %d (%d%%) in %s (Ø %.1f sec)",
                 numberOfCorrectAnswers, questionResults.size(), (int) (relativeNumberOfRightAnswers*100), timeFormat, (float)questionTimeS/questionResults.size()));
 
