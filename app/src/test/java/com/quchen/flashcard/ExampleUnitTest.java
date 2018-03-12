@@ -13,9 +13,9 @@ public class ExampleUnitTest {
     @Test
     public void listFileItemGetLabel_Test() throws Exception {
         ListFileItem listFileItem1 = new ListFileItem("foo", "foo.csv");
-        assertEquals(listFileItem1.getlabel(), "foo");
+        assertEquals(listFileItem1.getLabel(), "foo");
 
         ListFileItem listFileItem2 = new ListFileItem("foo", "foo");
-        assertEquals(listFileItem2.getlabel(), "foo");
+        assertEquals(listFileItem2.getLabel(), "foo");
     }
 }

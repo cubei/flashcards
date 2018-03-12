@@ -13,7 +13,7 @@ public class ListFileItem {
         this.fileName = fileName;
     }
 
-    public String getlabel() {
+    public String getLabel() {
         int startOfExtention = fileName.toLowerCase().lastIndexOf(".csv");
         return fileName.substring(0, startOfExtention == -1 ? fileName.length() : startOfExtention);
     }

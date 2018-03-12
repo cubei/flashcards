@@ -23,4 +23,6 @@
     <string name="createFolderDialogMessage">Setze den Ordnernamen</string>
     <string name="listImportFilePicker">Wähle die CSV Datei</string>
     <string name="listImportWrongFileType">Falscher Dateityp. Nur CSV Dateien sind erlaubt.</string>
+    <string name="resultComment100">EZ game EZ life!</string>
+    <string name="resultCommentLess50">Fail of the week!</string>
 </resources>
