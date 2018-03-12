@@ -127,9 +127,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateListFiles() {
-        copyFileFromResource(R.raw.artist_title, "Music", "artist_title.csv");
-        copyFileFromResource(R.raw.lyrics, "Music", "lyrics.csv");
-        copyFileFromResource(R.raw.quotes, "TV","quotes.csv");
         copyFileFromResource(R.raw.basic_chinese, "Chinese","basic.csv");
         copyFileFromResource(R.raw.numbers_chinese, "Chinese","numbers.csv");
         copyFileFromResource(R.raw.colours_chinese, "Chinese","colours.csv");
