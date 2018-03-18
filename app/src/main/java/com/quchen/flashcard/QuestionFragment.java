@@ -36,12 +36,18 @@ public class QuestionFragment extends Fragment {
     private TextView progressTextView;
     private LinearLayout cardLayout;
     private LinearLayout nextCardLayout;
+    private View answerLineLayout;
+    private View correctAnswerLine;
+    private View wrongAnswerLine;
 
     private void assignViews() {
         timeTextView = getView().findViewById(R.id.tv_time);
         progressTextView = getView().findViewById(R.id.tv_progress);
         cardLayout = getView().findViewById(R.id.cardLayout);
         nextCardLayout = getView().findViewById(R.id.nextCardLayout);
+        answerLineLayout = getView().findViewById(R.id.answerLineLayout);
+        correctAnswerLine = getView().findViewById(R.id.correctCntLine);
+        wrongAnswerLine = getView().findViewById(R.id.wrongCntLine);
     }
 
     private void setUpViews() {
@@ -98,6 +104,21 @@ public class QuestionFragment extends Fragment {
         colorAnimation.start();
     }
 
+    private void drawAnswerLine() {
+        answerLineLayout.setVisibility(View.VISIBLE);
+
+        final int totalWidth = answerLineLayout.getWidth();
+        // line is updated before questionCount is incremented
+        final int correctWidth = totalWidth * correctAnswerCount / (questionCount+1);
+        final int wrongWidth = totalWidth * wrongAnswerCount / (questionCount+1);
+
+        correctAnswerLine.getLayoutParams().width = correctWidth;
+        wrongAnswerLine.getLayoutParams().width = wrongWidth;
+
+        correctAnswerLine.requestLayout();
+        wrongAnswerLine.requestLayout();
+    }
+
     private View.OnClickListener answerOnClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -112,6 +133,8 @@ public class QuestionFragment extends Fragment {
             } else {
                 wrongAnswerCount++;
             }
+
+            drawAnswerLine();
 
             // Disable click event for all answers for the time of the answer animation
             for (TextView tv : getAnswerTextViews()) {
@@ -231,6 +254,7 @@ public class QuestionFragment extends Fragment {
         questionAnswerMap.clear();
 
         assignViews();
+        answerLineLayout.setVisibility(View.INVISIBLE);
         setUpViews();
     }
 }

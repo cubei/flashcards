@@ -36,7 +36,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
         <include layout="@layout/question_card"
             android:id="@+id/nextCardLayout"/>
@@ -46,36 +47,24 @@
 
     </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray" />
-
     <LinearLayout
-        android:orientation="horizontal"
+        android:id="@+id/answerLineLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:weightSum="2">
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_correctAnswerCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#489748"
-            android:text="1337"
-            android:layout_weight="1"
-            android:textAlignment="viewStart"/>
+        <View
+            android:id="@+id/correctCntLine"
+            android:layout_width="150dp"
+            android:layout_height="3dp"
+            android:background="@color/colorCorrectAnswer" />
 
-        <TextView
-            android:id="@+id/tv_wrongAnswerCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#890505"
-            android:text="42"
-            android:layout_weight="1"
-            android:textAlignment="viewEnd"/>
+        <View
+            android:id="@+id/wrongCntLine"
+            android:layout_width="150dp"
+            android:layout_height="3dp"
+            android:background="@color/colorWrongAnswer" />
+
     </LinearLayout>
 
 </LinearLayout>
