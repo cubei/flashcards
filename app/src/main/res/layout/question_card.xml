@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/card"
+    android:layout_marginRight="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginTop="40dp"
+    android:layout_marginBottom="40dp"
+    android:padding="7dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="48dp">
+
+        <TextView
+            android:id="@+id/tv_questionSide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/listCfg_radioBtn_Left" />
+
+        <TextView
+            android:id="@+id/tv_listName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="ListName" />
+
+        <TextView
+            android:id="@+id/tv_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_questionSide"
+            android:layout_centerHorizontal="true"
+            android:text="Word to guess"
+            android:textSize="26sp"/>
+    </RelativeLayout>
+
+
+
+    <TextView
+        android:id="@+id/tv_guessSide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/listCfg_radioBtn_Right"/>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:weightSum="2"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:measureWithLargestChild="true">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:weightSum="2">
+            <TextView
+                android:id="@+id/tv_answer1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_round_corners"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:text="dasfdsafdfdfadfdfadfdsfafdfadfadf"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textColor="#FFF"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="30sp"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_answer2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:text="test"
+                android:textColor="#FFF"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="30sp"
+                android:textSize="16sp"
+                android:background="@drawable/background_round_corners" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:weightSum="2">
+            <TextView
+                android:id="@+id/tv_answer3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_round_corners"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:text="test"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textColor="#FFF"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="30sp"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_answer4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:text="teadfadfasdfdst"
+                android:textColor="#FFF"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="30sp"
+                android:textSize="16sp"
+                android:background="@drawable/background_round_corners" />
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

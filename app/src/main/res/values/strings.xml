@@ -6,11 +6,11 @@
     <string name="btn_addFolder">add folder</string>
     <string name="btn_playAgainAll">Retry</string>
     <string name="btn_playAgainWrong">Retry Wrong</string>
-    <string name="btn_importList">Import List</string>
+    <string name="btn_importList">Add</string>
     <string name="btn_startAll">Start All</string>
     <string name="btn_startSelection">Start Selection</string>
     <string name="btn_startList">Start</string>
-    <string name="listCfg_tv_showSide">Ask of</string>
+    <string name="listCfg_tv_showSide">Question of</string>
     <string name="listCfg_tv_ListLength">How many items do you want to guess?</string>
     <string name="listCfg_tv_TimeTrial">Time Trial</string>
     <string name="listCfg_checkbox_TimeReset">Reset</string>
@@ -25,4 +25,5 @@
     <string name="createFolderDialogMessage">Set folder name</string>
     <string name="listImportFilePicker">Select the csv file</string>
     <string name="listImportWrongFileType">Wrong filetype. Only CSV files are supported.</string>
+    <string name="question">Question</string>
 </resources>

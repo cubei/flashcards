@@ -10,55 +10,49 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:orientation="vertical"
-        android:padding="10dp"
-        android:layout_marginTop="10dp">
+        android:padding="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="3">
+            android:orientation="vertical"
+            android:layout_marginTop="24dp">
 
             <TextView
                 android:id="@+id/tv_showSide"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/listCfg_tv_showSide"
-                android:layout_weight="2" />
+                android:textSize="24sp"/>
 
             <RadioGroup
                 android:id="@+id/sideRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                android:orientation="vertical"
+                android:layout_marginLeft="30dp">
 
                 <RadioButton
                     android:id="@+id/radioButtonLeft"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/listCfg_radioBtn_Left"
-                    android:layout_weight="1" />
+                    android:textSize="18sp"/>
 
                 <RadioButton
                     android:id="@+id/radioButtonRight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/listCfg_radioBtn_Right"
-                    android:layout_weight="1" />
+                    android:textSize="18sp"/>
             </RadioGroup>
         </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"
-            android:layout_margin="30dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:orientation="vertical">
 
             <TextView
@@ -66,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/listCfg_tv_ListLength"
-                android:textAlignment="center"/>
+                android:textSize="24sp"/>
 
 
             <LinearLayout
@@ -95,16 +89,11 @@
             </LinearLayout>
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"
-            android:layout_margin="30dp"/>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="24dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -117,14 +106,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/listCfg_tv_TimeTrial" />
+                    android:text="@string/listCfg_tv_TimeTrial"
+                    android:textSize="18sp" />
 
                 <CheckBox
                     android:id="@+id/timeTrialReset"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/listCfg_checkbox_TimeReset" />
+                    android:text="@string/listCfg_checkbox_TimeReset"
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -162,7 +153,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="@string/btn_startList" />
+        android:layout_marginBottom="20dp"
+        android:text="@string/btn_startList"
+        android:textSize="24sp" />
 
 
 </RelativeLayout>

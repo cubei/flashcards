@@ -6,7 +6,7 @@
     <string name="btn_addFolder">Ordner hinzufügen</string>
     <string name="btn_playAgainAll">Nochmal</string>
     <string name="btn_playAgainWrong">Nochmal die falschen</string>
-    <string name="btn_importList">Liste importieren</string>
+    <string name="btn_importList">Hinzufügen</string>
     <string name="btn_startAll">Alle starten</string>
     <string name="btn_startSelection">Auswahl starten</string>
     <string name="btn_startList">Start</string>
@@ -25,4 +25,5 @@
     <string name="listImportWrongFileType">Falscher Dateityp. Nur CSV Dateien sind erlaubt.</string>
     <string name="resultComment100">EZ game EZ life!</string>
     <string name="resultCommentLess50">Fail of the week!</string>
+    <string name="question">Frage</string>
 </resources>

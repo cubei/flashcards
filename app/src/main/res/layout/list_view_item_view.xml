@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp"
-    android:background="@drawable/backround_round_corners"
+    android:background="@drawable/background_round_corners"
     android:descendantFocusability="blocksDescendants"
     android:weightSum="2">
 

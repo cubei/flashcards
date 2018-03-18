@@ -28,7 +28,9 @@ public class QuestionItem {
         List<QuestionItem> questionItemList = new ArrayList<>();
 
         for(ListItem.ItemPair itemPair: listItem.getItemPairs()) {
-            String listFilePath = listItem.getFilePath();
+            String filePath = listItem.getFilePath();
+            String listName = filePath.substring(filePath.indexOf("/") + 1, filePath.lastIndexOf("."));
+
             String question = getQuestion(itemPair, side);
             String rightAnswer = getAnswer(itemPair, side);
 
@@ -39,7 +41,7 @@ public class QuestionItem {
                 }
             }
 
-            questionItemList.add(new QuestionItem(getQuestionHeader(listItem, side), getAnswerHeader(listItem, side), listFilePath, question, rightAnswer, potentialWrongAnswers));
+            questionItemList.add(new QuestionItem(getQuestionHeader(listItem, side), getAnswerHeader(listItem, side), listName, question, rightAnswer, potentialWrongAnswers));
         }
 
         return questionItemList;
@@ -47,15 +49,15 @@ public class QuestionItem {
 
     public String questionHeader;
     public String answerHeader;
-    public String listFilePath;
+    public String listName;
     public String question;
     public String rightAnswer;
     public List<String> wrongAnswers;
 
-    private QuestionItem(String questionHeader, String answerHeader, String listFilePath, String question, String rightAnswer, List<String> wrongAnswers) {
+    private QuestionItem(String questionHeader, String answerHeader, String listName, String question, String rightAnswer, List<String> wrongAnswers) {
         this.questionHeader = questionHeader;
         this.answerHeader = answerHeader;
-        this.listFilePath = listFilePath;
+        this.listName = listName;
         this.question = question;
         this.rightAnswer = rightAnswer;
         this.wrongAnswers = wrongAnswers;

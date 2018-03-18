@@ -88,12 +88,9 @@ public class MainActivity extends AppCompatActivity {
         alert.show();
     }
 
-    private View.OnClickListener createFolderClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            showFolderCreateDialog();
-        }
-    };
+    public void addFolderOnClick(View view) {
+        showFolderCreateDialog();
+    }
 
     private AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener() {
         @Override
@@ -169,8 +166,5 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(folderAdapter);
 
         listView.setOnItemClickListener(clickListener);
-
-        Button importButton = findViewById(R.id.addFolderBtn);
-        importButton.setOnClickListener(createFolderClickListener);
     }
 }
