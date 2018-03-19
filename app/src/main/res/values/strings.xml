@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FlashCard</string>
+    <string name="app_name">FlashCards</string>
     <string name="tv_results">Results</string>
     <string name="tv_folders">Folders</string>
     <string name="tv_lists">Lists</string>
