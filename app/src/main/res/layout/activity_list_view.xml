@@ -39,7 +39,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textAlignment="viewStart"
-                android:text="@string/listCfg_radioBtn_Left"/>
+                android:text="@string/listCfg_radioBtn_Left"
+                android:textSize="20sp"/>
 
             <TextView
                 android:id="@+id/rightHeader"
@@ -47,7 +48,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textAlignment="viewEnd"
-                android:text="@string/listCfg_radioBtn_Right"/>
+                android:text="@string/listCfg_radioBtn_Right"
+                android:textSize="20sp"/>
 
         </LinearLayout>
 

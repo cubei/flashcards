@@ -10,8 +10,8 @@
         android:id="@+id/label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Folder"
+        android:text="Minna no nihongo asdf"
         android:textAlignment="center"
         android:textColor="#ffffff"
-        android:textSize="40sp" />
+        android:textSize="36sp"/>
 </LinearLayout>

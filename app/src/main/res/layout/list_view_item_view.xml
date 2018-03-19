@@ -15,7 +15,8 @@
         android:layout_weight="1"
         android:textAlignment="viewEnd"
         android:text="@string/listCfg_radioBtn_Left"
-        android:textColor="#ffffff" />
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
 
     <View
         android:layout_width="2dp"
@@ -31,6 +32,7 @@
         android:layout_weight="1"
         android:textAlignment="viewStart"
         android:text="@string/listCfg_radioBtn_Right"
-        android:textColor="#ffffff" />
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
 
 </LinearLayout>
