@@ -123,34 +123,63 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /** Renamed some files, so the old ones should be deleted */
+    private void cleanupOldFiles() {
+        File folder_minnaNoNihongo = new File(App.getListRootDir(), "Minna no Nihongo");
+        new File(folder_minnaNoNihongo, "Lektion0.csv").delete();
+        new File(folder_minnaNoNihongo, "Lektion1.csv").delete();
+        new File(folder_minnaNoNihongo, "Lektion2.csv").delete();
+        new File(folder_minnaNoNihongo, "Lektion3.csv").delete();
+        new File(folder_minnaNoNihongo, "Lektion4.csv").delete();
+        new File(folder_minnaNoNihongo, "Lektion5.csv").delete();
+
+        File folder_Japanese = new File(App.getListRootDir(), "Japanese");
+        new File(folder_Japanese, "Kanji1.csv").delete();
+        new File(folder_Japanese, "Kanji2.csv").delete();
+        new File(folder_Japanese, "Kanji3.csv").delete();
+        new File(folder_Japanese, "Kanji4.csv").delete();
+        new File(folder_Japanese, "Kanji5.csv").delete();
+        new File(folder_Japanese, "Kanji6.csv").delete();
+
+        File folder_Chinese = new File(App.getListRootDir(), "Chinese");
+        new File(folder_Chinese, "characters1.csv").delete();
+    }
+
     private void updateListFiles() {
-        copyFileFromResource(R.raw.basic_chinese, "Chinese","basic.csv");
-        copyFileFromResource(R.raw.numbers_chinese, "Chinese","numbers.csv");
-        copyFileFromResource(R.raw.colours_chinese, "Chinese","colours.csv");
-        copyFileFromResource(R.raw.japanese_kanji_grade1_pinyin, "Chinese","characters1.csv");
-        copyFileFromResource(R.raw.basic_german, "German","basic.csv");
-        copyFileFromResource(R.raw.numbers_german, "German","numbers.csv");
-        copyFileFromResource(R.raw.basic_spanish, "Spanish","basic.csv");
-        copyFileFromResource(R.raw.numbers_spanish, "Spanish","numbers.csv");
+        copyFileFromResource(R.raw.japanese_lektion0, "Minna no Nihongo","Lektion 0.csv");
+        copyFileFromResource(R.raw.japanese_lektion1, "Minna no Nihongo","Lektion 1.csv");
+        copyFileFromResource(R.raw.japanese_lektion2, "Minna no Nihongo","Lektion 2.csv");
+        copyFileFromResource(R.raw.japanese_lektion3, "Minna no Nihongo","Lektion 3.csv");
+        copyFileFromResource(R.raw.japanese_lektion4, "Minna no Nihongo","Lektion 4.csv");
+        copyFileFromResource(R.raw.japanese_lektion5, "Minna no Nihongo","Lektion 5.csv");
+        copyFileFromResource(R.raw.japanese_lektion6, "Minna no Nihongo","Lektion 6.csv");
+        copyFileFromResource(R.raw.japanese_particle, "Minna no Nihongo","Particle.csv");
+        copyFileFromResource(R.raw.minna_no_nihongo_kanji, "Minna no Nihongo","Kanji.csv");
+
         copyFileFromResource(R.raw.hiragana, "Japanese","hiragana.csv");
         copyFileFromResource(R.raw.katakana, "Japanese","katakana.csv");
         copyFileFromResource(R.raw.basic_japanese, "Japanese","basic.csv");
         copyFileFromResource(R.raw.numbers_japanese, "Japanese","numbers.csv");
         copyFileFromResource(R.raw.japanese_dates, "Japanese","dates.csv");
-        copyFileFromResource(R.raw.japanese_kanji_grade1, "Japanese","Kanji1.csv");
-        copyFileFromResource(R.raw.japanese_kanji_grade2, "Japanese","Kanji2.csv");
-        copyFileFromResource(R.raw.japanese_kanji_grade3, "Japanese","Kanji3.csv");
-        copyFileFromResource(R.raw.japanese_kanji_grade4, "Japanese","Kanji4.csv");
-        copyFileFromResource(R.raw.japanese_kanji_grade5, "Japanese","Kanji5.csv");
-        copyFileFromResource(R.raw.japanese_kanji_grade6, "Japanese","Kanji6.csv");
-        copyFileFromResource(R.raw.japanese_lektion0, "Minna no Nihongo","Lektion0.csv");
-        copyFileFromResource(R.raw.japanese_lektion1, "Minna no Nihongo","Lektion1.csv");
-        copyFileFromResource(R.raw.japanese_lektion2, "Minna no Nihongo","Lektion2.csv");
-        copyFileFromResource(R.raw.japanese_lektion3, "Minna no Nihongo","Lektion3.csv");
-        copyFileFromResource(R.raw.japanese_lektion4, "Minna no Nihongo","Lektion4.csv");
-        copyFileFromResource(R.raw.japanese_lektion5, "Minna no Nihongo","Lektion5.csv");
-        copyFileFromResource(R.raw.japanese_particle, "Minna no Nihongo","Particle.csv");
-        copyFileFromResource(R.raw.minna_no_hihongo_kanji, "Minna no Nihongo","Kanji.csv");
+        copyFileFromResource(R.raw.japanese_kanji_grade1, "Japanese","Kanji 1.csv");
+        copyFileFromResource(R.raw.japanese_kanji_grade2, "Japanese","Kanji 2.csv");
+        copyFileFromResource(R.raw.japanese_kanji_grade3, "Japanese","Kanji 3.csv");
+        copyFileFromResource(R.raw.japanese_kanji_grade4, "Japanese","Kanji 4.csv");
+        copyFileFromResource(R.raw.japanese_kanji_grade5, "Japanese","Kanji 5.csv");
+        copyFileFromResource(R.raw.japanese_kanji_grade6, "Japanese","Kanji 6.csv");
+
+        copyFileFromResource(R.raw.basic_chinese, "Chinese","basic.csv");
+        copyFileFromResource(R.raw.numbers_chinese, "Chinese","numbers.csv");
+        copyFileFromResource(R.raw.colours_chinese, "Chinese","colours.csv");
+        copyFileFromResource(R.raw.japanese_kanji_grade1_pinyin, "Chinese","characters 1.csv");
+
+        copyFileFromResource(R.raw.basic_german, "German","basic.csv");
+        copyFileFromResource(R.raw.numbers_german, "German","numbers.csv");
+
+        copyFileFromResource(R.raw.basic_spanish, "Spanish","basic.csv");
+        copyFileFromResource(R.raw.numbers_spanish, "Spanish","numbers.csv");
+
+        cleanupOldFiles();
     }
 
     @Override
