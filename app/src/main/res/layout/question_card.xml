@@ -81,36 +81,18 @@
                 android:layout_weight="1"
                 android:padding="4dp"
                 android:weightSum="2">
-                <TextView
+
+                <include layout="@layout/answer_button"
                     android:id="@+id/tv_answer1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/background_round_corners"
                     android:layout_weight="1"
-                    android:padding="5dp"
-                    android:layout_margin="8dp"
-                    android:text="dasfdsafdfdfadfdfadfdsfafdfadfadf"
-                    android:textAlignment="center"
-                    android:gravity="center"
-                    android:textColor="#FFF"
-                    android:autoSizeTextType="uniform"
-                    android:autoSizeMaxTextSize="30sp"
-                    android:textSize="16sp" />
-                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"/>
+                <include layout="@layout/answer_button"
                     android:id="@+id/tv_answer2"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textAlignment="center"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:layout_margin="8dp"
-                    android:text="test"
-                    android:textColor="#FFF"
-                    android:autoSizeTextType="uniform"
-                    android:autoSizeMaxTextSize="30sp"
-                    android:textSize="16sp"
-                    android:background="@drawable/background_round_corners" />
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"/>
+
             </TableRow>
 
             <TableRow
@@ -120,36 +102,18 @@
                 android:layout_weight="1"
                 android:padding="4dp"
                 android:weightSum="2">
-                <TextView
+
+                <include layout="@layout/answer_button"
                     android:id="@+id/tv_answer3"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/background_round_corners"
                     android:layout_weight="1"
-                    android:padding="5dp"
-                    android:layout_margin="8dp"
-                    android:text="test"
-                    android:textAlignment="center"
-                    android:gravity="center"
-                    android:textColor="#FFF"
-                    android:autoSizeTextType="uniform"
-                    android:autoSizeMaxTextSize="30sp"
-                    android:textSize="16sp" />
-                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"/>
+                <include layout="@layout/answer_button"
                     android:id="@+id/tv_answer4"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textAlignment="center"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:layout_margin="8dp"
-                    android:text="teadfadfasdfdst"
-                    android:textColor="#FFF"
-                    android:autoSizeTextType="uniform"
-                    android:autoSizeMaxTextSize="30sp"
-                    android:textSize="16sp"
-                    android:background="@drawable/background_round_corners" />
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"/>
+
             </TableRow>
         </TableLayout>
     </LinearLayout>

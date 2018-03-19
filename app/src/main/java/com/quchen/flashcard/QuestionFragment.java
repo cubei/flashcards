@@ -93,7 +93,7 @@ public class QuestionFragment extends Fragment {
                         super.onAnimationEnd(animation);
 
                         // Restore to normal color
-                        dw.setColor(getResources().getColor(R.color.colorPrimary));
+                        dw.setColor(getResources().getColor(R.color.answerBtn));
 
                         setUpNextQuestion();
                     }
@@ -151,10 +151,16 @@ public class QuestionFragment extends Fragment {
 
     private List<TextView> getAnswerTextViews(View layout) {
         List<TextView> answerTextViews = new ArrayList<>();
-        answerTextViews.add((TextView) layout.findViewById(R.id.tv_answer1));
-        answerTextViews.add((TextView) layout.findViewById(R.id.tv_answer2));
-        answerTextViews.add((TextView) layout.findViewById(R.id.tv_answer3));
-        answerTextViews.add((TextView) layout.findViewById(R.id.tv_answer4));
+        View view;
+
+        view = layout.findViewById(R.id.tv_answer1);
+        answerTextViews.add((TextView) view.findViewById(R.id.answerTextView));
+        view = layout.findViewById(R.id.tv_answer2);
+        answerTextViews.add((TextView) view.findViewById(R.id.answerTextView));
+        view = layout.findViewById(R.id.tv_answer3);
+        answerTextViews.add((TextView) view.findViewById(R.id.answerTextView));
+        view = layout.findViewById(R.id.tv_answer4);
+        answerTextViews.add((TextView) view.findViewById(R.id.answerTextView));
 
         return answerTextViews;
     }
@@ -254,7 +260,10 @@ public class QuestionFragment extends Fragment {
         questionAnswerMap.clear();
 
         assignViews();
+
         answerLineLayout.setVisibility(View.INVISIBLE);
+        timeTextView.setVisibility(View.INVISIBLE);
+
         setUpViews();
     }
 }
