@@ -29,6 +29,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
@@ -130,6 +132,13 @@ public class ListActivity extends AppCompatActivity {
         for(File listFile: listFolder.listFiles()) {
             lists.add(new ListFileItem(folderName, listFile.getName()));
         }
+
+        Collections.sort(lists, new Comparator<ListFileItem>() {
+            @Override
+            public int compare(ListFileItem obj1, ListFileItem obj2) {
+                return obj1.getLabel().compareTo(obj2.getLabel());
+            }
+        });
 
         return lists;
     }
