@@ -156,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
         copyFileFromResource(R.raw.japanese_lektion4, "Minna no Nihongo","Lektion 4.csv");
         copyFileFromResource(R.raw.japanese_lektion5, "Minna no Nihongo","Lektion 5.csv");
         copyFileFromResource(R.raw.japanese_lektion6, "Minna no Nihongo","Lektion 6.csv");
+        copyFileFromResource(R.raw.japanese_lektion6_lebensmittel, "Minna no Nihongo","Lektion 6 Lebensmittel.csv");
         copyFileFromResource(R.raw.japanese_lektion7, "Minna no Nihongo","Lektion 7.csv");
         copyFileFromResource(R.raw.japanese_particle, "Minna no Nihongo","Particle.csv");
         copyFileFromResource(R.raw.minna_no_nihongo_kanji, "Minna no Nihongo","Kanji.csv");
