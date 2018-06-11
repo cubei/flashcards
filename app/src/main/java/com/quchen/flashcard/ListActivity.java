@@ -190,7 +190,7 @@ public class ListActivity extends AppCompatActivity {
                         STORAGE_READ_PERMISSOIN_REQUEST_ID);
         } else {
             Intent intent = new Intent()
-                    .setType("*/*")
+                    .setType("text/comma-separated-values")
                     .setAction(Intent.ACTION_GET_CONTENT);
 
             startActivityForResult(Intent.createChooser(intent, "Select a file"), GET_FILE_REQUEST_ID);
