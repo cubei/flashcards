@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -80,9 +81,13 @@ public class MainActivity extends AppCompatActivity {
         alert.setPositiveButton(R.string.createFolderYesOption, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 String folderName = edittext.getText().toString();
-                File folder = new File(App.getListRootDir(), folderName);
-                folder.mkdir();
-                folderAdapter.add(folderName);
+                if (folderName.equals("")) {
+                    Toast.makeText(MainActivity.this, "Folder name can't be empty!", Toast.LENGTH_SHORT).show();
+                } else {
+                    File folder = new File(App.getListRootDir(), folderName);
+                    folder.mkdir();
+                    folderAdapter.add(folderName);
+                }
             }
         });
 
