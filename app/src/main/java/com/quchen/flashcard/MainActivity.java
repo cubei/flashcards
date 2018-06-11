@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -81,8 +82,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int id) {
                 String folderName = edittext.getText().toString();
                 File folder = new File(App.getListRootDir(), folderName);
-                folder.mkdir();
-                folderAdapter.add(folderName);
+                if(folder.mkdir()) {
+                    folderAdapter.add(folderName);
+                } else {
+                    Toast.makeText(MainActivity.this, R.string.folderCreateError, Toast.LENGTH_LONG).show();
+                }
             }
         });
 

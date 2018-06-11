@@ -24,6 +24,7 @@
     <string name="createFolderDialogTitle">Create a new folder</string>
     <string name="createFolderDialogMessage">Set folder name</string>
     <string name="listImportFilePicker">Select the csv file</string>
-    <string name="listImportWrongFileType">Wrong filetype. Only CSV files are supported.</string>
+    <string name="listImportFileError">An error occurred while creating the file</string>
+    <string name="folderCreateError">An error occurred while creating the folder</string>
     <string name="question">Question</string>
 </resources>

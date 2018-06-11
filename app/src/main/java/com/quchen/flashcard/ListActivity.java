@@ -4,8 +4,10 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -185,9 +187,9 @@ public class ListActivity extends AppCompatActivity {
 
     private void showListImport() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        STORAGE_READ_PERMISSOIN_REQUEST_ID);
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    STORAGE_READ_PERMISSOIN_REQUEST_ID);
         } else {
             Intent intent = new Intent()
                     .setType("text/comma-separated-values")
@@ -197,6 +199,29 @@ public class ListActivity extends AppCompatActivity {
         }
     }
 
+    // https://stackoverflow.com/a/25005243
+    private String getFileName(Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        if (result == null) {
+            result = uri.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
+    }
+
     private View.OnClickListener importListBtnOnClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -204,10 +229,10 @@ public class ListActivity extends AppCompatActivity {
         }
     };
 
-    private void copyFileFromUri(Uri fileUri, String fileName) {
+    private boolean copyFileFromUri(Uri fileUri, String fileName) {
+        boolean success = true;
 
         File folder = new File(App.getListRootDir(), folderName);
-        folder.mkdirs();
         File file = new File(folder, fileName);
 
         try {
@@ -222,7 +247,10 @@ public class ListActivity extends AppCompatActivity {
             out.close();
         } catch (IOException e) {
             e.printStackTrace();
+            success = false;
         }
+
+        return success;
     }
 
     @Override
@@ -230,19 +258,11 @@ public class ListActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == GET_FILE_REQUEST_ID && resultCode == RESULT_OK) {
             Uri selectedFile = data.getData();
-            if(selectedFile.getPath().toLowerCase().endsWith(".csv")) {
-
-                String fileName = selectedFile.getLastPathSegment();
-                // If the file is in root, the URI may contain a ':' in the last segment
-                if(fileName.contains(":")) {
-                    fileName = fileName.split(":")[1];
-                }
-
-                copyFileFromUri(selectedFile, fileName);
-
+            String fileName = getFileName(selectedFile);
+            if(copyFileFromUri(selectedFile, fileName)) {
                 listAdapter.add(new ListFileItem(folderName, fileName));
             } else {
-                Toast.makeText(this, R.string.listImportWrongFileType, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.listImportFileError, Toast.LENGTH_LONG).show();
             }
         }
     }
