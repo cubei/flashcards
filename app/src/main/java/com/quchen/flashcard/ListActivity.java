@@ -181,7 +181,11 @@ public class ListActivity extends AppCompatActivity {
                 }
             }
 
-            startGameActivity(fileList.toArray(new String[fileList.size()]));
+            if (fileList.size() > 0) {
+                startGameActivity(fileList.toArray(new String[fileList.size()]));
+            } else {
+                Toast.makeText(ListActivity.this, R.string.addFileAlert, Toast.LENGTH_SHORT).show();
+            }
         }
     };
 
