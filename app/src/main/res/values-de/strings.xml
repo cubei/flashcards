@@ -26,5 +26,6 @@
     <string name="folderCreateError">Ein Fehler ist beim erstellen des Ordners aufgetreten</string>
     <string name="resultComment100">EZ game EZ life!</string>
     <string name="resultCommentLess50">Fail of the week!</string>
+    <string name="addFileAlert">Bitte füge eine Liste hinzu</string>
     <string name="question">Frage</string>
 </resources>
