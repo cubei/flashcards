@@ -132,24 +132,8 @@ public class MainActivity extends AppCompatActivity {
 
     /** Renamed some files, so the old ones should be deleted */
     private void cleanupOldFiles() {
-        File folder_minnaNoNihongo = new File(App.getListRootDir(), "Minna no Nihongo");
-        new File(folder_minnaNoNihongo, "Lektion0.csv").delete();
-        new File(folder_minnaNoNihongo, "Lektion1.csv").delete();
-        new File(folder_minnaNoNihongo, "Lektion2.csv").delete();
-        new File(folder_minnaNoNihongo, "Lektion3.csv").delete();
-        new File(folder_minnaNoNihongo, "Lektion4.csv").delete();
-        new File(folder_minnaNoNihongo, "Lektion5.csv").delete();
-
-        File folder_Japanese = new File(App.getListRootDir(), "Japanese");
-        new File(folder_Japanese, "Kanji1.csv").delete();
-        new File(folder_Japanese, "Kanji2.csv").delete();
-        new File(folder_Japanese, "Kanji3.csv").delete();
-        new File(folder_Japanese, "Kanji4.csv").delete();
-        new File(folder_Japanese, "Kanji5.csv").delete();
-        new File(folder_Japanese, "Kanji6.csv").delete();
-
         File folder_Chinese = new File(App.getListRootDir(), "Chinese");
-        new File(folder_Chinese, "characters1.csv").delete();
+        new File(folder_Chinese, "basic_extented.csv").delete();
     }
 
     private void updateListFiles() {
@@ -182,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
         copyFileFromResource(R.raw.basic_chinese, "Chinese","basic.csv");
         copyFileFromResource(R.raw.basic_chinese_introduction, "Chinese","introduction.csv");
         copyFileFromResource(R.raw.basic_chinese_family, "Chinese","family.csv");
-        copyFileFromResource(R.raw.basic_chinese_extented, "Chinese","basic_extented");
+        copyFileFromResource(R.raw.basic_chinese_extended, "Chinese","basic_extended");
         copyFileFromResource(R.raw.numbers_chinese, "Chinese","numbers.csv");
         copyFileFromResource(R.raw.colours_chinese, "Chinese","colours.csv");
         copyFileFromResource(R.raw.japanese_kanji_grade1_pinyin, "Chinese","characters 1.csv");
