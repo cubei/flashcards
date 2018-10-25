@@ -29,7 +29,20 @@ public class QuestionItem {
 
         for(ListItem.ItemPair itemPair: listItem.getItemPairs()) {
             String filePath = listItem.getFilePath();
-            String listName = filePath.substring(filePath.indexOf("/") + 1, filePath.lastIndexOf("."));
+
+            // Extract the fileName without type ending from file path
+
+            int fileNameStartIdx = filePath.lastIndexOf("/") + 1;
+            if(fileNameStartIdx == -1) {
+                fileNameStartIdx = 0;
+            }
+
+            int fileNameEndIdx = filePath.lastIndexOf(".");
+            if(fileNameEndIdx == -1) {
+                fileNameEndIdx = filePath.length();
+            }
+
+            String listName = filePath.substring(fileNameStartIdx, fileNameEndIdx);
 
             String question = getQuestion(itemPair, side);
             String rightAnswer = getAnswer(itemPair, side);
