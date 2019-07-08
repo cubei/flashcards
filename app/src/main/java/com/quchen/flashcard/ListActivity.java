@@ -291,7 +291,8 @@ public class ListActivity extends AppCompatActivity {
         if(requestCode == GET_FILE_REQUEST_ID && resultCode == RESULT_OK) {
             Uri selectedFile = data.getData();
             String fileName = getFileName(selectedFile);
-            if(copyFileFromUri(selectedFile, fileName)) {
+            String[] splitFileName = fileName.split("\\.");
+            if(splitFileName[1].equals("csv") && copyFileFromUri(selectedFile, fileName)) {
                 listAdapter.add(new ListFileItem(folderName, fileName));
                 finish();
                 startActivity(getIntent());
