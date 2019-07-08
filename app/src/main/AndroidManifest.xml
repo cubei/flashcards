@@ -49,7 +49,7 @@
                 <action android:name="com.quchen.flashcard.ListViewActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>>
+            </intent-filter>
         </activity>
     </application>
 

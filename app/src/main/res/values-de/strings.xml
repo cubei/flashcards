@@ -28,4 +28,8 @@
     <string name="resultCommentLess50">Fail of the week!</string>
     <string name="addFileAlert">Bitte füge eine Liste hinzu</string>
     <string name="question">Frage</string>
+    <string name="deleteList">Willst du die Liste löschen?</string>
+    <string name="deleteFolder">Willst du den Ordner löschen?</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
 </resources>

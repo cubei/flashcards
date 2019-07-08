@@ -1,7 +1,9 @@
 package com.quchen.flashcard;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -34,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 public class ListActivity extends AppCompatActivity {
 
@@ -53,6 +56,30 @@ public class ListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 ListFileItem listItem = getItem(position);
                 startGameActivity(listItem.getFilePath());
+            }
+        };
+
+        private AdapterView.OnItemLongClickListener itemLongClickListener = new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
+                ListFileItem listItem = getItem(position);
+                final File file = new File(App.getListRootDir(), listItem.getFilePath());
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(ListActivity.this);
+                builder.setMessage(String.format("%s %s", getResources().getString(R.string.deleteList), listItem.getLabel(), Locale.GERMANY))
+                        .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if(file.delete()) {
+                                    finish();
+                                    startActivity(getIntent());
+                                }
+                            }
+                        })
+                        .setNegativeButton(getResources().getString(R.string.no), null)
+                        .show();
+
+                return true;
             }
         };
 
@@ -94,6 +121,7 @@ public class ListActivity extends AppCompatActivity {
             this.listView = listView;
 
             listView.setOnItemClickListener(itemClickListener);
+            listView.setOnItemLongClickListener(itemLongClickListener);
         }
 
         @NonNull
@@ -265,6 +293,8 @@ public class ListActivity extends AppCompatActivity {
             String fileName = getFileName(selectedFile);
             if(copyFileFromUri(selectedFile, fileName)) {
                 listAdapter.add(new ListFileItem(folderName, fileName));
+                finish();
+                startActivity(getIntent());
             } else {
                 Toast.makeText(this, R.string.listImportFileError, Toast.LENGTH_LONG).show();
             }

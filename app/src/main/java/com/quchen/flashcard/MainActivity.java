@@ -27,6 +27,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -180,6 +181,44 @@ public class MainActivity extends AppCompatActivity {
         cleanupOldFiles();
     }
 
+    boolean deleteDirectory(File file) {
+        // First delete all content recursively
+        if (file.isDirectory()) {
+            File[] files = file.listFiles();
+            for (File f : files) {
+                if(!deleteDirectory(f)) {
+                    return false;
+                }
+            }
+        }
+
+        // Then delete the folder itself
+        return file.delete();
+    }
+
+    private AdapterView.OnItemLongClickListener itemLongClickListener = new AdapterView.OnItemLongClickListener() {
+        @Override
+        public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
+            final String folder = folderAdapter.getItem(position);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setMessage(String.format("%s %s", getResources().getString(R.string.deleteFolder), folder, Locale.GERMANY))
+                    .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if(deleteDirectory(new File(App.getListRootDir(), folder))) {
+                                finish();
+                                startActivity(getIntent());
+                            }
+                        }
+                    })
+                    .setNegativeButton(getResources().getString(R.string.no), null)
+                    .show();
+
+            return true;
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -194,5 +233,6 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(folderAdapter);
 
         listView.setOnItemClickListener(clickListener);
+        listView.setOnItemLongClickListener(itemLongClickListener);
     }
 }
