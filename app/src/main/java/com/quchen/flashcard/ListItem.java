@@ -103,10 +103,24 @@ public class ListItem {
     }
 
     public String getLeftHeader() {
-        return header.left;
+        if (header != null)
+        {
+            return header.left;
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public String getRightHeader() {
-        return header.right;
+        if(header != null)
+        {
+            return header.right;
+        }
+        else
+        {
+            return null;
+        }
     }
 }
