@@ -14,6 +14,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -292,7 +293,10 @@ public class ListActivity extends AppCompatActivity {
             Uri selectedFile = data.getData();
             String fileName = getFileName(selectedFile);
             String fileExtension = fileName.contains(".") ? fileName.substring(fileName.lastIndexOf(".") + 1) : "";
-            if(fileExtension.toLowerCase().equals("csv") && copyFileFromUri(selectedFile, fileName)) {
+            if(!checkIfFileAlreadyExists(fileName)) {
+                Toast.makeText(this, R.string.listImportSameFileError, Toast.LENGTH_LONG).show();
+            }
+            else if(fileExtension.toLowerCase().equals("csv") && copyFileFromUri(selectedFile, fileName)) {
                 listAdapter.add(new ListFileItem(folderName, fileName));
                 finish();
                 startActivity(getIntent());
@@ -300,6 +304,16 @@ public class ListActivity extends AppCompatActivity {
                 Toast.makeText(this, R.string.listImportFileError, Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    public boolean checkIfFileAlreadyExists(String fileName) {
+        String toCheck = folderName+"/"+fileName;
+        for(int i = 0; i < listAdapter.getCount(); i++) {
+            if(listAdapter.getItem(i).getFilePath().trim().equalsIgnoreCase(toCheck.trim())) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void changeStartBtnText(boolean isSelection) {

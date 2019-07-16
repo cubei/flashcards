@@ -23,6 +23,7 @@
     <string name="createFolderDialogMessage">Setze den Ordnernamen</string>
     <string name="listImportFilePicker">Wähle die CSV Datei</string>
     <string name="listImportFileError">Ein Fehler ist beim erstellen der Datei aufgetreten</string>
+    <string name="listImportSameFileError">Datei mit dem gleichen Namen existiert bereits</string>
     <string name="folderCreateError">Ein Fehler ist beim erstellen des Ordners aufgetreten</string>
     <string name="resultComment100">EZ game EZ life!</string>
     <string name="resultCommentLess50">Fail of the week!</string>

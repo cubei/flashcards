@@ -25,6 +25,7 @@
     <string name="createFolderDialogMessage">Set folder name</string>
     <string name="listImportFilePicker">Select the csv file</string>
     <string name="listImportFileError">An error occurred while creating the file</string>
+    <string name="listImportSameFileError">File with the same name already exists</string>
     <string name="folderCreateError">An error occurred while creating the folder</string>
     <string name="addFileAlert">Please add a file</string>
     <string name="question">Question</string>
