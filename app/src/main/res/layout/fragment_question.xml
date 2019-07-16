@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.quchen.flashcard.GameActivity"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:background="@color/colorPrimaryLight">
 
 
     <RelativeLayout
@@ -19,7 +20,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:text="10 sec" />
+            android:text="10 sec"
+            android:textColor="@android:color/white" />
 
         <TextView
             android:id="@+id/tv_progress"
@@ -28,177 +30,41 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:text="5 / 10" />
+            android:text="Frage 5 / 10"
+            android:textColor="@android:color/white"/>
     </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        android:layout_marginBottom="10dp"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp">
+        android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/tv_questionSide"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:text="@string/listCfg_radioBtn_Left" />
+        <include layout="@layout/question_card"
+            android:id="@+id/nextCardLayout"/>
 
-        <TextView
-            android:id="@+id/tv_listName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:text="ListName" />
+        <include layout="@layout/question_card"
+            android:id="@+id/cardLayout"/>
 
-        <TextView
-            android:id="@+id/tv_question"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_questionSide"
-            android:layout_centerHorizontal="true"
-            android:text="Word to guess"
-            android:textSize="24sp"/>
     </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"/>
-
-    <TextView
-        android:id="@+id/tv_guessSide"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/listCfg_radioBtn_Right"/>
-
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:weightSum="2"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:measureWithLargestChild="true">
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="horizontal"
-            android:layout_weight="1"
-            android:weightSum="2">
-            <TextView
-                android:id="@+id/tv_answer1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/backround_round_corners"
-                android:layout_weight="1"
-                android:padding="5dp"
-                android:text="dasfdsafdfdfadfdfadfdsfafdfadfadf"
-                android:textAlignment="center"
-                android:gravity="center"
-                android:textColor="#FFF"
-                android:autoSizeTextType="uniform"
-                android:autoSizeMaxTextSize="30sp"
-                android:textSize="16sp" />
-            <TextView
-                android:id="@+id/tv_answer2"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="test"
-                android:textColor="#FFF"
-                android:autoSizeTextType="uniform"
-                android:autoSizeMaxTextSize="30sp"
-                android:textSize="16sp"
-                android:background="@drawable/backround_round_corners" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="horizontal"
-            android:layout_weight="1"
-            android:weightSum="2">
-            <TextView
-                android:id="@+id/tv_answer3"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/backround_round_corners"
-                android:layout_weight="1"
-                android:padding="5dp"
-                android:text="test"
-                android:textAlignment="center"
-                android:gravity="center"
-                android:textColor="#FFF"
-                android:autoSizeTextType="uniform"
-                android:autoSizeMaxTextSize="30sp"
-                android:textSize="16sp" />
-            <TextView
-                android:id="@+id/tv_answer4"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="teadfadfasdfdst"
-                android:textColor="#FFF"
-                android:autoSizeTextType="uniform"
-                android:autoSizeMaxTextSize="30sp"
-                android:textSize="16sp"
-                android:background="@drawable/backround_round_corners" />
-        </TableRow>
-    </TableLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray" />
-
     <LinearLayout
-        android:orientation="horizontal"
+        android:id="@+id/answerLineLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:weightSum="2">
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_correctAnswerCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#489748"
-            android:text="1337"
-            android:layout_weight="1"
-            android:textAlignment="viewStart"/>
+        <View
+            android:id="@+id/correctCntLine"
+            android:layout_width="150dp"
+            android:layout_height="3dp"
+            android:background="@color/colorCorrectAnswer" />
 
-        <TextView
-            android:id="@+id/tv_wrongAnswerCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#890505"
-            android:text="42"
-            android:layout_weight="1"
-            android:textAlignment="viewEnd"/>
+        <View
+            android:id="@+id/wrongCntLine"
+            android:layout_width="150dp"
+            android:layout_height="3dp"
+            android:background="@color/colorWrongAnswer" />
+
     </LinearLayout>
 
 </LinearLayout>

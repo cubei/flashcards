@@ -1,8 +1,9 @@
 package com.quchen.flashcard;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,8 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,7 +25,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -59,7 +65,39 @@ public class MainActivity extends AppCompatActivity {
             folders.add(listFolder.getName());
         }
 
+        Collections.sort(folders);
+
         return folders;
+    }
+
+    private void showFolderCreateDialog() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+        final EditText edittext = new EditText(this);
+        alert.setTitle(R.string.createFolderDialogTitle);
+        alert.setMessage(R.string.createFolderDialogMessage);
+
+        alert.setView(edittext);
+
+        alert.setPositiveButton(R.string.createFolderYesOption, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                String folderName = edittext.getText().toString();
+                File folder = new File(App.getListRootDir(), folderName);
+                if(folder.mkdir()) {
+                    folderAdapter.add(folderName);
+                } else {
+                    Toast.makeText(MainActivity.this, R.string.folderCreateError, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        alert.setNegativeButton(R.string.createFolderNoOption, null);
+
+        alert.show();
+    }
+
+    public void addFolderOnClick(View view) {
+        showFolderCreateDialog();
     }
 
     private AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener() {
@@ -88,43 +126,98 @@ public class MainActivity extends AppCompatActivity {
             }
             in.close();
             out.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    /** Renamed some files, so the old ones should be deleted */
+    private void cleanupOldFiles() {
+        File folder_Chinese = new File(App.getListRootDir(), "Chinese");
+        new File(folder_Chinese, "basic_extented.csv").delete();
     }
 
     private void updateListFiles() {
-        copyFileFromResource(R.raw.artist_title, "Music", "artist_title.csv");
-        copyFileFromResource(R.raw.lyrics, "Music", "lyrics.csv");
-        copyFileFromResource(R.raw.quotes, "TV","quotes.csv");
-        copyFileFromResource(R.raw.basic_chinese, "Chinese","basic.csv");
-        copyFileFromResource(R.raw.numbers_chinese, "Chinese","numbers.csv");
-        copyFileFromResource(R.raw.japanese_kanji_grade1_pinyin, "Chinese","characters1.csv");
-        copyFileFromResource(R.raw.basic_german, "German","basic.csv");
-        copyFileFromResource(R.raw.numbers_german, "German","numbers.csv");
-        copyFileFromResource(R.raw.basic_japanese, "Japanese","basic.csv");
-        copyFileFromResource(R.raw.numbers_japanese, "Japanese","numbers.csv");
-        copyFileFromResource(R.raw.basic_spanish, "Spanish","basic.csv");
-        copyFileFromResource(R.raw.numbers_spanish, "Spanish","numbers.csv");
+        copyFileFromResource(R.raw.japanese_lektion0, "Minna no Nihongo","Lektion 0.csv");
+        copyFileFromResource(R.raw.japanese_lektion1, "Minna no Nihongo","Lektion 1.csv");
+        copyFileFromResource(R.raw.japanese_lektion2, "Minna no Nihongo","Lektion 2.csv");
+        copyFileFromResource(R.raw.japanese_lektion3, "Minna no Nihongo","Lektion 3.csv");
+        copyFileFromResource(R.raw.japanese_lektion4, "Minna no Nihongo","Lektion 4.csv");
+        copyFileFromResource(R.raw.japanese_lektion5, "Minna no Nihongo","Lektion 5.csv");
+        copyFileFromResource(R.raw.japanese_lektion6, "Minna no Nihongo","Lektion 6.csv");
+        copyFileFromResource(R.raw.japanese_lektion6_lebensmittel, "Minna no Nihongo","Lektion 6 Lebensmittel.csv");
+        copyFileFromResource(R.raw.japanese_lektion7, "Minna no Nihongo","Lektion 7.csv");
+        copyFileFromResource(R.raw.japanese_lektion7_familie, "Minna no Nihongo","Lektion 7 Familie.csv");
+        copyFileFromResource(R.raw.japanese_lektion8, "Minna no Nihongo","Lektion 8.csv");
+        copyFileFromResource(R.raw.japanese_particle, "Minna no Nihongo","Particle.csv");
+        copyFileFromResource(R.raw.minna_no_nihongo_kanji, "Minna no Nihongo","Kanji.csv");
+
         copyFileFromResource(R.raw.hiragana, "Japanese","hiragana.csv");
         copyFileFromResource(R.raw.katakana, "Japanese","katakana.csv");
-        copyFileFromResource(R.raw.japanese_kanji_grade1, "Japanese","Kanji1.csv");
-        copyFileFromResource(R.raw.japanese_kanji_grade2, "Japanese","Kanji2.csv");
-        copyFileFromResource(R.raw.japanese_kanji_grade3, "Japanese","Kanji3.csv");
-        copyFileFromResource(R.raw.japanese_kanji_grade4, "Japanese","Kanji4.csv");
-        copyFileFromResource(R.raw.japanese_kanji_grade5, "Japanese","Kanji5.csv");
-        copyFileFromResource(R.raw.japanese_kanji_grade6, "Japanese","Kanji6.csv");
-        copyFileFromResource(R.raw.japanese_lektion0, "Minna no Nihongo","Lektion0.csv");
-        copyFileFromResource(R.raw.japanese_lektion1, "Minna no Nihongo","Lektion1.csv");
-        copyFileFromResource(R.raw.japanese_lektion2, "Minna no Nihongo","Lektion2.csv");
-        copyFileFromResource(R.raw.japanese_lektion3, "Minna no Nihongo","Lektion3.csv");
-        copyFileFromResource(R.raw.japanese_lektion4, "Minna no Nihongo","Lektion4.csv");
-        copyFileFromResource(R.raw.japanese_lektion5, "Minna no Nihongo","Lektion5.csv");
-        copyFileFromResource(R.raw.japanese_particle, "Minna no Nihongo","Particle.csv");
+        copyFileFromResource(R.raw.basic_japanese, "Japanese","basic.csv");
+        copyFileFromResource(R.raw.numbers_japanese, "Japanese","numbers.csv");
+        copyFileFromResource(R.raw.japanese_dates, "Japanese","dates.csv");
+        copyFileFromResource(R.raw.japanese_kanji_grade1, "Japanese","Kanji 1.csv");
+        copyFileFromResource(R.raw.japanese_kanji_grade2, "Japanese","Kanji 2.csv");
+        copyFileFromResource(R.raw.japanese_kanji_grade3, "Japanese","Kanji 3.csv");
+        copyFileFromResource(R.raw.japanese_kanji_grade4, "Japanese","Kanji 4.csv");
+        copyFileFromResource(R.raw.japanese_kanji_grade5, "Japanese","Kanji 5.csv");
+        copyFileFromResource(R.raw.japanese_kanji_grade6, "Japanese","Kanji 6.csv");
+
+        copyFileFromResource(R.raw.basic_chinese, "Chinese","basic.csv");
+        copyFileFromResource(R.raw.basic_chinese_introduction, "Chinese","introduction.csv");
+        copyFileFromResource(R.raw.basic_chinese_family, "Chinese","family.csv");
+        copyFileFromResource(R.raw.basic_chinese_extended, "Chinese","basic_extended");
+        copyFileFromResource(R.raw.numbers_chinese, "Chinese","numbers.csv");
+        copyFileFromResource(R.raw.colours_chinese, "Chinese","colours.csv");
+        copyFileFromResource(R.raw.japanese_kanji_grade1_pinyin, "Chinese","characters 1.csv");
+
+        copyFileFromResource(R.raw.basic_german, "German","basic.csv");
+        copyFileFromResource(R.raw.numbers_german, "German","numbers.csv");
+
+        copyFileFromResource(R.raw.basic_spanish, "Spanish","basic.csv");
+        copyFileFromResource(R.raw.numbers_spanish, "Spanish","numbers.csv");
+
+        cleanupOldFiles();
     }
+
+    boolean deleteDirectory(File file) {
+        // First delete all content recursively
+        if (file.isDirectory()) {
+            File[] files = file.listFiles();
+            for (File f : files) {
+                if(!deleteDirectory(f)) {
+                    return false;
+                }
+            }
+        }
+
+        // Then delete the folder itself
+        return file.delete();
+    }
+
+    private AdapterView.OnItemLongClickListener itemLongClickListener = new AdapterView.OnItemLongClickListener() {
+        @Override
+        public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
+            final String folder = folderAdapter.getItem(position);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setMessage(String.format("%s %s", getResources().getString(R.string.deleteFolder), folder, Locale.GERMANY))
+                    .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if(deleteDirectory(new File(App.getListRootDir(), folder))) {
+                                finish();
+                                startActivity(getIntent());
+                            }
+                        }
+                    })
+                    .setNegativeButton(getResources().getString(R.string.no), null)
+                    .show();
+
+            return true;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,5 +233,6 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(folderAdapter);
 
         listView.setOnItemClickListener(clickListener);
+        listView.setOnItemLongClickListener(itemLongClickListener);
     }
 }

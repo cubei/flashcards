@@ -7,11 +7,14 @@ import android.os.Bundle;
 import android.widget.FrameLayout;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GameActivity extends AppCompatActivity {
 
     public static final String KEY_FILE_LIST = "file";
+
+    public static final int NUMBER_OF_ANSWERS = 4;
 
     public static final int VAL_SIDE_LEFT = 0;
     public static final int VAL_SIDE_RIGHT = 1;
@@ -19,6 +22,9 @@ public class GameActivity extends AppCompatActivity {
     private String[] listFiles;
 
     private long startTimestampMs;
+
+    private ListCfgFragment.CfgContainer cfgContainer;
+    private List<QuestionItem> questionItems;
 
     public void questionsCompleted(List<QuestionResult> questionResults) {
         long questionTimeMs = System.currentTimeMillis() - startTimestampMs;
@@ -30,22 +36,56 @@ public class GameActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    public void startGame(ListCfgFragment.CfgContainer cfgContainer) {
-        List<QuestionItem> questionItems = new ArrayList<>();
-        for(String listFile: listFiles) {
-            ListItem listItem = new ListItem(listFile);
-            questionItems.addAll(QuestionItem.getQuestionItemList(listItem, cfgContainer.side));
-        }
+    private void startQuestionFragment() {
+        int numberOfQuestions = Math.min(cfgContainer.numberOfDesireditems, questionItems.size());
 
-        cfgContainer.numberOfDesireditems = Math.min(cfgContainer.numberOfDesireditems, questionItems.size());
-
-        QuestionFragment questionFragment = QuestionFragment.newInstance(cfgContainer.numberOfDesireditems, questionItems);
+        QuestionFragment questionFragment = QuestionFragment.newInstance(numberOfQuestions, questionItems);
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.replace(R.id.frameLayout, questionFragment);
         transaction.commit();
 
         startTimestampMs = System.currentTimeMillis();
+    }
+
+    public void restartLastGame() {
+        startQuestionFragment();
+    }
+
+    /**
+     * Restarts the last game, but uses only questions from the given questionResults
+     * @param questionResultFilter
+     */
+    public void restartLastGame(List<QuestionResult> questionResultFilter) {
+        this.cfgContainer.numberOfDesireditems = questionResultFilter.size();
+
+        List<QuestionItem> filteredQuestionItems = new ArrayList<>();
+        for(QuestionResult questionResult: questionResultFilter) {
+            for(QuestionItem questionItem: this.questionItems) {
+                if(   questionResult.question.equals(questionItem.question)
+                   && questionResult.correctAnswer.equals(questionItem.rightAnswer)) {
+                    filteredQuestionItems.add(questionItem);
+                }
+            }
+        }
+
+        this.questionItems = filteredQuestionItems;
+
+        startQuestionFragment();
+    }
+
+    public void startGame(ListCfgFragment.CfgContainer cfgContainer) {
+        this.cfgContainer = cfgContainer;
+
+        List<QuestionItem> questionItems = new ArrayList<>();
+        for(String listFile: listFiles) {
+            ListItem listItem = new ListItem(listFile);
+            questionItems.addAll(QuestionItem.getQuestionItemList(listItem, cfgContainer.side));
+        }
+        Collections.shuffle(questionItems);
+        this.questionItems = questionItems;
+
+        startQuestionFragment();
     }
 
     @Override

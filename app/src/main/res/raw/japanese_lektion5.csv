@@ -30,7 +30,7 @@ Japanisch;Deutsch
 せんげつ;letzten Monat
 こんげつ;diesen Monat
 らいげつ;nächsten Monat
-きょねん;letztes jahr
+きょねん;letztes Jahr
 ことし;dieses Jahr
 らいねん;nächstes Jahr
 
@@ -38,6 +38,22 @@ Japanisch;Deutsch
 なんねん;in welchem Jahr
 -がつ;- Monat
 なんがつ;welcher Monat
+
+ついたち;der 1. des Monats
+ふつか;der 2. des Monats
+みっか;der 3. des Monats
+よっか;der 4. des Monats
+いつか;der 5. des Monats
+むいか;der 6. des Monats
+なのか;der 7. des Monats
+ようか;der 8. des Monats
+ここのか;der 9. des Monats
+とおか;der 10. des Monats
+じゅうよっか;der 14. des Monats, 14 Tage
+はつか;der 20. des Monats, 20 Tage
+にじゅうよっか;der 24. des Monats, 24 Tage
+-にち;der -te des Monats, - Tage
+なんにち;Welcher Tag, Wie viele Tage
 
 いつ;wann
 たんじょうび;Geburtstag
@@ -50,3 +66,7 @@ Japanisch;Deutsch
 ふつう;S-Bahn
 きゅうこう;Schnellzug
 とっきゅう;Expresszug
+
+どこも　いきません;Ich gehe nirgendwohin
+なにも　たべません;Ich esse nichts
+だれも きませんでした;Es ist niemand gekommen

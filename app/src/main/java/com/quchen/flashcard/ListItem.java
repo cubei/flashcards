@@ -17,8 +17,8 @@ import java.util.List;
 
 public class ListItem {
 
-    static final int LEFT_IDX = 0;
-    static final int RIGHT_IDX = 1;
+    private static final int LEFT_IDX = 0;
+    private static final int RIGHT_IDX = 1;
 
     private String filePath;
 
@@ -93,7 +93,7 @@ public class ListItem {
             header = new ItemPair(headerLine.get(LEFT_IDX), headerLine.get(RIGHT_IDX));
             lines.remove(0);
             for(List<String> line: lines) {
-                itemPairs.add(new ItemPair(line.get(LEFT_IDX), line.get(RIGHT_IDX)));
+                itemPairs.add(new ItemPair(line.get(LEFT_IDX).trim(), line.get(RIGHT_IDX).trim()));
             }
         }
     }
@@ -103,10 +103,24 @@ public class ListItem {
     }
 
     public String getLeftHeader() {
-        return header.left;
+        if (header != null)
+        {
+            return header.left;
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public String getRightHeader() {
-        return header.right;
+        if(header != null)
+        {
+            return header.right;
+        }
+        else
+        {
+            return null;
+        }
     }
 }

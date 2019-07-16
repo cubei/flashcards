@@ -1,16 +1,16 @@
 <resources>
-    <string name="app_name">FlashCard</string>
+    <string name="app_name">FlashCards</string>
     <string name="tv_results">Results</string>
     <string name="tv_folders">Folders</string>
     <string name="tv_lists">Lists</string>
     <string name="btn_addFolder">add folder</string>
     <string name="btn_playAgainAll">Retry</string>
     <string name="btn_playAgainWrong">Retry Wrong</string>
-    <string name="btn_importList">Import List</string>
+    <string name="btn_importList">Add</string>
     <string name="btn_startAll">Start All</string>
     <string name="btn_startSelection">Start Selection</string>
     <string name="btn_startList">Start</string>
-    <string name="listCfg_tv_showSide">Ask of</string>
+    <string name="listCfg_tv_showSide">Question of</string>
     <string name="listCfg_tv_ListLength">How many items do you want to guess?</string>
     <string name="listCfg_tv_TimeTrial">Time Trial</string>
     <string name="listCfg_checkbox_TimeReset">Reset</string>
@@ -19,4 +19,17 @@
     <string name="tv_yourAnswer">Your Answer</string>
     <string name="resultComment100">EZ game EZ life!</string>
     <string name="resultCommentLess50">Fail of the week!</string>
+    <string name="createFolderYesOption">Create folder</string>
+    <string name="createFolderNoOption">Cancel</string>
+    <string name="createFolderDialogTitle">Create a new folder</string>
+    <string name="createFolderDialogMessage">Set folder name</string>
+    <string name="listImportFilePicker">Select the csv file</string>
+    <string name="listImportFileError">An error occurred while creating the file</string>
+    <string name="folderCreateError">An error occurred while creating the folder</string>
+    <string name="addFileAlert">Please add a file</string>
+    <string name="question">Question</string>
+    <string name="deleteList">Do you want to delete the list?</string>
+    <string name="deleteFolder">Do you want to delete the folder?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

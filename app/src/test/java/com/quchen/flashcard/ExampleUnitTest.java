@@ -11,7 +11,11 @@ import static org.junit.Assert.*;
  */
 public class ExampleUnitTest {
     @Test
-    public void addition_isCorrect() throws Exception {
-        assertEquals(4, 2 + 2);
+    public void listFileItemGetLabel_Test() throws Exception {
+        ListFileItem listFileItem1 = new ListFileItem("foo", "foo.csv");
+        assertEquals(listFileItem1.getLabel(), "foo");
+
+        ListFileItem listFileItem2 = new ListFileItem("foo", "foo");
+        assertEquals(listFileItem2.getLabel(), "foo");
     }
 }

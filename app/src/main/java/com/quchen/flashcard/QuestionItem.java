@@ -10,17 +10,17 @@ import java.util.List;
 
 public class QuestionItem {
 
-    public static String getQuestion(ListItem.ItemPair itemPair, int side) {
+    private static String getQuestion(ListItem.ItemPair itemPair, int side) {
         return side == GameActivity.VAL_SIDE_LEFT ? itemPair.left : itemPair.right;
     }
-    public static String getAnswer(ListItem.ItemPair itemPair, int side) {
+    private static String getAnswer(ListItem.ItemPair itemPair, int side) {
         return side == GameActivity.VAL_SIDE_LEFT ? itemPair.right : itemPair.left;
     }
 
-    public static String getQuestionHeader(ListItem listItem, int side) {
+    private static String getQuestionHeader(ListItem listItem, int side) {
         return side == GameActivity.VAL_SIDE_LEFT ? listItem.getLeftHeader() : listItem.getRightHeader();
     }
-    public static String getAnswerHeader(ListItem listItem, int side) {
+    private static String getAnswerHeader(ListItem listItem, int side) {
         return side == GameActivity.VAL_SIDE_LEFT ? listItem.getRightHeader() : listItem.getLeftHeader();
     }
 
@@ -28,7 +28,22 @@ public class QuestionItem {
         List<QuestionItem> questionItemList = new ArrayList<>();
 
         for(ListItem.ItemPair itemPair: listItem.getItemPairs()) {
-            String listFilePath = listItem.getFilePath();
+            String filePath = listItem.getFilePath();
+
+            // Extract the fileName without type ending from file path
+
+            int fileNameStartIdx = filePath.lastIndexOf("/") + 1;
+            if(fileNameStartIdx == -1) {
+                fileNameStartIdx = 0;
+            }
+
+            int fileNameEndIdx = filePath.lastIndexOf(".");
+            if(fileNameEndIdx == -1) {
+                fileNameEndIdx = filePath.length();
+            }
+
+            String listName = filePath.substring(fileNameStartIdx, fileNameEndIdx);
+
             String question = getQuestion(itemPair, side);
             String rightAnswer = getAnswer(itemPair, side);
 
@@ -39,7 +54,7 @@ public class QuestionItem {
                 }
             }
 
-            questionItemList.add(new QuestionItem(getQuestionHeader(listItem, side), getAnswerHeader(listItem, side), listFilePath, question, rightAnswer, potentialWrongAnswers));
+            questionItemList.add(new QuestionItem(getQuestionHeader(listItem, side), getAnswerHeader(listItem, side), listName, question, rightAnswer, potentialWrongAnswers));
         }
 
         return questionItemList;
@@ -47,17 +62,23 @@ public class QuestionItem {
 
     public String questionHeader;
     public String answerHeader;
-    public String listFilePath;
+    public String listName;
     public String question;
     public String rightAnswer;
     public List<String> wrongAnswers;
 
-    public QuestionItem(String questionHeader, String answerHeader, String listFilePath, String question, String rightAnswer, List<String> wrongAnswers) {
+    private QuestionItem(String questionHeader, String answerHeader, String listName, String question, String rightAnswer, List<String> wrongAnswers) {
         this.questionHeader = questionHeader;
         this.answerHeader = answerHeader;
-        this.listFilePath = listFilePath;
+        this.listName = listName;
         this.question = question;
         this.rightAnswer = rightAnswer;
         this.wrongAnswers = wrongAnswers;
+
+        // Fill wrong answer lists to make sure the list contains enough items to fill all flash cards
+        int numberOfMissingAnswers = GameActivity.NUMBER_OF_ANSWERS - wrongAnswers.size() - 1; // minus the correct answer
+        for(int i = 0; i < numberOfMissingAnswers; i++) {
+            wrongAnswers.add("");
+        }
     }
 }
