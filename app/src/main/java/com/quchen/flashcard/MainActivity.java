@@ -171,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
         copyFileFromResource(R.raw.numbers_chinese, "Chinese","numbers.csv");
         copyFileFromResource(R.raw.colours_chinese, "Chinese","colours.csv");
         copyFileFromResource(R.raw.japanese_kanji_grade1_pinyin, "Chinese","characters 1.csv");
+        copyFileFromResource(R.raw.chinese_animals_emoji, "Chinese","animal_emojis.csv");
 
         copyFileFromResource(R.raw.basic_german, "German","basic.csv");
         copyFileFromResource(R.raw.numbers_german, "German","numbers.csv");
