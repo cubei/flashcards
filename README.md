@@ -11,3 +11,11 @@ The app is meant for stuff like learning vocabulary of different languages.
      height="80">](https://f-droid.org/packages/com.quchen.flashcard/)
 
 [Or get the latest APK directly from the Github repo](app/release/app-release.apk)
+
+
+### CSV format
+* CSV file with `;` (semicolon) as seperator.
+* First line is the header (e.g. `English;Chinese`)
+* Other lines are used as content (e.g. `Thanks;Xie Xie`)
+* Content lines without semicolon are ignored (Can be used for comments)
+* At the moment only the first columns are used and later columns will be ignored. (e.g. `Thanks;Xie Xie;谢谢`)
