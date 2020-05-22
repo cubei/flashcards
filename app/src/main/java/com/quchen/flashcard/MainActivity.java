@@ -180,20 +180,6 @@ public class MainActivity extends AppCompatActivity {
         cleanupOldFiles();
     }
 
-    boolean deleteDirectory(File file) {
-        // First delete all content recursively
-        if (file.isDirectory()) {
-            File[] files = file.listFiles();
-            for (File f : files) {
-                if(!deleteDirectory(f)) {
-                    return false;
-                }
-            }
-        }
-
-        // Then delete the folder itself
-        return file.delete();
-    }
 
     private AdapterView.OnItemLongClickListener itemLongClickListener = new AdapterView.OnItemLongClickListener() {
         @Override
@@ -205,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
                     .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            if(deleteDirectory(new File(App.getListRootDir(), folder))) {
+                            if(App.deleteDirectory(new File(App.getListRootDir(), folder))) {
                                 finish();
                                 startActivity(getIntent());
                             }
