@@ -16,6 +16,7 @@
     <string name="listCfg_checkbox_TimeReset">Zurücksetzen</string>
     <string name="listCfg_radioBtn_Left">Links</string>
     <string name="listCfg_radioBtn_Right">Rechts</string>
+    <string name="listCfg_PauseOnError">Bei Fehler anhalten</string>
     <string name="tv_yourAnswer">Deine Antwort</string>
     <string name="createFolderYesOption">Ordner erstellen</string>
     <string name="createFolderNoOption">Abbrechen</string>

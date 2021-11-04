@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
+import android.content.res.ColorStateList;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
@@ -23,6 +24,8 @@ import java.util.Map;
 
 
 public class QuestionFragment extends Fragment {
+
+    private boolean pauseOnError = true;
 
     private List<QuestionItem> questionItems = new ArrayList<>();
     private List<QuestionResult> questionResults = new ArrayList<>();
@@ -63,13 +66,15 @@ public class QuestionFragment extends Fragment {
         progressTextView.setText(String.format(Locale.US, "%s %d / %d", getResources().getString(R.string.question), questionCount + 1, numberOfDesiredQuestions));
     }
 
-    private void animateAnswer(final TextView tv, boolean correctAnswer) {
-        int colorFrom = getResources().getColor(R.color.colorPrimary);
-        int colorTo = getResources().getColor(correctAnswer ? R.color.colorCorrectAnswer : R.color.colorWrongAnswer);
-
-        final GradientDrawable dw = (GradientDrawable) tv.getBackground();
-
-        ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+    ValueAnimator animateAnswerColor(View view, int color) {
+        final GradientDrawable dw = (GradientDrawable) view.getBackground();
+        int originalColor;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            originalColor = dw.getColor().getDefaultColor();
+        } else {
+            originalColor = getResources().getColor(R.color.colorPrimary);
+        }
+        final ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), originalColor, color);
         colorAnimation.setDuration(300);
         colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -77,31 +82,73 @@ public class QuestionFragment extends Fragment {
                 dw.setColor((int)valueAnimator.getAnimatedValue());
             }
         });
+        return colorAnimation;
+    }
 
-        colorAnimation.addListener(new AnimatorListenerAdapter() {
+    /**
+     * @param wrongTv Can be null in case the correct answer was selected
+     * @param correctTv Can't be null.
+     */
+    private void animateAnswer(final TextView wrongTv, final TextView correctTv) {
+        final ColorStateList defaultColor;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            defaultColor = ((GradientDrawable) correctTv.getBackground()).getColor();
+        } else {
+            defaultColor = null;
+        }
+
+        ValueAnimator colorAnimationCorrect = animateAnswerColor(correctTv, getResources().getColor(R.color.colorCorrectAnswer));
+        colorAnimationCorrect.addListener(new AnimatorListenerAdapter() {
+
+            private void flipCardAway() {
+                cardLayout.animate()
+                        .translationY(-getView().getHeight())
+                        .translationX(getView().getWidth() / 6)
+                        .setDuration(400)
+                        .setListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                super.onAnimationEnd(animation);
+                                // Restore to normal color
+                                if(wrongTv != null) {
+                                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                                        ((GradientDrawable)wrongTv.getBackground()).setColor(defaultColor);
+                                    } else {
+                                        ((GradientDrawable)wrongTv.getBackground()).setColor(getResources().getColor(R.color.colorPrimaryContainer));
+                                    }
+                                }
+                                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                                    ((GradientDrawable)correctTv.getBackground()).setColor(defaultColor);
+                                } else {
+                                    ((GradientDrawable)correctTv.getBackground()).setColor(getResources().getColor(R.color.colorPrimaryContainer));
+                                }
+                                setUpNextQuestion();
+                            }
+                        });
+            }
+
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
 
-                cardLayout.animate()
-                        .translationY(- getView().getHeight())
-                        .translationX(getView().getWidth()/6)
-                        .setDuration(400)
-                        .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        super.onAnimationEnd(animation);
-
-                        // Restore to normal color
-                        dw.setColor(getResources().getColor(R.color.answerBtn));
-
-                        setUpNextQuestion();
-                    }
-                });
+                if(pauseOnError && (wrongTv != null)) {
+                    cardLayout.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            cardLayout.setOnClickListener(null);
+                            flipCardAway();
+                        }
+                    });
+                } else {
+                    flipCardAway();
+                }
             }
         });
 
-        colorAnimation.start();
+        if(wrongTv != null) {
+            animateAnswerColor(wrongTv, getResources().getColor(R.color.colorWrongAnswer)).start();
+        }
+        colorAnimationCorrect.start();
     }
 
     private void drawAnswerLine() {
@@ -123,6 +170,7 @@ public class QuestionFragment extends Fragment {
         @Override
         public void onClick(View view) {
             TextView answerTextView = (TextView) view;
+            TextView correctTextView = null;
             String givenAnswer = answerTextView.getText().toString();
             QuestionItem questionItem = questionItems.get(questionCount);
             QuestionResult questionResult = new QuestionResult(questionItem.questionHeader, questionItem.answerHeader, questionItem.question, questionItem.rightAnswer, givenAnswer);
@@ -139,9 +187,12 @@ public class QuestionFragment extends Fragment {
             // Disable click event for all answers for the time of the answer animation
             for (TextView tv : getAnswerTextViews()) {
                 tv.setClickable(false);
+                if (tv.getText().toString().equals(questionItem.rightAnswer)) {
+                    correctTextView = tv;
+                }
             }
 
-            animateAnswer(answerTextView, questionResult.isAnswerCorrect());
+            animateAnswer(questionResult.isAnswerCorrect() ? null : answerTextView, correctTextView);
         }
     };
 
@@ -241,10 +292,11 @@ public class QuestionFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static QuestionFragment newInstance(int numberOfDesiredQuestions, List<QuestionItem> questionItems) {
+    public static QuestionFragment newInstance(int numberOfDesiredQuestions, List<QuestionItem> questionItems, boolean pauseOnError) {
         QuestionFragment fragment = new QuestionFragment();
         fragment.numberOfDesiredQuestions = numberOfDesiredQuestions;
         fragment.questionItems = questionItems;
+        fragment.pauseOnError = pauseOnError;
         return fragment;
     }
 

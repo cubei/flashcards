@@ -238,7 +238,8 @@ public class ListActivity extends AppCompatActivity {
             Cursor cursor = getContentResolver().query(uri, null, null, null, null);
             try {
                 if (cursor != null && cursor.moveToFirst()) {
-                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                    int index = Math.max(0, cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                    result = cursor.getString(index);
                 }
             } finally {
                 cursor.close();
@@ -292,7 +293,7 @@ public class ListActivity extends AppCompatActivity {
             Uri selectedFile = data.getData();
             String fileName = getFileName(selectedFile);
             String fileExtension = fileName.contains(".") ? fileName.substring(fileName.lastIndexOf(".") + 1) : "";
-            if(fileExtension.toLowerCase().equals("csv") && copyFileFromUri(selectedFile, fileName)) {
+            if(fileExtension.equalsIgnoreCase("csv") && copyFileFromUri(selectedFile, fileName)) {
                 listAdapter.add(new ListFileItem(folderName, fileName));
                 finish();
                 startActivity(getIntent());

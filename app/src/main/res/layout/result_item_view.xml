@@ -11,7 +11,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="?attr/colorPrimaryContainer" >
 
         <TextView
             android:id="@+id/tv_questionLabel"
@@ -20,7 +21,8 @@
             android:text="Foobar"
             android:textAlignment="viewStart"
             android:layout_weight="1"
-            android:textColor="#ffffff" />
+            android:textColor="?attr/colorOnPrimaryContainer"
+            android:background="?attr/colorPrimaryContainer" />
 
         <TextView
             android:id="@+id/tv_questionVal"
@@ -29,7 +31,8 @@
             android:textAlignment="viewEnd"
             android:text="val"
             android:layout_weight="1"
-            android:textColor="#ffffff" />
+            android:textColor="?attr/colorOnPrimaryContainer"
+            android:background="?attr/colorPrimaryContainer"  />
 
     </LinearLayout>
 
@@ -41,7 +44,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="?attr/colorPrimaryContainer">
 
         <TextView
             android:id="@+id/tv_correctAnswerLabel"
@@ -50,7 +54,8 @@
             android:text="Foobar"
             android:textAlignment="viewStart"
             android:layout_weight="1"
-            android:textColor="#ffffff" />
+            android:textColor="?attr/colorOnPrimaryContainer"
+            android:background="?attr/colorPrimaryContainer"  />
 
         <TextView
             android:id="@+id/tv_correctAnswerVal"
@@ -59,7 +64,8 @@
             android:textAlignment="viewEnd"
             android:text="val"
             android:layout_weight="1"
-            android:textColor="#ffffff" />
+            android:textColor="?attr/colorOnPrimaryContainer"
+            android:background="?attr/colorPrimaryContainer"  />
 
     </LinearLayout>
 
@@ -67,7 +73,8 @@
         android:id="@+id/selectedAnswerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="?attr/colorPrimaryContainer">
 
         <View
             android:layout_width="match_parent"
@@ -86,7 +93,8 @@
                 android:text="@string/tv_yourAnswer"
                 android:textAlignment="viewStart"
                 android:layout_weight="1"
-                android:textColor="#ff4040" />
+                android:textColor="?attr/colorOnError"
+                android:background="?attr/colorPrimaryContainer" />
 
             <TextView
                 android:id="@+id/tv_selectedAnswerVal"
@@ -95,7 +103,8 @@
                 android:textAlignment="viewEnd"
                 android:text="val"
                 android:layout_weight="1"
-                android:textColor="#ff4040" />
+                android:textColor="?attr/colorOnError"
+                android:background="?attr/colorPrimaryContainer" />
 
         </LinearLayout>
     </LinearLayout>

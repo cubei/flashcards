@@ -38,7 +38,7 @@ public class GameActivity extends AppCompatActivity {
     private void startQuestionFragment() {
         int numberOfQuestions = Math.min(cfgContainer.numberOfDesireditems, questionItems.size());
 
-        QuestionFragment questionFragment = QuestionFragment.newInstance(numberOfQuestions, questionItems);
+        QuestionFragment questionFragment = QuestionFragment.newInstance(numberOfQuestions, questionItems, cfgContainer.pauseOnError);
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.replace(R.id.frameLayout, questionFragment);

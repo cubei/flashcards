@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.quchen.flashcard.GameActivity"
-    android:padding="10dp"
-    android:background="@color/colorPrimaryLight">
+    android:padding="10dp">
 
 
     <RelativeLayout
@@ -20,8 +19,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:text="10 sec"
-            android:textColor="@android:color/white" />
+            android:text="10 sec"/>
 
         <TextView
             android:id="@+id/tv_progress"
@@ -30,8 +28,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:text="Frage 5 / 10"
-            android:textColor="@android:color/white"/>
+            android:text="Frage 5 / 10"/>
     </RelativeLayout>
 
     <RelativeLayout

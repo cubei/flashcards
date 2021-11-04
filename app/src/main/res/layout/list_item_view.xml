@@ -12,7 +12,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="5dp">
+        android:padding="5dp"
+        android:background="?attr/colorPrimaryContainer">
 
         <TextView
             android:id="@+id/label"
@@ -21,7 +22,8 @@
             android:layout_centerVertical="true"
             android:layout_toStartOf="@+id/showListBtn"
             android:text="List"
-            android:textColor="#ffffff"
+            android:textColor="?attr/colorOnPrimaryContainer"
+            android:background="?attr/colorPrimaryContainer"
             android:textSize="26sp" />
 
         <ImageButton
@@ -33,16 +35,15 @@
             android:layout_toStartOf="@+id/selectList"
             android:contentDescription="Show lists content"
             android:background="@drawable/background_circle"
-            app:srcCompat="@android:drawable/ic_menu_view" />
+            app:srcCompat="@android:drawable/ic_menu_view"/>
 
         <CheckBox
             android:id="@+id/selectList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:background="@drawable/background_circle"/>
+            android:layout_centerInParent="true" />
 
     </RelativeLayout>
 </LinearLayout>

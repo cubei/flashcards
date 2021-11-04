@@ -28,20 +28,14 @@ public class ListCfgFragment extends Fragment {
     private SeekBar itemNumberSeekBar;
     private TextView itemNumberTextView;
 
-    private CheckBox timeTrialActiveCheckBox;
-    private CheckBox timeTrialResetCheckBox;
-    private LinearLayout timeTrialSeekBarLayout;
-    private SeekBar timeTrialTimeSeekBar;
-    private TextView timeTrialTimeTextView;
+    private CheckBox pauseOnErrorChkBx;
 
     private Button startButton;
 
     public class CfgContainer {
         public int side;
         public int numberOfDesireditems;
-        public boolean isTimeTrial;
-        public boolean isTimeTrialReset;
-        public int timePerItem;
+        public boolean pauseOnError;
     }
     private CfgContainer cfgContainer = new CfgContainer();
 
@@ -61,41 +55,13 @@ public class ListCfgFragment extends Fragment {
         itemNumberSeekBar = view.findViewById(R.id.numberOfListItemsSlider);
         itemNumberTextView = view.findViewById(R.id.numberOfListItemsSliderLabel);
 
-        timeTrialActiveCheckBox = view.findViewById(R.id.timeTrialActive);
-        timeTrialSeekBarLayout = view.findViewById(R.id.layoutTimeSlider);
-        timeTrialResetCheckBox = view.findViewById(R.id.timeTrialReset);
-        timeTrialTimeSeekBar = view.findViewById(R.id.timeSlider);
-        timeTrialTimeTextView = view.findViewById(R.id.timeSliderLabel);
+        pauseOnErrorChkBx = view.findViewById(R.id.pauseOnErrorChkBx);
 
         startButton = view.findViewById(R.id.startBtn);
     }
 
     private void setUpViews() {
-        timeTrialActiveCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if(isChecked) {
-                    timeTrialResetCheckBox.setVisibility(View.VISIBLE);
-                    timeTrialSeekBarLayout.setVisibility(View.VISIBLE);
-                    cfgContainer.isTimeTrial = true;
-                } else {
-                    timeTrialResetCheckBox.setVisibility(View.INVISIBLE);
-                    timeTrialSeekBarLayout.setVisibility(View.INVISIBLE);
-                    cfgContainer.isTimeTrial = false;
-                }
-            }
-        });
 
-        timeTrialResetCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if(isChecked) {
-                    cfgContainer.isTimeTrialReset = true;
-                } else {
-                    cfgContainer.isTimeTrialReset = false;
-                }
-            }
-        });
 
         itemNumberSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -114,21 +80,6 @@ public class ListCfgFragment extends Fragment {
         itemNumberSeekBar.setMax(numberOfItems);
         itemNumberSeekBar.setProgress(numberOfItems);
 
-        timeTrialTimeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                timeTrialTimeTextView.setText(String.format(Locale.US, "%d sec", progress));
-                cfgContainer.timePerItem = progress;
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) { }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) { }
-        });
-        timeTrialTimeSeekBar.setProgress(10);
-
         leftRadioBtn.setText(multiListItem.getLeftHeader());
         rightRadioBtn.setText(multiListItem.getRightHeader());
 
@@ -146,6 +97,17 @@ public class ListCfgFragment extends Fragment {
             }
         });
 
+        pauseOnErrorChkBx.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked) {
+                    cfgContainer.pauseOnError = true;
+                } else {
+                    cfgContainer.pauseOnError = false;
+                }
+            }
+        });
+
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -156,10 +118,8 @@ public class ListCfgFragment extends Fragment {
 
     private void restoreViewCfg() {
         // Defaults
-        timeTrialResetCheckBox.setVisibility(View.INVISIBLE);
-        timeTrialSeekBarLayout.setVisibility(View.INVISIBLE);
-
         sideRadioGroup.check(R.id.radioButtonLeft);
+        pauseOnErrorChkBx.setChecked(false);
 
         // todo Restore previously saved config from last run
     }

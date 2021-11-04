@@ -16,6 +16,7 @@
     <string name="listCfg_checkbox_TimeReset">Reset</string>
     <string name="listCfg_radioBtn_Left">Left</string>
     <string name="listCfg_radioBtn_Right">Right</string>
+    <string name="listCfg_PauseOnError">Pause on error</string>
     <string name="tv_yourAnswer">Your Answer</string>
     <string name="resultComment100">EZ game EZ life!</string>
     <string name="resultCommentLess50">Fail of the week!</string>

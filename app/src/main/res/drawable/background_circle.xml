@@ -8,7 +8,7 @@
         android:color="#ffffff" />
 
     <solid
-        android:color="@color/colorPrimary"/>
+        android:color="?attr/colorPrimary"/>
 
     <size
         android:width="24dp"

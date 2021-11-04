@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="answerBtn">#607D8B</color>
-    <color name="answerText">#FFF</color>
-    <color name="colorPrimary">#607D8B</color>
-    <color name="colorPrimaryDark">#455A64</color>
-    <color name="colorPrimaryLight">#6e7679</color>
-    <color name="colorAccent">#FF5722</color>
-    <color name="colorCorrectAnswer">#00ac00</color>
-    <color name="colorWrongAnswer">#dc1414</color>
+    <color name="colorTertiary">#00293C</color>
+
+    <color name="colorPrimary">#F44336</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorPrimaryContainer">#607D8B</color>
+    <color name="colorOnPrimaryContainer">#FFFFFF</color>
+
+    <color name="colorError">#FFC4C4</color>
+    <color name="colorOnError">#AE0202</color>
+    <color name="colorErrorContainer">#FFC4C4</color>
+    <color name="colorOnErrorContainer">#AE0202</color>
+
+    <color name="colorSecondary">#0E4E07</color>
+    <color name="colorOnSecondary">#A2CD96</color>
+    <color name="colorSecondaryContainer">#0E4E07</color>
+    <color name="colorOnSecondaryContainer">#A2CD96</color>
+
+    <color name="colorCorrectAnswer">#3D9733</color>
+    <color name="colorWrongAnswer">#FA3F3F</color>
+
 </resources>

@@ -2,6 +2,7 @@ package com.quchen.flashcard;
 
 import android.app.Application;
 import android.content.Context;
+import com.google.android.material.color.DynamicColors;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -41,6 +42,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         App.context = getApplicationContext();
+        DynamicColors.applyToActivitiesIfAvailable(this);
     }
 
 

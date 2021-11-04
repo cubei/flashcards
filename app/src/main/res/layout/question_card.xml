@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F0F0F0"
     android:layout_marginRight="5dp"
     android:layout_marginLeft="5dp"
     android:layout_marginTop="40dp"
-    android:layout_marginBottom="40dp">
+    android:layout_marginBottom="40dp"
+    android:background="?attr/colorSurface">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:text="@string/listCfg_radioBtn_Left" />
+            android:text="@string/listCfg_radioBtn_Left"/>
 
         <TextView
             android:id="@+id/tv_listName"
@@ -30,7 +30,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:text="ListName" />
+            android:text="ListName"/>
 
         <TextView
             android:id="@+id/tv_question"
@@ -72,7 +72,8 @@
             android:layout_height="match_parent"
             android:weightSum="2"
             android:orientation="vertical"
-            android:measureWithLargestChild="true">
+            android:measureWithLargestChild="true"
+            android:background="@android:color/transparent">
 
             <TableRow
                 android:layout_width="match_parent"
@@ -80,7 +81,8 @@
                 android:orientation="horizontal"
                 android:layout_weight="1"
                 android:padding="4dp"
-                android:weightSum="2">
+                android:weightSum="2"
+                android:background="@android:color/transparent">
 
                 <include layout="@layout/answer_button"
                     android:id="@+id/tv_answer1"
@@ -101,7 +103,8 @@
                 android:orientation="horizontal"
                 android:layout_weight="1"
                 android:padding="4dp"
-                android:weightSum="2">
+                android:weightSum="2"
+                android:background="@android:color/transparent">
 
                 <include layout="@layout/answer_button"
                     android:id="@+id/tv_answer3"

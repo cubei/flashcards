@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
     <TextView
         android:id="@+id/answerTextView"
         android:layout_width="match_parent"
@@ -12,7 +14,7 @@
         android:text="dasfdsafdfdfadfd"
         android:textAlignment="center"
         android:gravity="center"
-        android:textColor="@color/answerText"
+        android:textColor="?attr/colorOnPrimaryContainer"
         android:autoSizeTextType="uniform"
         android:autoSizeMaxTextSize="30sp"
         android:textSize="18sp" />

@@ -95,55 +95,13 @@
             android:orientation="vertical"
             android:layout_marginTop="24dp">
 
-            <LinearLayout
+            <CheckBox
+                android:id="@+id/pauseOnErrorChkBx"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <CheckBox
-                    android:id="@+id/timeTrialActive"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/listCfg_tv_TimeTrial"
-                    android:textSize="18sp" />
-
-                <CheckBox
-                    android:id="@+id/timeTrialReset"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/listCfg_checkbox_TimeReset"
-                    android:textSize="18sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layoutTimeSlider"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:weightSum="8">
-
-                <SeekBar
-                    style="@style/Widget.AppCompat.SeekBar.Discrete"
-                    android:id="@+id/timeSlider"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:max="30"
-                    android:progress="5"/>
-
-                <TextView
-                    android:id="@+id/timeSliderLabel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="5"
-                    android:textAlignment="center"
-                    android:layout_weight="7"/>
-            </LinearLayout>
+                android:layout_weight="1"
+                android:text="@string/listCfg_PauseOnError"
+                android:textSize="18sp"/>
         </LinearLayout>
     </LinearLayout>
 
