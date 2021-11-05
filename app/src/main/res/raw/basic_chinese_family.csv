@@ -1,9 +1,9 @@
-Pinyin;English
-bàba (爸爸);Papa
-Māma (妈妈);Mama
-gēge (哥哥);brother
-jǐejie (姐姐);sister
-xiōng dì (兄弟);brother
-jǐe mèi (姐妹);sister
-yéye (爷爷);grandpa
-nǎinǎi (奶奶);grandma
+English;中文;Pinyin
+father;爸爸;bàba
+mother;妈妈;Māma
+brother;哥哥;gēge
+sister;姐姐;jǐejie
+brother;兄弟;xiōng dì
+sister;姐妹;jǐe mèi
+grandpa;爷爷;yéye
+grandma;奶奶;nǎinǎi

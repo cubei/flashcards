@@ -103,6 +103,44 @@
                 android:text="@string/listCfg_PauseOnError"
                 android:textSize="18sp"/>
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="24dp">
+
+            <CheckBox
+                android:id="@+id/useTextToSpeechChkBx"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/listCfg_UseTextToSpeech"
+                android:textSize="18sp"/>
+
+            <RadioGroup
+                android:id="@+id/textToSpeechSideRadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="30dp">
+
+                <RadioButton
+                    android:id="@+id/radioButtonSpeakQuestion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/listCfg_radioBtn_SpeakQuestion"
+                    android:textSize="18sp"/>
+
+                <RadioButton
+                    android:id="@+id/radioButtonSpeakAnswer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/listCfg_radioBtn_SpeakAnswer"
+                    android:textSize="18sp"/>
+            </RadioGroup>
+        </LinearLayout>
+
     </LinearLayout>
 
     <Button

@@ -9,6 +9,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,9 @@ import java.util.Map;
 
 public class QuestionFragment extends Fragment {
 
-    private boolean pauseOnError = true;
+    private boolean pauseOnError = false;
+    private boolean speakQuestion = false;
+    private boolean speakAnswer = false;
 
     private List<QuestionItem> questionItems = new ArrayList<>();
     private List<QuestionResult> questionResults = new ArrayList<>();
@@ -59,6 +62,17 @@ public class QuestionFragment extends Fragment {
         for(TextView tv: getAnswerTextViews()) {
             tv.setOnClickListener(answerOnClick);
         }
+
+        TextView questionTv = cardLayout.findViewById(R.id.tv_question);
+        questionTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(speakQuestion) {
+                    ((GameActivity) QuestionFragment.this.getActivity()).speakText(questionTv.getText().toString());
+                }
+            }
+        });
+
         updateViews();
     }
 
@@ -173,6 +187,11 @@ public class QuestionFragment extends Fragment {
             TextView correctTextView = null;
             String givenAnswer = answerTextView.getText().toString();
             QuestionItem questionItem = questionItems.get(questionCount);
+
+            if(speakAnswer) {
+                ((GameActivity) QuestionFragment.this.getActivity()).speakText(givenAnswer, questionItem.answerHeader);
+            }
+
             QuestionResult questionResult = new QuestionResult(questionItem.questionHeader, questionItem.answerHeader, questionItem.question, questionItem.rightAnswer, givenAnswer);
             questionResults.add(questionResult);
 
@@ -247,7 +266,6 @@ public class QuestionFragment extends Fragment {
         ((TextView)layout.findViewById(R.id.tv_questionSide)).setText(questionItem.questionHeader);
         ((TextView)layout.findViewById(R.id.tv_guessSide)).setText(questionItem.answerHeader);
 
-
         List<TextView> answerTextViews = getAnswerTextViews(layout);
 
         List<String> answers = getAnswerList(questionItem);
@@ -267,6 +285,10 @@ public class QuestionFragment extends Fragment {
         } else {
             setQuestionItem(questionItems.get(questionCount), cardLayout, true);
             updateViews();
+            if(speakQuestion) {
+                QuestionItem questionItem = questionItems.get(questionCount);
+                ((GameActivity) this.getActivity()).speakText(questionItem.question, questionItem.questionHeader);
+            }
         }
 
         // Reset view translation
@@ -292,11 +314,18 @@ public class QuestionFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static QuestionFragment newInstance(int numberOfDesiredQuestions, List<QuestionItem> questionItems, boolean pauseOnError) {
+    public static QuestionFragment newInstance(
+            int numberOfDesiredQuestions,
+            List<QuestionItem> questionItems,
+            boolean pauseOnError,
+            boolean speakQuestion,
+            boolean speakAnswer) {
         QuestionFragment fragment = new QuestionFragment();
         fragment.numberOfDesiredQuestions = numberOfDesiredQuestions;
         fragment.questionItems = questionItems;
         fragment.pauseOnError = pauseOnError;
+        fragment.speakQuestion = speakQuestion;
+        fragment.speakAnswer = speakAnswer;
         return fragment;
     }
 

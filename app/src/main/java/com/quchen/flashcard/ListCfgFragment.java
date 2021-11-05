@@ -30,12 +30,18 @@ public class ListCfgFragment extends Fragment {
 
     private CheckBox pauseOnErrorChkBx;
 
+    private CheckBox useTextToSpeechChkBx;
+    private RadioGroup speechRadioGroup;
+
     private Button startButton;
 
     public class CfgContainer {
         public int side;
         public int numberOfDesireditems;
         public boolean pauseOnError;
+        public boolean useTextToSpeech;
+        public boolean speakQuestion;
+        public boolean speakAnswer;
     }
     private CfgContainer cfgContainer = new CfgContainer();
 
@@ -56,6 +62,9 @@ public class ListCfgFragment extends Fragment {
         itemNumberTextView = view.findViewById(R.id.numberOfListItemsSliderLabel);
 
         pauseOnErrorChkBx = view.findViewById(R.id.pauseOnErrorChkBx);
+
+        useTextToSpeechChkBx = view.findViewById(R.id.useTextToSpeechChkBx);
+        speechRadioGroup = view.findViewById(R.id.textToSpeechSideRadioGroup);
 
         startButton = view.findViewById(R.id.startBtn);
     }
@@ -100,10 +109,34 @@ public class ListCfgFragment extends Fragment {
         pauseOnErrorChkBx.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                cfgContainer.pauseOnError = isChecked;
+            }
+        });
+
+        useTextToSpeechChkBx.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                cfgContainer.useTextToSpeech = isChecked;
                 if(isChecked) {
-                    cfgContainer.pauseOnError = true;
+                    speechRadioGroup.setVisibility(View.VISIBLE);
                 } else {
-                    cfgContainer.pauseOnError = false;
+                    speechRadioGroup.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        speechRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                switch(i) {
+                    case R.id.radioButtonSpeakQuestion:
+                        cfgContainer.speakQuestion = true;
+                        cfgContainer.speakAnswer = false;
+                        break;
+                    case R.id.radioButtonSpeakAnswer:
+                        cfgContainer.speakQuestion = false;
+                        cfgContainer.speakAnswer = true;
+                        break;
                 }
             }
         });
@@ -120,6 +153,9 @@ public class ListCfgFragment extends Fragment {
         // Defaults
         sideRadioGroup.check(R.id.radioButtonLeft);
         pauseOnErrorChkBx.setChecked(false);
+        useTextToSpeechChkBx.setChecked(false);
+        speechRadioGroup.setVisibility(View.GONE);
+        speechRadioGroup.check(R.id.radioButtonSpeakQuestion);
 
         // todo Restore previously saved config from last run
     }

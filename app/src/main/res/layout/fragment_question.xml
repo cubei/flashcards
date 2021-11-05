@@ -39,8 +39,9 @@
         <include layout="@layout/question_card"
             android:id="@+id/nextCardLayout"/>
 
-        <include layout="@layout/question_card"
-            android:id="@+id/cardLayout"/>
+        <include
+            android:id="@+id/cardLayout"
+            layout="@layout/question_card" />
 
     </RelativeLayout>
 

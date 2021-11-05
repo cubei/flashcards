@@ -1,22 +1,23 @@
-Pinyin;English
-Yī;1
-Èr;2
-Sān;3
-Sì;4
-Wǔ;5
-Liù;6
-Qī;7
-Bā;8
-Jiǔ;9
-Shí;10
-Shí yī;11
-Shí èr;12
-Shí sān;13
-Shí sì;14
-Shí wǔ;15
-Shí liù;16
-Shí qī;17
-Shí bā;18
-Shí jiǔ;19
-Èr shí;20
-Yì bǎi;100
+English;中文;Pinyin
+0;零;líng
+1;一;Yī
+2;二;Èr
+3;三;Sān
+4;四;Sì
+5;五;Wǔ
+6;六;Liù
+7;七;Qī
+8;八;Bā
+9;九;Jiǔ
+10;十;Shí
+11;十一;Shí yī
+12;十二;Shí èr
+13;十三;Shí sān
+14;十四;Shí sì
+15;十五;Shí wǔ
+16;十六;Shí liù
+17;十七;Shí qī
+18;十八;Shí bā
+19;十九;Shí jiǔ
+20;二十;Èr shí
+100;百;Yì bǎi

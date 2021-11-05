@@ -39,7 +39,7 @@
             android:layout_below="@+id/tv_questionSide"
             android:layout_centerHorizontal="true"
             android:text="Word to guess"
-            android:textSize="26sp"/>
+            android:textSize="26sp" />
     </RelativeLayout>
 
 

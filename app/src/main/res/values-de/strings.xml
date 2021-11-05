@@ -17,6 +17,9 @@
     <string name="listCfg_radioBtn_Left">Links</string>
     <string name="listCfg_radioBtn_Right">Rechts</string>
     <string name="listCfg_PauseOnError">Bei Fehler anhalten</string>
+    <string name="listCfg_UseTextToSpeech">Sprachausgabe verwenden</string>
+    <string name="listCfg_radioBtn_SpeakAnswer">Antwort sprechen</string>
+    <string name="listCfg_radioBtn_SpeakQuestion">Frage sprechen</string>
     <string name="tv_yourAnswer">Deine Antwort</string>
     <string name="createFolderYesOption">Ordner erstellen</string>
     <string name="createFolderNoOption">Abbrechen</string>
