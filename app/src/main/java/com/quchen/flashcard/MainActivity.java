@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
         copyFileFromResource(R.raw.japanese_kanji_grade6, "Japanese","Kanji 6.csv");
         copyFileFromResource(R.raw.animals_japanese_emoji, "Japanese","Animal Emoji.csv");
         copyFileFromResource(R.raw.fruit_japanese_emoji, "Japanese","Fruit Emoji.csv");
-        copyFileFromResource(R.raw.colours_japanese_emoji, "Japanese","Colours.csv");
+        copyFileFromResource(R.raw.colours_japanese_emoji, "Japanese","Colours Emoji.csv");
 
         copyFileFromResource(R.raw.basic_chinese, "Chinese","basic.csv");
         copyFileFromResource(R.raw.basic_chinese_introduction, "Chinese","introduction.csv");
@@ -174,17 +174,17 @@ public class MainActivity extends AppCompatActivity {
         copyFileFromResource(R.raw.japanese_kanji_grade1_pinyin, "Chinese","characters 1.csv");
         copyFileFromResource(R.raw.animals_chinese_emoji, "Chinese","Animal Emoji.csv");
         copyFileFromResource(R.raw.fruit_chinese_emoji, "Chinese","Fruit Emoji.csv");
-        copyFileFromResource(R.raw.colours_chinese_emoji, "Chinese","Colours.csv");
+        copyFileFromResource(R.raw.colours_chinese_emoji, "Chinese","Colours Emoji.csv");
 
         copyFileFromResource(R.raw.basic_german, "German","basic.csv");
         copyFileFromResource(R.raw.numbers_german, "German","numbers.csv");
         copyFileFromResource(R.raw.animals_german_emoji, "German","Tiere Emoji.csv");
         copyFileFromResource(R.raw.fruit_german_emoji, "German","Früchte Emoji.csv");
-        copyFileFromResource(R.raw.colours_german_emoji, "German","Farben.csv");
+        copyFileFromResource(R.raw.colours_german_emoji, "German","Farben Emoji.csv");
 
         copyFileFromResource(R.raw.animals_english_emoji, "English","Animal Emoji.csv");
         copyFileFromResource(R.raw.fruit_english_emoji, "English","Fruit Emoji.csv");
-        copyFileFromResource(R.raw.colours_english_emoji, "English","Colours.csv");
+        copyFileFromResource(R.raw.colours_english_emoji, "English","Colours Emoji.csv");
 
         copyFileFromResource(R.raw.basic_spanish, "Spanish","basic.csv");
         copyFileFromResource(R.raw.numbers_spanish, "Spanish","numbers.csv");
