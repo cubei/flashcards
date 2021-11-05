@@ -14,7 +14,7 @@ The app is meant for stuff like learning vocabulary of different languages.
 
 
 ### CSV format
-* CSV file with `;` (semicolon) as seperator.
+* CSV file with `;` (semicolon) as separator.
 * First line is the header (e.g. `English;Chinese`)
 * Other lines are used as content (e.g. `Thanks;Xie Xie`)
 * Content lines without semicolon are ignored (Can be used for comments)
