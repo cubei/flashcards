@@ -43,7 +43,6 @@ public class ResultAdapter extends ArrayAdapter<QuestionResult> {
             selectedAnswerlayout.setVisibility(View.GONE);
         } else {
             selectedAnswerlayout.setVisibility(View.VISIBLE);
-            TextView selectedAnswerLabel = convertView.findViewById(R.id.tv_selectedAnswerLabel);
             TextView selectedAnswerVal = convertView.findViewById(R.id.tv_selectedAnswerVal);
             selectedAnswerVal.setText(item.givenAnswer);
         }

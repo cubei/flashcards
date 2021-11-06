@@ -48,42 +48,10 @@ public class ListActivity extends AppCompatActivity {
     private class ListAdapter extends ArrayAdapter<ListFileItem> {
 
         private final ListView listView;
-        private Button startBtn;
-        private List<ListFileItem> listOfSelectedItems = new ArrayList<>();
+        private final List<ListFileItem> listOfSelectedItems = new ArrayList<>();
 
-        private AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                ListFileItem listItem = getItem(position);
-                startGameActivity(listItem.getFilePath());
-            }
-        };
 
-        private AdapterView.OnItemLongClickListener itemLongClickListener = new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
-                ListFileItem listItem = getItem(position);
-                final File file = new File(App.getListRootDir(), listItem.getFilePath());
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(ListActivity.this);
-                builder.setMessage(String.format("%s %s", getResources().getString(R.string.deleteList), listItem.getLabel(), Locale.GERMANY))
-                        .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                if(file.delete()) {
-                                    finish();
-                                    startActivity(getIntent());
-                                }
-                            }
-                        })
-                        .setNegativeButton(getResources().getString(R.string.no), null)
-                        .show();
-
-                return true;
-            }
-        };
-
-        private View.OnClickListener watchBtnClickListener = new View.OnClickListener() {
+        private final View.OnClickListener watchBtnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final View parentRow = (View) view.getParent().getParent();
@@ -93,7 +61,7 @@ public class ListActivity extends AppCompatActivity {
             }
         };
 
-        private CompoundButton.OnCheckedChangeListener selectionChanged = new CompoundButton.OnCheckedChangeListener() {
+        private final CompoundButton.OnCheckedChangeListener selectionChanged = new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
                 final View parentRow = (View) compoundButton.getParent().getParent();
@@ -120,8 +88,27 @@ public class ListActivity extends AppCompatActivity {
 
             this.listView = listView;
 
-            listView.setOnItemClickListener(itemClickListener);
-            listView.setOnItemLongClickListener(itemLongClickListener);
+            listView.setOnItemClickListener((adapterView, view, position, l) -> {
+                ListFileItem listItem = getItem(position);
+                startGameActivity(listItem.getFilePath());
+            });
+            listView.setOnItemLongClickListener((adapterView, view, position, l) -> {
+                ListFileItem listItem = getItem(position);
+                final File file = new File(App.getListRootDir(), listItem.getFilePath());
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(ListActivity.this);
+                builder.setMessage(String.format("%s %s", getResources().getString(R.string.deleteList), listItem.getLabel()))
+                        .setPositiveButton(getResources().getString(R.string.yes), (dialog, which) -> {
+                            if (file.delete()) {
+                                finish();
+                                startActivity(getIntent());
+                            }
+                        })
+                        .setNegativeButton(getResources().getString(R.string.no), null)
+                        .show();
+
+                return true;
+            });
         }
 
         @NonNull
@@ -163,12 +150,7 @@ public class ListActivity extends AppCompatActivity {
             lists.add(new ListFileItem(folderName, listFile.getName()));
         }
 
-        Collections.sort(lists, new Comparator<ListFileItem>() {
-            @Override
-            public int compare(ListFileItem obj1, ListFileItem obj2) {
-                return obj1.getLabel().compareTo(obj2.getLabel());
-            }
-        });
+        Collections.sort(lists, (obj1, obj2) -> obj1.getLabel().compareTo(obj2.getLabel()));
 
         return lists;
     }
@@ -180,17 +162,17 @@ public class ListActivity extends AppCompatActivity {
     }
 
     public void startGameActivity(String file) {
-        String files[] = {file};
+        String[] files = {file};
         startGameActivity(files);
     }
 
-    public void startGameActivity(String files[]) {
+    public void startGameActivity(String[] files) {
         Intent intent = new Intent("com.quchen.flashcard.GameActivity");
         intent.putExtra(GameActivity.KEY_FILE_LIST, files);
         startActivity(intent);
     }
 
-    private View.OnClickListener startBtnOnClick = new View.OnClickListener() {
+    private final View.OnClickListener startBtnOnClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             List<String> fileList = new ArrayList<>();
@@ -210,7 +192,7 @@ public class ListActivity extends AppCompatActivity {
             }
 
             if (fileList.size() > 0) {
-                startGameActivity(fileList.toArray(new String[fileList.size()]));
+                startGameActivity(fileList.toArray(new String[0]));
             } else {
                 Toast.makeText(ListActivity.this, R.string.addFileAlert, Toast.LENGTH_SHORT).show();
             }
@@ -235,14 +217,11 @@ public class ListActivity extends AppCompatActivity {
     private String getFileName(Uri uri) {
         String result = null;
         if (uri.getScheme().equals("content")) {
-            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
-            try {
+            try (Cursor cursor = getContentResolver().query(uri, null, null, null, null)) {
                 if (cursor != null && cursor.moveToFirst()) {
                     int index = Math.max(0, cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
                     result = cursor.getString(index);
                 }
-            } finally {
-                cursor.close();
             }
         }
         if (result == null) {
@@ -255,12 +234,7 @@ public class ListActivity extends AppCompatActivity {
         return result;
     }
 
-    private View.OnClickListener importListBtnOnClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            showListImport();
-        }
-    };
+    private final View.OnClickListener importListBtnOnClick = view -> showListImport();
 
     private boolean copyFileFromUri(Uri fileUri, String fileName) {
         boolean success = true;

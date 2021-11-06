@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
-import android.content.res.ColorStateList;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
@@ -15,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.android.material.color.MaterialColors;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,7 +32,7 @@ public class QuestionFragment extends Fragment {
     private boolean speakAnswer = false;
 
     private List<QuestionItem> questionItems = new ArrayList<>();
-    private List<QuestionResult> questionResults = new ArrayList<>();
+    private final List<QuestionResult> questionResults = new ArrayList<>();
 
     private int numberOfDesiredQuestions;
     private int questionCount = 0;
@@ -56,20 +57,31 @@ public class QuestionFragment extends Fragment {
         wrongAnswerLine = getView().findViewById(R.id.wrongCntLine);
     }
 
+    private int getDefaultAnswerBackgroundColor() {
+        return MaterialColors.getColor(getView(), R.attr.colorPrimaryContainer);
+    }
+
+    private void setAnswerBackgroundColor(View view, int color) {
+        ((GradientDrawable)view.getBackground()).setColor(color);
+    }
+
     private void setUpViews() {
         setUpQuestionCards();
 
+        int defaultAnswerColor = getDefaultAnswerBackgroundColor();
         for(TextView tv: getAnswerTextViews()) {
             tv.setOnClickListener(answerOnClick);
+            setAnswerBackgroundColor(tv, defaultAnswerColor);
+        }
+
+        for (TextView tv: getAnswerTextViews(nextCardLayout)) {
+            setAnswerBackgroundColor(tv, defaultAnswerColor);
         }
 
         TextView questionTv = cardLayout.findViewById(R.id.tv_question);
-        questionTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(speakQuestion) {
-                    ((GameActivity) QuestionFragment.this.getActivity()).speakText(questionTv.getText().toString());
-                }
+        questionTv.setOnClickListener(v -> {
+            if(speakQuestion) {
+                ((GameActivity) QuestionFragment.this.getActivity()).speakText(questionTv.getText().toString());
             }
         });
 
@@ -82,20 +94,9 @@ public class QuestionFragment extends Fragment {
 
     ValueAnimator animateAnswerColor(View view, int color) {
         final GradientDrawable dw = (GradientDrawable) view.getBackground();
-        int originalColor;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            originalColor = dw.getColor().getDefaultColor();
-        } else {
-            originalColor = getResources().getColor(R.color.colorPrimary);
-        }
-        final ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), originalColor, color);
+        final ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), getDefaultAnswerBackgroundColor(), color);
         colorAnimation.setDuration(300);
-        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                dw.setColor((int)valueAnimator.getAnimatedValue());
-            }
-        });
+        colorAnimation.addUpdateListener(valueAnimator -> dw.setColor((int)valueAnimator.getAnimatedValue()));
         return colorAnimation;
     }
 
@@ -104,13 +105,6 @@ public class QuestionFragment extends Fragment {
      * @param correctTv Can't be null.
      */
     private void animateAnswer(final TextView wrongTv, final TextView correctTv) {
-        final ColorStateList defaultColor;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            defaultColor = ((GradientDrawable) correctTv.getBackground()).getColor();
-        } else {
-            defaultColor = null;
-        }
-
         ValueAnimator colorAnimationCorrect = animateAnswerColor(correctTv, getResources().getColor(R.color.colorCorrectAnswer));
         colorAnimationCorrect.addListener(new AnimatorListenerAdapter() {
 
@@ -124,18 +118,12 @@ public class QuestionFragment extends Fragment {
                             public void onAnimationEnd(Animator animation) {
                                 super.onAnimationEnd(animation);
                                 // Restore to normal color
+                                int originalColor = getDefaultAnswerBackgroundColor();
                                 if(wrongTv != null) {
-                                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                                        ((GradientDrawable)wrongTv.getBackground()).setColor(defaultColor);
-                                    } else {
-                                        ((GradientDrawable)wrongTv.getBackground()).setColor(getResources().getColor(R.color.colorPrimaryContainer));
-                                    }
+                                    ((GradientDrawable)wrongTv.getBackground()).setColor(originalColor);
+
                                 }
-                                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                                    ((GradientDrawable)correctTv.getBackground()).setColor(defaultColor);
-                                } else {
-                                    ((GradientDrawable)correctTv.getBackground()).setColor(getResources().getColor(R.color.colorPrimaryContainer));
-                                }
+                                ((GradientDrawable)correctTv.getBackground()).setColor(originalColor);
                                 setUpNextQuestion();
                             }
                         });
@@ -146,12 +134,9 @@ public class QuestionFragment extends Fragment {
                 super.onAnimationEnd(animation);
 
                 if(pauseOnError && (wrongTv != null)) {
-                    cardLayout.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            cardLayout.setOnClickListener(null);
-                            flipCardAway();
-                        }
+                    cardLayout.setOnClickListener(v -> {
+                        cardLayout.setOnClickListener(null);
+                        flipCardAway();
                     });
                 } else {
                     flipCardAway();
@@ -180,39 +165,36 @@ public class QuestionFragment extends Fragment {
         wrongAnswerLine.requestLayout();
     }
 
-    private View.OnClickListener answerOnClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            TextView answerTextView = (TextView) view;
-            TextView correctTextView = null;
-            String givenAnswer = answerTextView.getText().toString();
-            QuestionItem questionItem = questionItems.get(questionCount);
+    private final View.OnClickListener answerOnClick = view -> {
+        TextView answerTextView = (TextView) view;
+        TextView correctTextView = null;
+        String givenAnswer = answerTextView.getText().toString();
+        QuestionItem questionItem = questionItems.get(questionCount);
 
-            if(speakAnswer) {
-                ((GameActivity) QuestionFragment.this.getActivity()).speakText(givenAnswer, questionItem.answerHeader);
-            }
-
-            QuestionResult questionResult = new QuestionResult(questionItem.questionHeader, questionItem.answerHeader, questionItem.question, questionItem.rightAnswer, givenAnswer);
-            questionResults.add(questionResult);
-
-            if(questionResult.isAnswerCorrect()) {
-                correctAnswerCount++;
-            } else {
-                wrongAnswerCount++;
-            }
-
-            drawAnswerLine();
-
-            // Disable click event for all answers for the time of the answer animation
-            for (TextView tv : getAnswerTextViews()) {
-                tv.setClickable(false);
-                if (tv.getText().toString().equals(questionItem.rightAnswer)) {
-                    correctTextView = tv;
-                }
-            }
-
-            animateAnswer(questionResult.isAnswerCorrect() ? null : answerTextView, correctTextView);
+        if(speakAnswer) {
+            ((GameActivity) QuestionFragment.this.getActivity()).speakText(givenAnswer, questionItem.answerHeader);
         }
+
+        QuestionResult questionResult = new QuestionResult(questionItem.questionHeader, questionItem.answerHeader, questionItem.question, questionItem.rightAnswer, givenAnswer);
+        questionResults.add(questionResult);
+
+        if(questionResult.isAnswerCorrect()) {
+            correctAnswerCount++;
+        } else {
+            wrongAnswerCount++;
+        }
+
+        drawAnswerLine();
+
+        // Disable click event for all answers for the time of the answer animation
+        for (TextView tv : getAnswerTextViews()) {
+            tv.setClickable(false);
+            if (tv.getText().toString().equals(questionItem.rightAnswer)) {
+                correctTextView = tv;
+            }
+        }
+
+        animateAnswer(questionResult.isAnswerCorrect() ? null : answerTextView, correctTextView);
     };
 
     private List<TextView> getAnswerTextViews() {
@@ -236,7 +218,7 @@ public class QuestionFragment extends Fragment {
     }
 
     // Store the shuffled list, so the nextCardView is identical to one placed above it
-    private Map<QuestionItem, List<String>> questionAnswerMap = new HashMap<>();
+    private final Map<QuestionItem, List<String>> questionAnswerMap = new HashMap<>();
     private List<String> getAnswerList(QuestionItem questionItem) {
         List<String> answers;
         if(questionAnswerMap.containsKey(questionItem)) {

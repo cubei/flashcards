@@ -81,14 +81,9 @@ public class ResultFragment extends Fragment {
         return view;
     }
 
-    private View.OnClickListener retryAllOnClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            ((GameActivity)getActivity()).restartLastGame();
-        }
-    };
+    private final View.OnClickListener retryAllOnClick = view -> ((GameActivity)getActivity()).restartLastGame();
 
-    private View.OnClickListener retryWrongOnClick = new View.OnClickListener() {
+    private final View.OnClickListener retryWrongOnClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             List<QuestionResult> wrongQuestionResults = new ArrayList<>();

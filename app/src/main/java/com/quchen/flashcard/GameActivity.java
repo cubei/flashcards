@@ -60,7 +60,6 @@ public class GameActivity extends AppCompatActivity {
 
     /**
      * Restarts the last game, but uses only questions from the given questionResults
-     * @param questionResultFilter
      */
     public void restartLastGame(List<QuestionResult> questionResultFilter) {
         this.cfgContainer.numberOfDesireditems = questionResultFilter.size();
@@ -98,12 +97,9 @@ public class GameActivity extends AppCompatActivity {
     private TextToSpeech textToSpeechEngine;
 
     private void setUpTTSE() {
-        textToSpeechEngine = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if (status == TextToSpeech.SUCCESS) {
-                    textToSpeechEngine.setLanguage(Locale.US);
-                }
+        textToSpeechEngine = new TextToSpeech(this, status -> {
+            if (status == TextToSpeech.SUCCESS) {
+                textToSpeechEngine.setLanguage(Locale.US);
             }
         });
     }

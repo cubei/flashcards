@@ -5,8 +5,8 @@ package com.quchen.flashcard;
  */
 
 public class ListFileItem {
-    private String folderName;
-    private String fileName;
+    private final String folderName;
+    private final String fileName;
 
     public ListFileItem(String folderName, String fileName) {
         this.folderName = folderName;

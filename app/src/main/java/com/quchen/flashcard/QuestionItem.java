@@ -60,12 +60,12 @@ public class QuestionItem {
         return questionItemList;
     }
 
-    public String questionHeader;
-    public String answerHeader;
-    public String listName;
-    public String question;
-    public String rightAnswer;
-    public List<String> wrongAnswers;
+    public final String questionHeader;
+    public final String answerHeader;
+    public final String listName;
+    public final String question;
+    public final String rightAnswer;
+    public final List<String> wrongAnswers;
 
     private QuestionItem(String questionHeader, String answerHeader, String listName, String question, String rightAnswer, List<String> wrongAnswers) {
         this.questionHeader = questionHeader;

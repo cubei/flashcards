@@ -20,15 +20,15 @@ public class ListItem {
     private static final int LEFT_IDX = 0;
     private static final int RIGHT_IDX = 1;
 
-    private String filePath;
+    private final String filePath;
 
     public String getFilePath() {
         return filePath;
     }
 
     public static class ItemPair {
-        public String left;
-        public String right;
+        public final String left;
+        public final String right;
 
         public ItemPair(String left, String right) {
             this.left = left;
@@ -37,7 +37,7 @@ public class ListItem {
     }
 
     private ItemPair header;
-    private List<ItemPair> itemPairs = new ArrayList<>();
+    private final List<ItemPair> itemPairs = new ArrayList<>();
 
     public ListItem(String filePath) {
         this.filePath = filePath;
@@ -76,7 +76,6 @@ public class ListItem {
     private void readFile()
     {
         File file = new File(App.getListRootDir(), filePath);
-        List<String> list = new ArrayList<>();
         List<List<String>> lines = null;
 
         try {

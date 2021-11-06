@@ -29,7 +29,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    private class FolderAdapter extends ArrayAdapter<String> {
+    private static class FolderAdapter extends ArrayAdapter<String> {
 
         public FolderAdapter(Context context) {
             super(context, 0);
@@ -77,15 +77,13 @@ public class MainActivity extends AppCompatActivity {
 
         alert.setView(edittext);
 
-        alert.setPositiveButton(R.string.createFolderYesOption, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                String folderName = edittext.getText().toString();
-                File folder = new File(App.getListRootDir(), folderName);
-                if(folder.mkdir()) {
-                    folderAdapter.add(folderName);
-                } else {
-                    Toast.makeText(MainActivity.this, R.string.folderCreateError, Toast.LENGTH_LONG).show();
-                }
+        alert.setPositiveButton(R.string.createFolderYesOption, (dialog, id) -> {
+            String folderName = edittext.getText().toString();
+            File folder = new File(App.getListRootDir(), folderName);
+            if(folder.mkdir()) {
+                folderAdapter.add(folderName);
+            } else {
+                Toast.makeText(MainActivity.this, R.string.folderCreateError, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -98,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         showFolderCreateDialog();
     }
 
-    private AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener() {
+    private final AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
             String folder = folderAdapter.getItem(position);
@@ -193,20 +191,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private AdapterView.OnItemLongClickListener itemLongClickListener = new AdapterView.OnItemLongClickListener() {
+    private final AdapterView.OnItemLongClickListener itemLongClickListener = new AdapterView.OnItemLongClickListener() {
         @Override
         public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
             final String folder = folderAdapter.getItem(position);
 
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-            builder.setMessage(String.format("%s %s", getResources().getString(R.string.deleteFolder), folder, Locale.GERMANY))
-                    .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            if(App.deleteDirectory(new File(App.getListRootDir(), folder))) {
-                                finish();
-                                startActivity(getIntent());
-                            }
+            builder.setMessage(String.format("%s %s", getResources().getString(R.string.deleteFolder), folder))
+                    .setPositiveButton(getResources().getString(R.string.yes), (dialog, which) -> {
+                        if(App.deleteDirectory(new File(App.getListRootDir(), folder))) {
+                            finish();
+                            startActivity(getIntent());
                         }
                     })
                     .setNegativeButton(getResources().getString(R.string.no), null)

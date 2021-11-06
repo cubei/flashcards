@@ -8,13 +8,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
-
-import java.util.Locale;
 
 
 public class ListCfgFragment extends Fragment {
@@ -35,7 +32,7 @@ public class ListCfgFragment extends Fragment {
 
     private Button startButton;
 
-    public class CfgContainer {
+    public static class CfgContainer {
         public int side;
         public int numberOfDesireditems;
         public boolean pauseOnError;
@@ -43,7 +40,7 @@ public class ListCfgFragment extends Fragment {
         public boolean speakQuestion;
         public boolean speakAnswer;
     }
-    private CfgContainer cfgContainer = new CfgContainer();
+    private final CfgContainer cfgContainer = new CfgContainer();
 
     public ListCfgFragment() {}
 
@@ -92,61 +89,42 @@ public class ListCfgFragment extends Fragment {
         leftRadioBtn.setText(multiListItem.getLeftHeader());
         rightRadioBtn.setText(multiListItem.getRightHeader());
 
-        sideRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                switch(i) {
-                    case R.id.radioButtonLeft:
-                        cfgContainer.side = GameActivity.VAL_SIDE_LEFT;
-                        break;
-                    case R.id.radioButtonRight:
-                        cfgContainer.side = GameActivity.VAL_SIDE_RIGHT;
-                        break;
-                }
+        sideRadioGroup.setOnCheckedChangeListener((radioGroup, i) -> {
+            switch(i) {
+                case R.id.radioButtonLeft:
+                    cfgContainer.side = GameActivity.VAL_SIDE_LEFT;
+                    break;
+                case R.id.radioButtonRight:
+                    cfgContainer.side = GameActivity.VAL_SIDE_RIGHT;
+                    break;
             }
         });
 
-        pauseOnErrorChkBx.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                cfgContainer.pauseOnError = isChecked;
+        pauseOnErrorChkBx.setOnCheckedChangeListener((compoundButton, isChecked) -> cfgContainer.pauseOnError = isChecked);
+
+        useTextToSpeechChkBx.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+            cfgContainer.useTextToSpeech = isChecked;
+            if(isChecked) {
+                speechRadioGroup.setVisibility(View.VISIBLE);
+            } else {
+                speechRadioGroup.setVisibility(View.GONE);
             }
         });
 
-        useTextToSpeechChkBx.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                cfgContainer.useTextToSpeech = isChecked;
-                if(isChecked) {
-                    speechRadioGroup.setVisibility(View.VISIBLE);
-                } else {
-                    speechRadioGroup.setVisibility(View.GONE);
-                }
+        speechRadioGroup.setOnCheckedChangeListener((radioGroup, i) -> {
+            switch(i) {
+                case R.id.radioButtonSpeakQuestion:
+                    cfgContainer.speakQuestion = true;
+                    cfgContainer.speakAnswer = false;
+                    break;
+                case R.id.radioButtonSpeakAnswer:
+                    cfgContainer.speakQuestion = false;
+                    cfgContainer.speakAnswer = true;
+                    break;
             }
         });
 
-        speechRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                switch(i) {
-                    case R.id.radioButtonSpeakQuestion:
-                        cfgContainer.speakQuestion = true;
-                        cfgContainer.speakAnswer = false;
-                        break;
-                    case R.id.radioButtonSpeakAnswer:
-                        cfgContainer.speakQuestion = false;
-                        cfgContainer.speakAnswer = true;
-                        break;
-                }
-            }
-        });
-
-        startButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((GameActivity)getActivity()).startGame(cfgContainer);
-            }
-        });
+        startButton.setOnClickListener(view -> ((GameActivity)getActivity()).startGame(cfgContainer));
     }
 
     private void restoreViewCfg() {

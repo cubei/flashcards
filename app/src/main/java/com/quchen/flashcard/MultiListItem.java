@@ -8,9 +8,9 @@ import java.util.List;
  */
 
 public class MultiListItem {
-    private List<ListItem> listItems = new ArrayList<>();
+    private final List<ListItem> listItems = new ArrayList<>();
 
-    public MultiListItem(String filesPaths[]) {
+    public MultiListItem(String[] filesPaths) {
         for(String filePath: filesPaths) {
             listItems.add(new ListItem(filePath));
         }
@@ -31,7 +31,7 @@ public class MultiListItem {
         headers.remove(0);
 
         for(String h: headers) {
-            if(!header.toLowerCase().equals(h.toLowerCase())) {
+            if(!header.equalsIgnoreCase(h)) {
                 header = defaultName;
                 break;
             }
