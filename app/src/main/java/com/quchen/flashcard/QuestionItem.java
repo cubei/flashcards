@@ -33,9 +33,6 @@ public class QuestionItem {
             // Extract the fileName without type ending from file path
 
             int fileNameStartIdx = filePath.lastIndexOf("/") + 1;
-            if(fileNameStartIdx == -1) {
-                fileNameStartIdx = 0;
-            }
 
             int fileNameEndIdx = filePath.lastIndexOf(".");
             if(fileNameEndIdx == -1) {

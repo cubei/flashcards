@@ -22,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -156,7 +157,7 @@ public class ListActivity extends AppCompatActivity {
     }
 
     public void startListView(ListFileItem listFileItem) {
-        Intent intent = new Intent("com.quchen.flashcard.ListViewActivity");
+        Intent intent = new Intent(this, ListViewActivity.class);
         intent.putExtra(ListViewActivity.KEY_FILE, listFileItem.getFilePath());
         startActivity(intent);
     }
@@ -167,7 +168,7 @@ public class ListActivity extends AppCompatActivity {
     }
 
     public void startGameActivity(String[] files) {
-        Intent intent = new Intent("com.quchen.flashcard.GameActivity");
+        Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra(GameActivity.KEY_FILE_LIST, files);
         startActivity(intent);
     }
@@ -200,17 +201,39 @@ public class ListActivity extends AppCompatActivity {
     };
 
     private void showListImport() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                    STORAGE_READ_PERMISSOIN_REQUEST_ID);
-        } else {
-            Intent intent = new Intent()
-                    .setType("text/comma-separated-values")
-                    .setAction(Intent.ACTION_GET_CONTENT);
+        Intent intent = new Intent()
+                .setType("text/comma-separated-values")
+                .setAction(Intent.ACTION_GET_CONTENT);
 
-            startActivityForResult(Intent.createChooser(intent, "Select a file"), GET_FILE_REQUEST_ID);
-        }
+        startActivityForResult(Intent.createChooser(intent, "Select a file"), GET_FILE_REQUEST_ID);
+    }
+
+    private void showListAdd() {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+            View view = this.getLayoutInflater().inflate(R.layout.add_list_view, null);
+            alert.setView(view);
+            final EditText leftEdit = view.findViewById(R.id.leftEdit);
+            final EditText rightEdit = view.findViewById(R.id.rightEdit);
+            final EditText listNameEdit = view.findViewById(R.id.title);
+
+            alert.setPositiveButton(R.string.btn_addList, (dialog, id) -> {
+                final String leftVal = leftEdit.getText().toString();
+                final String rightVal = rightEdit.getText().toString();
+                final String titleVal = listNameEdit.getText().toString();
+
+                ListItem listItem = new ListItem(String.format("%s/%s.csv", folderName, titleVal), leftVal, rightVal);
+                listItem.saveToFile();
+
+                finish();
+                startActivity(getIntent());
+            });
+
+            alert.setNegativeButton(R.string.createFolderNoOption, (dialog, id) -> {
+
+            });
+
+            alert.show();
     }
 
     // https://stackoverflow.com/a/25005243
@@ -235,6 +258,8 @@ public class ListActivity extends AppCompatActivity {
     }
 
     private final View.OnClickListener importListBtnOnClick = view -> showListImport();
+
+    private final View.OnClickListener addListBtnOnClick = view -> showListAdd();
 
     private boolean copyFileFromUri(Uri fileUri, String fileName) {
         boolean success = true;
@@ -307,6 +332,9 @@ public class ListActivity extends AppCompatActivity {
 
         Button importButton = findViewById(R.id.importListBtn);
         importButton.setOnClickListener(importListBtnOnClick);
+
+        Button addButton = findViewById(R.id.addListBtn);
+        addButton.setOnClickListener(addListBtnOnClick);
     }
 
 }

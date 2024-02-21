@@ -6,7 +6,8 @@
     <string name="btn_addFolder">Ordner hinzufügen</string>
     <string name="btn_playAgainAll">Nochmal</string>
     <string name="btn_playAgainWrong">Nochmal die falschen</string>
-    <string name="btn_importList">Hinzufügen</string>
+    <string name="btn_importList">Importieren</string>
+    <string name="btn_addList">Hinzufügen</string>
     <string name="btn_startAll">Alle starten</string>
     <string name="btn_startSelection">Auswahl starten</string>
     <string name="btn_startList">Start</string>
@@ -33,7 +34,14 @@
     <string name="addFileAlert">Bitte füge eine Liste hinzu</string>
     <string name="question">Frage</string>
     <string name="deleteList">Willst du die Liste löschen?</string>
+    <string name="delete">Löschen</string>
+    <string name="deleted">gelöscht</string>
+    <string name="added">hinzugefügt</string>
+    <string name="changed">geändert</string>
     <string name="deleteFolder">Willst du den Ordner löschen?</string>
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
+    <string name="listName">Listen Name</string>
+    <string name="leftColumn">Linke Spalte</string>
+    <string name="RightColumn">Rechte Spalte</string>
 </resources>

@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
             String folder = folderAdapter.getItem(position);
 
-            Intent intent = new Intent("com.quchen.flashcard.ListActivity");
+            Intent intent = new Intent(MainActivity.this, ListActivity.class);
             intent.putExtra(ListActivity.KEY_FOLDER, folder);
             startActivity(intent);
         }
@@ -186,6 +186,9 @@ public class MainActivity extends AppCompatActivity {
 
         copyFileFromResource(R.raw.basic_spanish, "Spanish","basic.csv");
         copyFileFromResource(R.raw.numbers_spanish, "Spanish","numbers.csv");
+
+        copyFileFromResource(R.raw.animals_turkish_emoji, "Turkish","animals.csv");
+        copyFileFromResource(R.raw.fruit_turkish_emoji, "Turkish","fruits.csv");
 
         cleanupOldFiles();
     }

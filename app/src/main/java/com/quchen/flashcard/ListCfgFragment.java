@@ -72,7 +72,7 @@ public class ListCfgFragment extends Fragment {
         itemNumberSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                itemNumberTextView.setText("" + progress);
+                itemNumberTextView.setText(String.valueOf(progress));
                 cfgContainer.numberOfDesireditems = progress;
             }
 

@@ -3,9 +3,11 @@ package com.quchen.flashcard;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,6 +22,8 @@ public class ListItem {
     private static final int LEFT_IDX = 0;
     private static final int RIGHT_IDX = 1;
 
+    private static final String SEPARATOR = ";";
+
     private final String filePath;
 
     public String getFilePath() {
@@ -27,8 +31,8 @@ public class ListItem {
     }
 
     public static class ItemPair {
-        public final String left;
-        public final String right;
+        public String left;
+        public String right;
 
         public ItemPair(String left, String right) {
             this.left = left;
@@ -42,6 +46,10 @@ public class ListItem {
     public ListItem(String filePath) {
         this.filePath = filePath;
         readFile();
+    }
+    public ListItem(String filePath, String left, String right) {
+        this.filePath = filePath;
+        this.header = new ItemPair(left, right);
     }
 
     public List<ItemPair> getItemPairs() {
@@ -61,8 +69,8 @@ public class ListItem {
             String line;
 
             while ((line = br.readLine()) != null) {
-                if(line.contains(";")) {
-                    ArrayList<String> values = new ArrayList<>(Arrays.asList(line.split(";")));
+                if(line.contains(SEPARATOR)) {
+                    ArrayList<String> values = new ArrayList<>(Arrays.asList(line.split(SEPARATOR)));
                     fileContentList.add(values);
                 }
             }
@@ -92,8 +100,27 @@ public class ListItem {
             header = new ItemPair(headerLine.get(LEFT_IDX), headerLine.get(RIGHT_IDX));
             lines.remove(0);
             for(List<String> line: lines) {
-                itemPairs.add(new ItemPair(line.get(LEFT_IDX).trim(), line.get(RIGHT_IDX).trim()));
+                if(line.size() >= 2) {
+                    itemPairs.add(new ItemPair(line.get(LEFT_IDX).trim(), line.get(RIGHT_IDX).trim()));
+                }
             }
+        }
+    }
+
+    protected void saveToFile()
+    {
+        File file = new File(App.getListRootDir(), filePath);
+
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(file, false));
+            outputStreamWriter.write(String.format("%s%s%s\n", header.left, SEPARATOR, header.right));
+            for(ItemPair itempair: itemPairs) {
+                outputStreamWriter.write(String.format("%s%s%s\n", itempair.left, SEPARATOR, itempair.right));
+            }
+            outputStreamWriter.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

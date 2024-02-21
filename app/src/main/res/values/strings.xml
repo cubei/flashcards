@@ -6,7 +6,8 @@
     <string name="btn_addFolder">add folder</string>
     <string name="btn_playAgainAll">Retry</string>
     <string name="btn_playAgainWrong">Retry Wrong</string>
-    <string name="btn_importList">Add</string>
+    <string name="btn_importList">Import</string>
+    <string name="btn_addList">Add</string>
     <string name="btn_startAll">Start All</string>
     <string name="btn_startSelection">Start Selection</string>
     <string name="btn_startList">Start</string>
@@ -33,7 +34,14 @@
     <string name="addFileAlert">Please add a file</string>
     <string name="question">Question</string>
     <string name="deleteList">Do you want to delete the list?</string>
+    <string name="delete">Delete</string>
+    <string name="deleted">deleted</string>
+    <string name="added">added</string>
+    <string name="changed">changed</string>
     <string name="deleteFolder">Do you want to delete the folder?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="listName">List Name</string>
+    <string name="leftColumn">Left Column</string>
+    <string name="RightColumn">Right Column</string>
 </resources>
