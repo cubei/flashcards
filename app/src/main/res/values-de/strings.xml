@@ -44,4 +44,5 @@
     <string name="listName">Listen Name</string>
     <string name="leftColumn">Linke Spalte</string>
     <string name="RightColumn">Rechte Spalte</string>
+    <string name="addListError">Füll alle Felder aus!</string>
 </resources>

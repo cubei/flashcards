@@ -106,6 +106,7 @@ public class ListViewActivity extends AppCompatActivity {
             final String leftVal = leftEdit.getText().toString();
             final String rightVal = rightEdit.getText().toString();
             if(leftVal.isEmpty() || rightVal.isEmpty()){
+                Toast.makeText(ListViewActivity.this, R.string.addListError, Toast.LENGTH_SHORT).show();
                 return;
             }
 

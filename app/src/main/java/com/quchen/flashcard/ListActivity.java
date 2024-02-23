@@ -222,6 +222,12 @@ public class ListActivity extends AppCompatActivity {
                 final String rightVal = rightEdit.getText().toString();
                 final String titleVal = listNameEdit.getText().toString();
 
+                if(leftVal.isEmpty() || rightVal.isEmpty() || titleVal.isEmpty())
+                {
+                    Toast.makeText(ListActivity.this, R.string.addListError, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 ListItem listItem = new ListItem(String.format("%s/%s.csv", folderName, titleVal), leftVal, rightVal);
                 listItem.saveToFile();
 
